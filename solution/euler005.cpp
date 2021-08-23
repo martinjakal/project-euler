@@ -18,9 +18,9 @@ int minNumberDivisibleByRange(int maxDivisor)
 
 int main()
 {
-	int limit = 20;
-	auto result = minNumberDivisibleByRange(limit);
-	std::cout << result << std::endl;
+    int limit = 20;
+    auto result = minNumberDivisibleByRange(limit);
+    std::cout << result << std::endl;
 
-	return 0;
+    return 0;
 }
