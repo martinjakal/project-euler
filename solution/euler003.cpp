@@ -5,7 +5,7 @@
 // Largest prime factor
 // Result: 6857
 
-auto maxPrimeFactor(unsigned long long number) -> unsigned long long
+unsigned long long maxPrimeFactor(unsigned long long number)
 {
     unsigned long long maxFactor = 0;
 
