@@ -13,13 +13,13 @@
 // Add the greater child to its parent from bottom to top, maximum path is in the root.
 int maxPathInTriangle(std::vector<std::vector<int>> triangle)
 {
-    for (int i = triangle.size() - 1; i > 0; --i)
+    for (size_t i = triangle.size() - 1; i > 0; --i)
     {
-        for (int j = 0; j < i; ++j)
+        for (size_t j = 0; j < i; ++j)
             triangle[i - 1][j] += std::max(triangle[i][j], triangle[i][j + 1]);
     }
 
-    return triangle[0][0];
+    return triangle.front().front();
 }
 
 int main()
