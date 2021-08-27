@@ -26,7 +26,7 @@ int main()
 {
     std::string filename = "input/euler018input.txt";
     auto input = readInputTriangle(filename);
-    auto result = maxPathInTriangle(input);	
+    auto result = maxPathInTriangle(input);
     std::cout << result << std::endl;
     
     return 0;
