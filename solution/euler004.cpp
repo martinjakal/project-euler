@@ -10,7 +10,7 @@ bool isPalindrome(int number)
 {
     std::string s = std::to_string(number);
 
-    for (int i = 0, j = s.size() - 1; i < j; ++i, --j)
+    for (size_t i = 0, j = s.size() - 1; i < j; ++i, --j)
     {
         if (s[i] != s[j])
             return false;
