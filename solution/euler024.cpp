@@ -7,14 +7,14 @@
 // Lexicographic permutations
 // Result: 2783915460
 
-auto nthPermutation(std::string digits, int pos) -> std::string
+auto nthPermutation(std::string characters, int position) -> std::string
 {
-    int permutationCount = 1;
+    int permutationCnt = 1;
 
-    while (permutationCount != pos && std::next_permutation(digits.begin(), digits.end()))
-        ++permutationCount;
+    while (permutationCnt != position && std::next_permutation(characters.begin(), characters.end()))
+        ++permutationCnt;
 
-    return digits;
+    return characters;
 }
 
 int main()
