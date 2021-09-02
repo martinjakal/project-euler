@@ -10,11 +10,11 @@
 
 int productOfDigitsChampernowne(const std::vector<int>& digits)
 {
-    const int maxDigit = *std::max_element(digits.begin(), digits.end());
+    const size_t maxDigit = *std::max_element(digits.begin(), digits.end());
     std::string champernowne;
     int product = 1;
 
-    for (int i = 1; static_cast<int>(champernowne.size()) < maxDigit; ++i)
+    for (int i = 1; champernowne.size() < maxDigit; ++i)
         champernowne.append(std::to_string(i));
 
     for (auto digit : digits)
