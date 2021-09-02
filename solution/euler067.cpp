@@ -19,7 +19,7 @@ int maxPathInTriangle(std::vector<std::vector<int>> triangle)
             triangle[i - 1][j] += std::max(triangle[i][j], triangle[i][j + 1]);
     }
 
-    return triangle.front().front();
+    return triangle[0][0];
 }
 
 int main()
