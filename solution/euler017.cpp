@@ -16,7 +16,7 @@ int countLettersInNumbers(int limit)
     int letterCnt = 0;
     
     for (int i = 1; i <= limit; ++i)
-	{
+    {
         int thousands = i / 1000 % 10;
         int hundreds = i / 100 % 10;
         int belowHundred = i % 100;
