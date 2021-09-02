@@ -17,7 +17,7 @@ auto readInputString(const std::string& filename) -> std::string
     return out;
 }
 
-auto readInputTriangle(const std::string& filename) -> std::vector<std::vector<int>>
+auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vector<int>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<int>> out;
