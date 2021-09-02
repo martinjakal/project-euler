@@ -25,7 +25,7 @@ int maxPathInTriangle(std::vector<std::vector<int>> triangle)
 int main()
 {
     std::string filename = "input/euler018input.txt";
-    auto input = readInputTriangle(filename);
+    auto input = readInputNumbersGrid(filename);
     auto result = maxPathInTriangle(input);
     std::cout << result << std::endl;
     
