@@ -8,18 +8,18 @@
 int sumEvenFibonacci(int limit)
 {
     int sum = 0;
-    int fn = 0;
+    int fn0 = 0;
     int fn1 = 1;
-    int fn2 = fn + fn1;
+    int fn2 = fn0 + fn1;
 
     while (fn2 <= limit)
     {
         if (fn2 % 2 == 0)
             sum += fn2;
 
-        fn = fn1;
+        fn0 = fn1;
         fn1 = fn2;
-        fn2 = fn + fn1;
+        fn2 = fn0 + fn1;
     }
 
     return sum;
