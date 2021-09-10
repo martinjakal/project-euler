@@ -57,3 +57,21 @@ auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vecto
 
     return out;
 }
+
+auto readInputWords(const std::string& filename) -> std::vector<std::string>
+{
+    std::ifstream file(filename);
+    std::vector<std::string> out;
+
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
+
+    while (file.good())
+    {
+        std::string word;
+        getline(file, word, ',');
+        out.push_back(word.substr(1, word.size() - 2)); // skip " symbols
+    }
+
+    return out;
+}
