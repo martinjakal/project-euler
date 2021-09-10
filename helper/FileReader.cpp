@@ -7,6 +7,9 @@ auto readInputString(const std::string& filename) -> std::string
     std::ifstream file(filename);
     std::string out;
 
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
+
     while (file.good())
     {
         std::string word;
@@ -17,10 +20,31 @@ auto readInputString(const std::string& filename) -> std::string
     return out;
 }
 
+auto readInputNumbers(const std::string& filename) -> std::vector<std::string>
+{
+    std::ifstream file(filename);
+    std::vector<std::string> out;
+
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
+
+    while (file.good())
+    {
+        std::string word;
+        getline(file, word);
+        out.push_back(word);
+    }
+
+    return out;
+}
+
 auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vector<int>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<int>> out;
+
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
 
     while (file.good())
     {
