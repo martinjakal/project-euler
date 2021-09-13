@@ -1,7 +1,6 @@
 #include "NumberProperties.hpp"
 
 #include <cmath>
-#include <string>
 
 bool isTriangular(unsigned long long number)
 {
@@ -15,15 +14,16 @@ bool isPentagonal(unsigned long long number)
     return n == static_cast<int>(n);
 }
 
-bool isPalindrome(int number)
+bool isPalindrome(int number, int base)
 {
-    std::string s = std::to_string(number);
+    int reversed = 0;
+    int n = number;
 
-    for (size_t i = 0, j = s.size() - 1; i < j; ++i, --j)
+    while (n > 0)
     {
-        if (s[i] != s[j])
-            return false;
+        reversed = base * reversed + n % base;
+        n /= base;
     }
 
-    return true;
+    return number == reversed;
 }
