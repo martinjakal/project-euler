@@ -17,6 +17,47 @@ bool isPrime(int number)
     return true;
 }
 
+// Number stays prime when removing leading (left) digits.
+bool isLeftTruncatablePrime(int number)
+{
+    if (number < 2)
+        return false;
+
+    for (int i = number; i > 0; i /= 10)
+    {
+        if (i % 10 == 0)
+            return false;
+    }
+
+    for (int i = static_cast<int>(pow(10, ceil(log10(number)))); i > 1; i /= 10)
+    {
+        if (!isPrime(number % i))
+            return false;
+    }
+
+    return true;
+}
+
+// Number stays prime when removing last (right) digits.
+bool isRightTruncatablePrime(int number)
+{
+    if (number < 2)
+        return false;
+
+    for (; number > 0; number /= 10)
+    {
+        if (!isPrime(number))
+            return false;
+    }
+
+    return true;
+}
+
+bool isTruncatablePrime(int number)
+{
+    return isLeftTruncatablePrime(number) && isRightTruncatablePrime(number);
+}
+
 auto primeFactors(int number) -> std::vector<int>
 {
     std::vector<int> factors;
