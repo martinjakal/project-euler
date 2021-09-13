@@ -1,23 +1,12 @@
 #include <iostream>
 #include <string>
 
+#include <helper/NumberProperties.hpp>
+
 // Project Euler - Problem 4
 // https://projecteuler.net/problem=4
 // Largest palindrome product
 // Result: 906609
-
-bool isPalindrome(int number)
-{
-    std::string s = std::to_string(number);
-
-    for (size_t i = 0, j = s.size() - 1; i < j; ++i, --j)
-    {
-        if (s[i] != s[j])
-            return false;
-    }
-
-    return true;
-}
 
 int maxPalindromeProduct(int limit)
 {
