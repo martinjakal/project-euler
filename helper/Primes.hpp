@@ -1,8 +1,10 @@
 #pragma once
+
 #include <vector>
 
 bool isPrime(int number);
 
+bool isCircularPrime(int number);
 bool isLeftTruncatablePrime(int number);
 bool isRightTruncatablePrime(int number);
 bool isTruncatablePrime(int number);

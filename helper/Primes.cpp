@@ -17,6 +17,34 @@ bool isPrime(int number)
     return true;
 }
 
+// Number stays prime during cyclic rotation of the digits.
+bool isCircularPrime(int number)
+{
+    int digitCnt = 0;
+    int n = number;
+
+    for (; n > 0; n /= 10)
+    {
+        if (digitCnt > 0 && n % 10 != 1 && n % 10 != 3 && n % 10 != 7 && n % 10 != 9)
+            return false;
+
+        ++digitCnt;
+    }
+
+    const int rank = static_cast<int>(pow(10, digitCnt)) / 10;
+    n = number;
+
+    while (isPrime(n))
+    {
+        n = n % 10 * rank + n / 10;
+
+        if (n == number)
+            return true;
+    }
+
+    return false;
+}
+
 // Number stays prime when removing leading (left) digits.
 bool isLeftTruncatablePrime(int number)
 {
