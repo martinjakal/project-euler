@@ -4,12 +4,14 @@
 #include <unordered_map>
 
 #include <helper/FileReader.hpp>
-#include <helper/NumberProperties.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 42
 // https://projecteuler.net/problem=42
 // Coded triangle numbers
 // Result: 162
+
+using namespace math;
 
 int triangleWordsCnt(const std::vector<std::string>& words)
 {

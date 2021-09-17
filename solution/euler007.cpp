@@ -1,24 +1,32 @@
 #include <iostream>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 7
 // https://projecteuler.net/problem=7
 // 10001st prime
 // Result: 104743
 
-// Range can be estimated by prime-counting function.
-// For example, range 10^6 contains 78498 primes.
-int nthPrime(int limit, int position)
+using namespace math;
+
+int nthPrime(int position)
 {
-    return sieveOfEratosthenes(limit)[position - 1];
+    int primeCnt = 0;
+
+    for (int number = 0; ; ++number)
+    {
+        if (isPrime(number))
+            ++primeCnt;
+
+        if (primeCnt == position)
+            return number;
+    }
 }
 
 int main()
 {
-    int limit = 1000000;
     int position = 10001;
-    auto result = nthPrime(limit, position);
+    auto result = nthPrime(position);
     std::cout << result << std::endl;
 
     return 0;

@@ -1,12 +1,14 @@
 #include <iostream>
 #include <vector>
 
-#include <helper/NumberProperties.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 44
 // https://projecteuler.net/problem=44
 // Pentagon numbers
 // Result: 5482660 
+
+using namespace math;
 
 int minDiffPentagonal()
 {

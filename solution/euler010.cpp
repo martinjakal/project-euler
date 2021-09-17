@@ -1,12 +1,14 @@
 #include <iostream>
 #include <numeric>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 10
 // https://projecteuler.net/problem=10
 // Summation of primes
 // Result: 142913828922
+
+using namespace math;
 
 unsigned long long sumOfPrimes(int limit)
 {

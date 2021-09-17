@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include <helper/NumberProperties.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 4
 // https://projecteuler.net/problem=4
 // Largest palindrome product
 // Result: 906609
+
+using namespace math;
 
 int maxPalindromeProduct(int limit)
 {

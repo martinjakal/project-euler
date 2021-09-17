@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 37
 // https://projecteuler.net/problem=37
 // Truncatable primes
 // Result: 748317
+
+using namespace math;
 
 int sumTruncatablePrimes()
 {

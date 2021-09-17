@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 46
 // https://projecteuler.net/problem=46
 // Goldbach's other conjecture
 // Result: 5777
+
+using namespace math;
 
 int minGoldbachOther()
 {

@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include <helper/NumberProperties.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 45
 // https://projecteuler.net/problem=45
 // Triangular, pentagonal, and hexagonal
 // Result: 1533776805
+
+using namespace math;
 
 // Generate hexagonal number and verify the pentagonal property.
 // Skip triangular check because each hexagonal number is triangular.

@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 35
 // https://projecteuler.net/problem=35
 // Circular primes
 // Result: 55
+
+using namespace math;
 
 int countCircularPrimes(int limit)
 {
