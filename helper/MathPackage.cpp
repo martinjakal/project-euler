@@ -1,5 +1,7 @@
 #include "MathPackage.hpp"
 
+#include <sstream>
+
 namespace math {
 
 int factorial(int number)
@@ -186,9 +188,13 @@ bool isPermutation(int number1, int number2)
     return std::count(digits.begin(), digits.end(), 0) == digits.size();
 }
 
-bool isPandigital(int number)
+// Number is n-pandigital if it contains each digit from 1 to n exactly once.
+bool isPandigital(int number, int maxDigit)
 {
-    if (ceil(log10(number)) != 9)
+    if (maxDigit > 9)
+        throw std::runtime_error("Invalid max digit");
+
+    if (ceil(log10(number)) != maxDigit)
         return false;
 
     std::vector<int> digits(10, 0);
@@ -196,7 +202,7 @@ bool isPandigital(int number)
     for (; number > 0; number /= 10)
         ++digits[number % 10];
 
-    return std::count(digits.begin() + 1, digits.end(), 1) == digits.size() - 1;
+    return std::count(digits.begin() + 1, digits.begin() + maxDigit + 1, 1) == maxDigit;
 }
 
 } // namespace math

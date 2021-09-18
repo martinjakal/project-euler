@@ -21,6 +21,6 @@ bool isTriangular(unsigned long long number);
 bool isPentagonal(unsigned long long number);
 bool isPalindrome(int number, int base = 10);
 bool isPermutation(int number1, int number2);
-bool isPandigital(int number);
+bool isPandigital(int number, int maxDigit = 9);
 
 } // namespace math
