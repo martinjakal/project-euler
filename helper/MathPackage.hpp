@@ -7,6 +7,9 @@ namespace math {
 // General
 int factorial(int number);
 
+// Divisibility
+int sumProperDivisors(int number);
+
 // Primes
 bool isPrime(int number);
 bool isCircularPrime(int number);

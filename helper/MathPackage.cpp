@@ -9,6 +9,22 @@ int factorial(int number)
     return number == 0 ? 1 : number * factorial(number - 1);
 }
 
+int sumProperDivisors(int number)
+{
+    int sum = 1;
+
+    for (int i = 2; i * i <= number; ++i)
+    {
+        if (number % i == 0)
+            sum += i + number / i;
+
+        if (i * i == number)
+            sum -= i;
+    }
+
+    return sum;
+}
+
 bool isPrime(int number)
 {
     if (number == 2)
