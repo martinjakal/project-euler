@@ -167,4 +167,23 @@ bool isPalindrome(int number, int base)
     return number == reversed;
 }
 
+bool isPermutation(int number1, int number2)
+{
+    std::vector<int> digits(10, 0);
+
+    while (number1 > 0)
+    {
+        ++digits[number1 % 10];
+        number1 /= 10;
+    }
+
+    while (number2 > 0)
+    {
+        --digits[number2 % 10];
+        number2 /= 10;
+    }
+
+    return std::count(digits.begin(), digits.end(), 0) == digits.size();
+}
+
 } // namespace math

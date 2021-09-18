@@ -20,5 +20,6 @@ auto sieveOfEratosthenes(int limit)->std::vector<int>;
 bool isTriangular(unsigned long long number);
 bool isPentagonal(unsigned long long number);
 bool isPalindrome(int number, int base = 10);
+bool isPermutation(int number1, int number2);
 
 } // namespace math
