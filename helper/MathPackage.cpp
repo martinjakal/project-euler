@@ -2,8 +2,8 @@
 
 #include <sstream>
 
-namespace math {
-
+namespace math 
+{
 int factorial(int number)
 {
     return number == 0 ? 1 : number * factorial(number - 1);
@@ -18,7 +18,7 @@ int sumProperDivisors(int number)
         if (number % i == 0)
             sum += i + number / i;
 
-        if (i * i == number)
+        if (number == i * i)
             sum -= i;
     }
 
@@ -220,5 +220,4 @@ bool isPandigital(int number, int maxDigit)
 
     return std::count(digits.begin() + 1, digits.begin() + maxDigit + 1, 1) == maxDigit;
 }
-
 } // namespace math
