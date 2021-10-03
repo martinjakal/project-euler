@@ -9,6 +9,30 @@ int factorial(int number)
     return number == 0 ? 1 : number * factorial(number - 1);
 }
 
+int countDistinctFactors(int number)
+{
+    int factorCnt = 0;
+
+    if (number % 2 == 0)
+    {
+        ++factorCnt;
+        while (number % 2 == 0)
+            number /= 2;
+    }
+
+    for (int i = 3; i * i <= number; i += 2)
+    {
+        if (number % i == 0)
+        {
+            ++factorCnt;
+            while (number % i == 0)
+                number /= i;
+        }
+    }
+
+    return number != 1 ? ++factorCnt : factorCnt;
+}
+
 int sumProperDivisors(int number)
 {
     int sum = 1;

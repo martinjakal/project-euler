@@ -2,12 +2,13 @@
 
 #include <vector>
 
-namespace math 
+namespace math
 {
 // General
 int factorial(int number);
 
 // Divisibility
+int countDistinctFactors(int number);
 int sumProperDivisors(int number);
 bool isAbundant(int number);
 
