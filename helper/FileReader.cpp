@@ -2,6 +2,8 @@
 
 #include <fstream>
 
+namespace reader
+{
 auto readInputString(const std::string& filename) -> std::string
 {
     std::ifstream file(filename);
@@ -75,3 +77,4 @@ auto readInputWords(const std::string& filename) -> std::vector<std::string>
 
     return out;
 }
+} // namespace reader

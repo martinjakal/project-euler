@@ -10,6 +10,8 @@
 // Maximum path sum I
 // Result: 1074
 
+using namespace reader;
+
 // Add the greater child to its parent from bottom to top, maximum path is in the root.
 int maxPathInTriangle(std::vector<std::vector<int>> triangle)
 {

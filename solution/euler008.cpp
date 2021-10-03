@@ -10,6 +10,8 @@
 // Largest product in a series
 // Result: 23514624000
 
+using namespace reader;
+
 unsigned long long maxProductInSeries(const std::string& number, int length)
 {
     std::vector<int> digits;

@@ -11,6 +11,7 @@
 // Coded triangle numbers
 // Result: 162
 
+using namespace reader;
 using namespace math;
 
 int triangleWordsCnt(const std::vector<std::string>& words)

@@ -8,7 +8,9 @@
 // Project Euler - Problem 11
 // https://projecteuler.net/problem=11
 // Largest product in a grid
-// Result: 70600674 
+// Result: 70600674
+
+using namespace reader;
 
 int maxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
 {

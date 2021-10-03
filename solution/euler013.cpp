@@ -9,6 +9,8 @@
 // Large sum
 // Result: 5537376230
 
+using namespace reader;
+
 auto sumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -> std::string
 {
     BigInteger sum;

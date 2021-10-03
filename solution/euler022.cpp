@@ -11,6 +11,8 @@
 // Names scores
 // Result: 871198282
 
+using namespace reader;
+
 int sumNameScores(std::vector<std::string>& names)
 {
     const std::unordered_map<char, int> alphabet = { { 'A', 1 }, { 'B', 2 }, { 'C', 3 }, { 'D', 4 }, { 'E', 5 },
