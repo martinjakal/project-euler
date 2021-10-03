@@ -9,6 +9,7 @@ int factorial(int number);
 
 // Divisibility
 int sumProperDivisors(int number);
+bool isAbundant(int number);
 
 // Primes
 bool isPrime(int number);

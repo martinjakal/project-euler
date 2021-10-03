@@ -25,6 +25,11 @@ int sumProperDivisors(int number)
     return sum;
 }
 
+bool isAbundant(int number)
+{
+    return number < sumProperDivisors(number);
+}
+
 bool isPrime(int number)
 {
     if (number == 2)
