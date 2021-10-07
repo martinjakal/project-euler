@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 
@@ -18,6 +19,7 @@ public:
     friend void swap(BigInteger& lhs, BigInteger& rhs) noexcept;
     friend auto operator<<(std::ostream& os, const BigInteger& bigInteger) -> std::ostream&;
     auto print() const -> std::string;
+    bool compare(long long number) const;
 
     friend bool operator==(const BigInteger& lhs, const BigInteger& rhs);
     friend bool operator!=(const BigInteger& lhs, const BigInteger& rhs);

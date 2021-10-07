@@ -97,6 +97,20 @@ auto BigInteger::print() const -> std::string
     return out.str();
 }
 
+bool BigInteger::compare(long long number) const
+{
+    if (sign_ != number >= 0 || digitCnt() != ceil(log10(abs(number))))
+        return false;
+
+    for (std::size_t i = 0; i < digitCnt(); ++i, number /= base_)
+    {
+        if (digits_[i] != abs(number % base_))
+            return false;
+    }
+
+    return true;
+}
+
 bool operator==(const BigInteger& lhs, const BigInteger& rhs)
 {
     return lhs.sign_ == rhs.sign_ && lhs.digits_ == rhs.digits_;
@@ -141,7 +155,7 @@ bool operator>=(const BigInteger& lhs, const BigInteger& rhs)
 
 auto BigInteger::operator++() -> BigInteger&
 {
-    if (sign_ == false && digits_[0] == 1 && digitCnt() == 1) // special case -1 -> 0
+    if (this->compare(-1)) // special case -1 -> 0
     {
         --digits_[0];    
         changeSign();
@@ -368,24 +382,17 @@ auto BigInteger::operator%=(BigInteger other) -> BigInteger&
     if (other.isZero())
         throw std::logic_error("Cannot divide or mod by zero");
 
-    bool needSignChange = sign_ == false;
-    sign_ = true;
-    other.sign_ = true;
+    if (*this < other && sign_ == true || *this > other && sign_ == false)
+        return *this;
 
     if (*this == other)
         return *this = 0;
-
-    if (*this < other)
-        return *this;
 
     BigInteger result(*this);
     BigInteger tmp(*this);
     tmp /= other;
     tmp *= other;
     result -= tmp;
-
-    if (needSignChange)
-        result.changeSign();
 
     return *this = result;
 }
