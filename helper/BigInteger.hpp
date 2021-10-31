@@ -7,14 +7,14 @@
 class BigInteger
 {
 public:
-    BigInteger() : BigInteger(0) {};
+    BigInteger() : BigInteger(0) {}
     BigInteger(long long number);
     BigInteger(const std::string& number);
     BigInteger(const BigInteger& other);
     BigInteger(BigInteger&& other) noexcept;
     BigInteger& operator=(const BigInteger& other);
     BigInteger& operator=(BigInteger&& other) noexcept;
-    ~BigInteger() {};
+    ~BigInteger() {}
 
     friend void swap(BigInteger& lhs, BigInteger& rhs) noexcept;
     friend auto operator<<(std::ostream& os, const BigInteger& bigInteger) -> std::ostream&;

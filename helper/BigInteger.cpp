@@ -129,7 +129,7 @@ bool operator<(const BigInteger& lhs, const BigInteger& rhs)
     if (lhs.digitCnt() != rhs.digitCnt())
         return lhs.sign_ == true? lhs.digitCnt() < rhs.digitCnt() : lhs.digitCnt() > rhs.digitCnt();
 
-    for (int i = lhs.digitCnt() - 1; i >= 0; --i)
+    for (std::size_t i = lhs.digitCnt(); i-- > 0; )
     {
         if (lhs.digits_[i] != rhs.digits_[i])
             return lhs.sign_ == true? lhs.digits_[i] < rhs.digits_[i] : lhs.digits_[i] > rhs.digits_[i];
@@ -334,7 +334,7 @@ auto BigInteger::operator/(const BigInteger& other) const -> BigInteger
 auto BigInteger::operator/=(BigInteger other) -> BigInteger&
 {
     if (other.isZero())
-        throw std::logic_error("Cannot divide or mod by zero");
+        throw std::runtime_error("Cannot divide or mod by zero");
     
     if (this->isZero())
         return *this;
@@ -380,7 +380,7 @@ auto BigInteger::operator%(const BigInteger& other) const -> BigInteger
 auto BigInteger::operator%=(BigInteger other) -> BigInteger&
 {
     if (other.isZero())
-        throw std::logic_error("Cannot divide or mod by zero");
+        throw std::runtime_error("Cannot divide or mod by zero");
 
     if (*this < other && sign_ == true || *this > other && sign_ == false)
         return *this;
@@ -407,7 +407,7 @@ auto BigInteger::operator^(const BigInteger& other) const -> BigInteger
 auto BigInteger::operator^=(BigInteger other) -> BigInteger&
 {
     if (this->isZero() && (other.isZero() || other.sign_ == false))
-        throw std::logic_error("Cannot divide or mod by zero");
+        throw std::runtime_error("Cannot divide or mod by zero");
 
     if (this->isZero())
         return *this;
