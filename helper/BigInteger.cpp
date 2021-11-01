@@ -99,12 +99,12 @@ auto BigInteger::print() const -> std::string
 
 bool BigInteger::compare(long long number) const
 {
-    if (sign_ != number >= 0 || digitCnt() != ceil(log10(abs(number))))
+    if (sign_ != number >= 0 || digitCnt() != std::ceil(std::log10(std::abs(number))))
         return false;
 
     for (std::size_t i = 0; i < digitCnt(); ++i, number /= base_)
     {
-        if (digits_[i] != abs(number % base_))
+        if (digits_[i] != std::abs(number % base_))
             return false;
     }
 
@@ -347,19 +347,19 @@ auto BigInteger::operator/=(BigInteger other) -> BigInteger&
         return *this = 0;
     
     BigInteger result;
-    BigInteger tmp;
+    BigInteger left;
 
     for (std::size_t i = digitCnt(); i > 0;) // long division
     {
-        while (tmp < other && i > 0)
+        while (left < other && i > 0)
         {
-            tmp = tmp * base_ + digits_[--i];
+            left = left * base_ + digits_[--i];
             result *= base_;
         }
 
-        while (tmp >= other) // division by repeated subtraction
+        while (left >= other) // division by repeated subtraction
         {
-            tmp -= other;
+            left -= other;
             ++result;
         }
     } 
@@ -389,10 +389,10 @@ auto BigInteger::operator%=(BigInteger other) -> BigInteger&
         return *this = 0;
 
     BigInteger result(*this);
-    BigInteger tmp(*this);
-    tmp /= other;
-    tmp *= other;
-    result -= tmp;
+    BigInteger div(*this);
+    div /= other;
+    div *= other;
+    result -= div;
 
     return *this = result;
 }
@@ -419,18 +419,18 @@ auto BigInteger::operator^=(BigInteger other) -> BigInteger&
         return *this = 0;
 
     BigInteger result(1);
-    BigInteger expBase(*this);
+    BigInteger base(*this);
 
     while (!other.isZero()) // exponentiation by squaring
     {
         if (other.isEven())
         {
-            expBase *= expBase;
+            base *= base;
             other /= 2;
         }
         else
         {
-            result *= expBase;
+            result *= base;
             --other;
         }
     }
