@@ -108,4 +108,24 @@ auto readInputSudoku(const std::string& filename) -> std::vector<std::vector<std
     return out;
 }
 
+auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<int, int>>
+{
+    std::ifstream file(filename);
+    std::vector<std::pair<int, int>> out;
+
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
+
+    int firstNum;
+    int secondNum;
+    char separator;
+
+    while (file.good() && file >> firstNum >> separator >> secondNum)
+    {
+        out.push_back({ firstNum, secondNum });
+    }
+
+    return out;
+}
+
 } // namespace reader
