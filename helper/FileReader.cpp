@@ -53,6 +53,7 @@ auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vecto
         std::string row;
         getline(file, row);
         out.push_back({});
+
         for (size_t i = 0; i < row.size(); i += 3)
             out.back().push_back(std::stoi(row.substr(i, 2)));
     }
@@ -77,4 +78,34 @@ auto readInputWords(const std::string& filename) -> std::vector<std::string>
 
     return out;
 }
+
+auto readInputSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>
+{
+    std::ifstream file(filename);
+    std::vector<std::vector<std::vector<int>>> out;
+
+    if (!file.is_open())
+        throw std::runtime_error("Could not open file");
+
+    while (file.good())
+    {
+        std::string row;
+        std::vector<std::vector<int>> grid(9, std::vector<int>(9));
+
+        getline(file, row); // discard header
+
+        for (int i = 0; i < 9; ++i)
+        {
+            getline(file, row);
+
+            for (int j = 0; j < 9; ++j)
+                grid[i][j] = std::stoi(row.substr(j, 1));
+        }
+
+        out.push_back(grid);
+    }
+
+    return out;
+}
+
 } // namespace reader
