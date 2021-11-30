@@ -23,11 +23,11 @@ int findLineWithMaxExponential(const std::vector<std::pair<int, int>>& numbers)
         if (exp > maxExp)
         {
             maxExp = exp;
-            lineNumber = i;
+            lineNumber = i + 1;
         }
     }
 
-    return ++lineNumber;
+    return lineNumber;
 }
 
 int main()
