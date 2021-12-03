@@ -22,7 +22,7 @@ auto readInputString(const std::string& filename) -> std::string
     return out;
 }
 
-auto readInputNumbers(const std::string& filename) -> std::vector<std::string>
+auto readLines(const std::string& filename) -> std::vector<std::string>
 {
     std::ifstream file(filename);
     std::vector<std::string> out;
