@@ -24,7 +24,7 @@ int squareRootPeriod(int number)
     return period;
 }
 
-int countOddPeriodContFract(int limit)
+int countOddPeriodsOfSquareRoots(int limit)
 {
     int oddPeriodCount = 0;
 
@@ -42,7 +42,7 @@ int countOddPeriodContFract(int limit)
 int main()
 {
     int limit = 10000;
-    auto result = countOddPeriodContFract(limit);
+    auto result = countOddPeriodsOfSquareRoots(limit);
     std::cout << result << std::endl;
     
     return 0;
