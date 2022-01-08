@@ -23,7 +23,10 @@ auto sumEulerTotients(int limit) -> unsigned long long
     for (auto p : primes)
     {
         for (int i = p; i < static_cast<int>(totients.size()); i += p)
-            totients[i] *= static_cast<double>(p - 1) / p;
+        {
+            totients[i] /= p; // no data lost because i % p = 0
+            totients[i] *= p - 1;
+        }
     }
 
     return std::accumulate(totients.begin() + 2, totients.end(), 0ULL);
