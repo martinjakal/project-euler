@@ -30,7 +30,7 @@ int main()
 {
     std::string filename = "input/euler008input.txt";
     int length = 13;
-    auto number = readInputString(filename);
+    auto number = readConcatString(filename);
     auto result = maxProductInSeries(number, length);
     std::cout << result << std::endl;
 

@@ -75,7 +75,7 @@ int main()
 {
     std::string filename = "input/euler011input.txt";
     int length = 4;
-    auto input = readInputNumbersGrid(filename);
+    auto input = readNumbers(filename, ' ');
     auto result = maxProductInGrid(input, length);
     std::cout << result << std::endl;
 
