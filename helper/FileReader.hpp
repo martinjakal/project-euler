@@ -5,11 +5,11 @@
 
 namespace reader
 {
-auto readInputString(const std::string& filename) -> std::string;
-auto readLines(const std::string& filename) -> std::vector<std::string>;
-auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vector<int>>;
-auto readInputWords(const std::string& filename) -> std::vector<std::string>;
-auto readInputSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>;
-auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<int, int>>;
+auto readConcatString(const std::string& filename) -> std::string;
+auto readStrings(const std::string& filename) -> std::vector<std::string>;
+auto readNumbers(const std::string& filename, char separator) -> std::vector<std::vector<int>>;
+auto readWords(const std::string& filename) -> std::vector<std::string>;
+auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>;
+//auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<int, int>>;
 
 } // namespace reader

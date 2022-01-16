@@ -4,7 +4,7 @@
 
 namespace reader
 {
-auto readInputString(const std::string& filename) -> std::string
+auto readConcatString(const std::string& filename) -> std::string
 {
     std::ifstream file(filename);
     std::string out;
@@ -22,7 +22,7 @@ auto readInputString(const std::string& filename) -> std::string
     return out;
 }
 
-auto readLines(const std::string& filename) -> std::vector<std::string>
+auto readStrings(const std::string& filename) -> std::vector<std::string>
 {
     std::ifstream file(filename);
     std::vector<std::string> out;
@@ -40,7 +40,7 @@ auto readLines(const std::string& filename) -> std::vector<std::string>
     return out;
 }
 
-auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vector<int>>
+auto readNumbers(const std::string& filename, char separator) -> std::vector<std::vector<int>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<int>> out;
@@ -51,17 +51,25 @@ auto readInputNumbersGrid(const std::string& filename) -> std::vector<std::vecto
     while (file.good())
     {
         std::string row;
-        getline(file, row);
+        std::getline(file, row);
         out.push_back({});
 
-        for (size_t i = 0; i < row.size(); i += 3)
-            out.back().push_back(std::stoi(row.substr(i, 2)));
+        std::size_t i = 0;
+        auto pos = row.find(separator, i);
+
+        for (; pos != std::string::npos; pos = row.find(separator, i))
+        {
+            out.back().push_back(std::stoi(row.substr(i, pos - i)));
+            i = pos + 1;
+        }
+
+        out.back().push_back(std::stoi(row.substr(i, row.size() - i)));
     }
 
     return out;
 }
 
-auto readInputWords(const std::string& filename) -> std::vector<std::string>
+auto readWords(const std::string& filename) -> std::vector<std::string>
 {
     std::ifstream file(filename);
     std::vector<std::string> out;
@@ -79,7 +87,7 @@ auto readInputWords(const std::string& filename) -> std::vector<std::string>
     return out;
 }
 
-auto readInputSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>
+auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<std::vector<int>>> out;
@@ -108,6 +116,7 @@ auto readInputSudoku(const std::string& filename) -> std::vector<std::vector<std
     return out;
 }
 
+/*
 auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<int, int>>
 {
     std::ifstream file(filename);
@@ -127,5 +136,6 @@ auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<
 
     return out;
 }
+*/
 
 } // namespace reader
