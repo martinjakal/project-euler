@@ -20,7 +20,7 @@ const std::vector<std::pair<std::string, std::string>> replacements = {
 int countLetters(const std::vector<std::string>& words)
 {
     return std::accumulate(words.begin(), words.end(), 0, 
-        [](int letterCnt, const std::string& word) { return letterCnt + word.size(); });
+        [](int letterCnt, const std::string& word) { return letterCnt + static_cast<int>(word.size()); });
 }
 
 auto minimizeRomanNumber(std::string romanNumber) -> std::string
@@ -41,7 +41,7 @@ int charsSavedInRomanNumbers(const std::vector<std::string>& original)
 int main()
 {
     std::string filename = "input/euler089input.txt";
-    auto input = readLines(filename);
+    auto input = readStrings(filename);
     auto result = charsSavedInRomanNumbers(input);
     std::cout << result << std::endl;
     

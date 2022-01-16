@@ -25,7 +25,7 @@ int main()
 { 
     std::string filename = "input/euler013input.txt";
     int firstDigits = 10;
-    auto numbers = readInputNumbers(filename);
+    auto numbers = readStrings(filename);
     auto result = sumLargeNumbers(numbers, firstDigits);
     std::cout << result << std::endl;
 

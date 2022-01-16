@@ -15,7 +15,7 @@ auto readConcatString(const std::string& filename) -> std::string
     while (file.good())
     {
         std::string word;
-        getline(file, word);
+        std::getline(file, word);
         out.append(word);
     }
 
@@ -33,7 +33,7 @@ auto readStrings(const std::string& filename) -> std::vector<std::string>
     while (file.good())
     {
         std::string word;
-        getline(file, word);
+        std::getline(file, word);
         out.push_back(word);
     }
 
@@ -80,7 +80,7 @@ auto readWords(const std::string& filename) -> std::vector<std::string>
     while (file.good())
     {
         std::string word;
-        getline(file, word, ',');
+        std::getline(file, word, ',');
         out.push_back(word.substr(1, word.size() - 2)); // skip " symbols
     }
 
@@ -100,11 +100,11 @@ auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vec
         std::string row;
         std::vector<std::vector<int>> grid(9, std::vector<int>(9));
 
-        getline(file, row); // discard header
+        std::getline(file, row); // discard header
 
         for (int i = 0; i < 9; ++i)
         {
-            getline(file, row);
+            std::getline(file, row);
 
             for (int j = 0; j < 9; ++j)
                 grid[i][j] = std::stoi(row.substr(j, 1));
@@ -115,27 +115,5 @@ auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vec
 
     return out;
 }
-
-/*
-auto readInputNumberPairs(const std::string& filename) -> std::vector<std::pair<int, int>>
-{
-    std::ifstream file(filename);
-    std::vector<std::pair<int, int>> out;
-
-    if (!file.is_open())
-        throw std::runtime_error("Could not open file");
-
-    int firstNum;
-    int secondNum;
-    char separator;
-
-    while (file.good() && file >> firstNum >> separator >> secondNum)
-    {
-        out.push_back({ firstNum, secondNum });
-    }
-
-    return out;
-}
-*/
 
 } // namespace reader

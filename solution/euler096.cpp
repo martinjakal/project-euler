@@ -29,7 +29,7 @@ int solvedSudokuSum(std::vector<Grid>& sudokus)
 int main()
 {
     std::string filename = "input/euler096input.txt";
-    auto input = readInputSudoku(filename);
+    auto input = readSudoku(filename);
     auto result = solvedSudokuSum(input);
     std::cout << result << std::endl;
 

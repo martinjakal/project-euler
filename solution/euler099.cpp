@@ -10,7 +10,7 @@
 
 using namespace reader;
 
-int findLineWithMaxExponential(const std::vector<std::pair<int, int>>& numbers)
+int findLineWithMaxExponential(const std::vector<std::vector<int>>& numbers)
 {
     double maxExp = 0;
     int lineNumber = 0;
@@ -18,7 +18,7 @@ int findLineWithMaxExponential(const std::vector<std::pair<int, int>>& numbers)
     // If a ^ b = c ^ d, then b * log(a) = d * log(c).
     for (int i = 0; i < static_cast<int>(numbers.size()); ++i)
     {
-        double exp = numbers[i].second * log(numbers[i].first);
+        double exp = numbers[i][1] * log(numbers[i][0]);
 
         if (exp > maxExp)
         {
@@ -33,7 +33,7 @@ int findLineWithMaxExponential(const std::vector<std::pair<int, int>>& numbers)
 int main()
 {
     std::string filename = "input/euler099input.txt";
-    auto input = readInputNumberPairs(filename);
+    auto input = readNumbers(filename, ',');
     auto result = findLineWithMaxExponential(input);
     std::cout << result << std::endl; 
 
