@@ -35,7 +35,7 @@ int minPathTwoDirectionMatrix(std::vector<std::vector<int>> matrix)
 
 int main()
 {
-    std::string filename = "euler081input.txt";
+    std::string filename = "input/euler081input.txt";
     auto input = readNumbers(filename, ',');
     auto result = minPathTwoDirectionMatrix(input);
     std::cout << result << std::endl;
