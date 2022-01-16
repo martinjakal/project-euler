@@ -4,24 +4,6 @@
 
 namespace reader
 {
-auto readConcatString(const std::string& filename) -> std::string
-{
-    std::ifstream file(filename);
-    std::string out;
-
-    if (!file.is_open())
-        throw std::runtime_error("Could not open file");
-
-    while (file.good())
-    {
-        std::string word;
-        std::getline(file, word);
-        out.append(word);
-    }
-
-    return out;
-}
-
 auto readStrings(const std::string& filename) -> std::vector<std::string>
 {
     std::ifstream file(filename);

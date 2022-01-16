@@ -12,16 +12,18 @@
 
 using namespace reader;
 
-unsigned long long maxProductInSeries(const std::string& number, int length)
+unsigned long long maxProductInSeries(const std::vector<std::string>& numbers, int length)
 {
+    std::string concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string(""));
+
     std::vector<int> digits;
-    for (auto digit : number)
+    for (auto digit : concatNumber)
         digits.push_back(digit - '0');
 
     unsigned long long maxProduct = 0;
 
     for (auto it = digits.begin(); it != digits.end() - length; ++it)
-        maxProduct = std::max(std::accumulate(it, it + length, 1ULL, std::multiplies<unsigned long long>()), maxProduct);
+        maxProduct = std::max(std::accumulate(it, it + length, 1ull, std::multiplies<unsigned long long>()), maxProduct);
 
     return maxProduct;
 }
@@ -30,8 +32,8 @@ int main()
 {
     std::string filename = "input/euler008input.txt";
     int length = 13;
-    auto number = readConcatString(filename);
-    auto result = maxProductInSeries(number, length);
+    auto numbers = readStrings(filename);
+    auto result = maxProductInSeries(numbers, length);
     std::cout << result << std::endl;
 
     return 0;
