@@ -71,6 +71,20 @@ bool isPrime(int number)
     return true;
 }
 
+bool isPrime(int number, const std::vector<int>& primes)
+{
+    if (number < 2)
+        return false;
+
+    for (int i = 0; primes[i] * primes[i] <= number; ++i)
+    {
+        if (number % primes[i] == 0)
+            return false;
+    }
+
+    return true;
+}
+
 // Number stays prime during cyclic rotation of the digits.
 bool isCircularPrime(int number)
 {
@@ -249,4 +263,15 @@ bool isPandigital(int number, int maxDigit)
 
     return std::count(digits.begin() + 1, digits.begin() + maxDigit + 1, 1) == maxDigit;
 }
+
+int concat(int number1, int number2)
+{
+    int rank = 1;
+
+    while (rank <= number2)
+        rank *= 10;
+
+    return rank * number1 + number2;
+}
+
 } // namespace math
