@@ -36,7 +36,7 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
         {
             for (char z = 'a'; z <= 'z'; ++z)
             {
-                std::string key = { x, y, z };
+                const std::string key = { x, y, z };
                 std::string decoded;
 
                 for (std::size_t i = 0; i < message.size(); ++i)
@@ -51,10 +51,8 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
 
                 // Discard the message if the lengths are not matching (meaning the key produced some invalid characters).
                 // Verify the correct result by assuming that a valid English text would contain the word "the" multiple times.
-                if (decoded.size() != message.size() || countSubstrings(decoded, "the") < 3)
-                    continue;
-
-                return std::accumulate(decoded.begin(), decoded.end(), 0);
+                if (decoded.size() == message.size() && countSubstrings(decoded, "the") > 2)
+                    return std::accumulate(decoded.begin(), decoded.end(), 0);
             }
         }
     }
