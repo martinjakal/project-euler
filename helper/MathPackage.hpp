@@ -4,8 +4,38 @@
 
 namespace math
 {
+namespace impl
+{
+template <typename T>
+void generateCombinations(const T& data, int length, int start, T& result, std::vector<T>& carrier, bool repeat)
+{
+    if (length == 0)
+    {
+        carrier.push_back(result);
+        return;
+    }
+
+    for (int i = (repeat ? 0 : start); i <= data.size() - (repeat ? 1 : length); ++i)
+    {
+        result[result.size() - length] = data[i];
+        generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
+    }
+}
+
+} // namespace impl
+
 // General
 int factorial(int number);
+
+// Combinatorics
+template <typename T>
+auto generateCombinations(const T& data, int length, bool repeat) -> std::vector<T>
+{
+    std::vector<T> combinations;
+    T result(length, ' ');
+    impl::generateCombinations(data, length, 0, result, combinations, repeat);
+    return combinations;
+}
 
 // Divisibility
 int countDistinctFactors(int number);

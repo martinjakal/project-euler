@@ -2,33 +2,14 @@
 #include <string>
 #include <vector>
 
+#include <helper/MathPackage.hpp>
+
 // Project Euler - Problem 90
 // https://projecteuler.net/problem=90
 // Cube digit pairs
 // Result: 1217
 
-void generateCombinations(const std::string& data, int length , int start, std::string& result, std::vector<std::string>& carrier)
-{
-    if (length == 0)
-    {
-        carrier.push_back(result);
-        return;
-    }
-
-    for (int i = start; i <= data.size() - length; ++i)
-    {
-        result[result.size() - length] = data[i];
-        generateCombinations(data, length - 1, i + 1, result, carrier);
-    }
-}
-
-auto generateCombinations(const std::string& data, int length) -> std::vector<std::string>
-{
-    std::vector<std::string> combinations;
-    std::string result(length, ' ');
-    generateCombinations(data, length, 0, result, combinations);
-    return combinations;
-}
+using namespace math;
 
 bool canObtainAllPairs(const std::vector<std::string>& pairs, const std::string& dice1, const std::string& dice2)
 {
@@ -47,7 +28,7 @@ int countDiceArrangements()
     const std::string numbers = "0123456789";
     const std::vector<std::string> pairs = { "01", "04", "06", "16", "18", "25", "36", "46" }; // some digits switched, 9 replaced with 6
 
-    auto dices = generateCombinations(numbers, 6);
+    auto dices = generateCombinations(numbers, 6, false);
     int arrangements = 0;
 
     // Dices are generated with all numbers, but 9 is then replaced with 6 for easier checking.
