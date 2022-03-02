@@ -15,7 +15,8 @@ void generateCombinations(const T& data, int length, int start, T& result, std::
         return;
     }
 
-    for (int i = (repeat ? 0 : start); i <= data.size() - (repeat ? 1 : length); ++i)
+    int first = repeat ? 0 : start;
+    for (int i = first; i < data.size(); ++i)
     {
         result[result.size() - length] = data[i];
         generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
