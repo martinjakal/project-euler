@@ -1,5 +1,6 @@
 #include "MathPackage.hpp"
 
+#include <cmath>
 #include <sstream>
 
 namespace math 
@@ -7,6 +8,11 @@ namespace math
 int factorial(int number)
 {
     return number == 0 ? 1 : number * factorial(number - 1);
+}
+
+int countDigits(int number)
+{
+    return number != 0 ? static_cast<int>(std::floor(std::log10(std::abs(number)))) + 1 : 1;
 }
 
 int countDistinctFactors(int number)

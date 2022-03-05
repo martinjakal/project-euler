@@ -27,6 +27,7 @@ void generateCombinations(const T& data, int length, int start, T& result, std::
 
 // General
 int factorial(int number);
+int countDigits(int number);
 
 // Combinatorics
 template <typename T>
