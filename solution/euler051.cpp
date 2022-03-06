@@ -54,25 +54,22 @@ auto makeCandidate(int number, int count) -> PrimeFamilyCandidate
 
 int minMemberOfEightPrimeFamily()
 {
-    const int limit = 1000000;
-    auto primes = sieveOfEratosthenes(limit);
-    std::vector<PrimeFamilyCandidate> candidates;
-    for (auto p : primes)
+    for (int i = 0;; ++i)
     {
-        auto cand = makeCandidate(p, 3); // 3 digits must be replaced to possibly make size 8 prime family
-        if (cand.second != -1)
-            candidates.push_back(std::move(cand));
-    }
+        if (!isPrime(i))
+            continue;
 
-    for (const auto& candidate : candidates)
-    {
+        auto candidate = makeCandidate(i, 3); // 3 digits must be replaced to possibly make size 8 prime family
+        if (candidate.second == -1)
+            continue;
+
         int familySize = 0;
 
-        for (int i = 0; i < 10; ++i)
+        for (int digit = 0; digit < 10; ++digit)
         {
-            int replaced = replaceDigits(candidate.first, candidate.second, i);
+            int replaced = replaceDigits(candidate.first, candidate.second, digit);
 
-            if (i == 0 && countDigits(replaced) != countDigits(candidate.first)) // check for leading zeros when replacing with 0
+            if (digit == 0 && countDigits(replaced) != countDigits(candidate.first)) // check for leading zeros when replacing with 0
                 continue;
 
             if (isPrime(replaced))
@@ -82,8 +79,6 @@ int minMemberOfEightPrimeFamily()
         if (familySize == 8)
             return candidate.first;
     }
-
-    return 0;
 }
 
 int main()
