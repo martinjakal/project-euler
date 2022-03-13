@@ -5,14 +5,14 @@
 
 namespace math 
 {
-int factorial(int number)
-{
-    return number == 0 ? 1 : number * factorial(number - 1);
-}
-
 int countDigits(int number)
 {
     return number != 0 ? static_cast<int>(std::floor(std::log10(std::abs(number)))) + 1 : 1;
+}
+
+int factorial(int number)
+{
+    return number == 0 ? 1 : number * factorial(number - 1);
 }
 
 int countDistinctFactors(int number)
@@ -36,7 +36,7 @@ int countDistinctFactors(int number)
         }
     }
 
-    return number != 1 ? ++factorCnt : factorCnt;
+    return number != 1 ? factorCnt + 1 : factorCnt;
 }
 
 int sumProperDivisors(int number)
@@ -105,7 +105,7 @@ bool isCircularPrime(int number)
         ++digitCnt;
     }
 
-    const int rank = static_cast<int>(pow(10, digitCnt)) / 10;
+    const int rank = static_cast<int>(std::pow(10, digitCnt)) / 10;
     n = number;
 
     while (isPrime(n))
@@ -131,7 +131,7 @@ bool isLeftTruncatablePrime(int number)
             return false;
     }
 
-    for (int i = static_cast<int>(pow(10, ceil(log10(number)))); i > 1; i /= 10)
+    for (int i = static_cast<int>(std::pow(10, countDigits(number))); i > 1; i /= 10)
     {
         if (!isPrime(number % i))
             return false;
@@ -187,10 +187,17 @@ auto primeFactors(int number) -> std::vector<int>
 
 auto sieveOfEratosthenes(int limit) -> std::vector<int>
 {
+    if (limit < 2)
+        return {};
+
     std::vector<bool> primeCheck(limit + 1, true);
     std::vector<int> primes;
 
-    for (int i = 2; i * i <= limit; ++i)
+    primes.push_back(2);
+    for (int i = 4; i <= limit; i += 2)
+        primeCheck[i] = false;
+
+    for (int i = 3; i * i <= limit; i += 2)
     {
         if (primeCheck[i])
         {
@@ -199,7 +206,7 @@ auto sieveOfEratosthenes(int limit) -> std::vector<int>
         }
     }
 
-    for (int i = 2; i <= limit; ++i)
+    for (int i = 3; i <= limit; i += 2)
     {
         if (primeCheck[i])
             primes.push_back(i);
@@ -210,13 +217,13 @@ auto sieveOfEratosthenes(int limit) -> std::vector<int>
 
 bool isTriangular(unsigned long long number)
 {
-    double n = (sqrt(8 * number + 1) - 1) / 2;
+    double n = (std::sqrt(8 * number + 1) - 1) / 2;
     return n == static_cast<int>(n);
 }
 
 bool isPentagonal(unsigned long long number)
 {
-    double n = (sqrt(24 * number + 1) + 1) / 6;
+    double n = (std::sqrt(24 * number + 1) + 1) / 6;
     return n == static_cast<int>(n);
 }
 
@@ -259,7 +266,7 @@ bool isPandigital(int number, int maxDigit)
     if (maxDigit > 9)
         throw std::runtime_error("Invalid max digit");
 
-    if (ceil(log10(number)) != maxDigit)
+    if (countDigits(number) != maxDigit)
         return false;
 
     std::vector<int> digits(10, 0);

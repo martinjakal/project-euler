@@ -22,12 +22,11 @@ void generateCombinations(const T& data, int length, int start, T& result, std::
         generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
     }
 }
-
 } // namespace impl
 
 // General
-int factorial(int number);
 int countDigits(int number);
+int factorial(int number);
 
 // Combinatorics
 template <typename T>
