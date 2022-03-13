@@ -1,7 +1,6 @@
 #include "BigInteger.hpp"
 
 #include <algorithm>
-#include <numeric>
 #include <sstream>
 
 BigInteger::BigInteger(long long number)
@@ -9,20 +8,21 @@ BigInteger::BigInteger(long long number)
     if (number == 0)
     {
         digits_.push_back(0);
-        return;
     }
-
-    if (number < 0)
+    else
     {
-        sign_ = false;
-        number *= -1;
-    }
+        if (number < 0)
+        {
+            sign_ = false;
+            number *= -1;
+        }
 
-    while (number > 0)
-    {
-        digits_.push_back(number % base_);
-        number /= base_;
-    }
+        while (number > 0)
+        {
+            digits_.push_back(number % BASE);
+            number /= BASE;
+        }
+    } 
 }
 
 BigInteger::BigInteger(const std::string& number)
@@ -30,7 +30,7 @@ BigInteger::BigInteger(const std::string& number)
     int startIdx = number[0] == '-';
 
     if (number.empty() || number.begin() + startIdx == number.end() ||
-        std::any_of(number.begin() + startIdx, number.end(), [](char c) { return !isdigit(c); }))
+        std::any_of(number.begin() + startIdx, number.end(), [](char c) { return !std::isdigit(c); }))
         throw std::runtime_error("Invalid string input");
     
     for (auto it = number.rbegin(); it != number.rend() - startIdx; ++it)
@@ -42,21 +42,21 @@ BigInteger::BigInteger(const std::string& number)
     removeZeros();
 }
 
-BigInteger::BigInteger(const BigInteger& other) : 
-    digits_(other.digits_), 
-    sign_(other.sign_) 
+BigInteger::BigInteger(const BigInteger& other) :
+    digits_(other.digits_),
+    sign_(other.sign_)
 {}
 
-BigInteger::BigInteger(BigInteger&& other) noexcept : 
-    digits_(std::move(other.digits_)), 
-    sign_(other.sign_) 
-{}
+BigInteger::BigInteger(BigInteger&& other) noexcept :
+    digits_(std::move(other.digits_)),
+    sign_(other.sign_)
+{
+    other.digits_.push_back(0);
+    other.sign_ = true;
+}
 
 BigInteger& BigInteger::operator=(const BigInteger& other)
 {
-    if (*this == other)
-        return *this;
-
     digits_ = other.digits_;
     sign_ = other.sign_;
     return *this;
@@ -64,11 +64,12 @@ BigInteger& BigInteger::operator=(const BigInteger& other)
 
 BigInteger& BigInteger::operator=(BigInteger&& other) noexcept
 {
-    if (*this == other)
-        return *this;
-
     digits_ = std::move(other.digits_);
     sign_ = other.sign_;
+
+    other.digits_.push_back(0);
+    other.sign_ = true;
+
     return *this;
 }
 
@@ -102,9 +103,9 @@ bool BigInteger::compare(long long number) const
     if (sign_ != number >= 0 || digitCnt() != std::ceil(std::log10(std::abs(number))))
         return false;
 
-    for (std::size_t i = 0; i < digitCnt(); ++i, number /= base_)
+    for (std::size_t i = 0; i < digitCnt(); ++i, number /= BASE)
     {
-        if (digits_[i] != std::abs(number % base_))
+        if (digits_[i] != std::abs(number % BASE))
             return false;
     }
 
@@ -353,8 +354,8 @@ auto BigInteger::operator/=(BigInteger other) -> BigInteger&
     {
         while (left < other && i > 0)
         {
-            left = left * base_ + digits_[--i];
-            result *= base_;
+            left = left * BASE + digits_[--i];
+            result *= BASE;
         }
 
         while (left >= other) // division by repeated subtraction
@@ -445,7 +446,10 @@ auto BigInteger::digitCnt() const -> std::size_t
 
 int BigInteger::digitSum() const
 {
-    return std::accumulate(digits_.begin(), digits_.end(), 0);
+    std::size_t sum = 0;
+    for (auto d : digits_)
+        sum += d;
+    return sum;
 }
 
 bool BigInteger::isZero() const
@@ -487,7 +491,7 @@ void BigInteger::handleCarry()
 {
     for (std::size_t i = 0; i < digitCnt(); ++i)
     {
-        if (digits_[i] < base_)
+        if (digits_[i] < BASE)
             continue;
 
         if (i == digitCnt() - 1)
@@ -495,8 +499,8 @@ void BigInteger::handleCarry()
             digits_.push_back(0);
         } 
 
-        digits_[i + 1] += digits_[i] / base_;
-        digits_[i] %= base_;
+        digits_[i + 1] += digits_[i] / BASE;
+        digits_[i] %= BASE;
     }
 }
 
@@ -509,7 +513,7 @@ void BigInteger::handleBorrow()
             continue;
 
         --digits_[i + 1];
-        digits_[i] += base_;
+        digits_[i] += BASE;
     }
 }
 

@@ -1,9 +1,11 @@
 #pragma once
 
+#include <cstddef>
 #include <string>
 #include <vector>
 
-// Represents a large number and supports basic arithmetic operations.
+// BigInteger class represents a large number and supports basic arithmetic operations.
+// It is useful in calculations where larger numbers than the standard types are required.
 class BigInteger
 {
 public:
@@ -55,9 +57,10 @@ public:
     bool isPalindrome() const;
 
 private:
+    static constexpr int BASE = 10;
+
     std::vector<int> digits_; // digits are stored in reversed order
     bool sign_ = true;
-    const int base_ = 10;
 
     void changeSign();
     void handleCarry();
