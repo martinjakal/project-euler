@@ -1,75 +1,11 @@
 #include "FileReader.hpp"
 
+#include <algorithm>
 #include <fstream>
 
 namespace reader
 {
-auto readStrings(const std::string& filename) -> std::vector<std::string>
-{
-    std::ifstream file(filename);
-    std::vector<std::string> out;
-
-    if (!file.is_open())
-        throw std::runtime_error("Could not open file");
-
-    while (file.good())
-    {
-        std::string word;
-        std::getline(file, word);
-        out.push_back(word);
-    }
-
-    return out;
-}
-
-auto readNumbers(const std::string& filename, char separator) -> std::vector<std::vector<int>>
-{
-    std::ifstream file(filename);
-    std::vector<std::vector<int>> out;
-
-    if (!file.is_open())
-        throw std::runtime_error("Could not open file");
-
-    while (file.good())
-    {
-        std::string row;
-        std::getline(file, row);
-        out.push_back({});
-
-        std::size_t i = 0;
-        auto pos = row.find(separator, i);
-
-        for (; pos != std::string::npos; pos = row.find(separator, i))
-        {
-            out.back().push_back(std::stoi(row.substr(i, pos - i)));
-            i = pos + 1;
-        }
-
-        out.back().push_back(std::stoi(row.substr(i, row.size() - i)));
-    }
-
-    return out;
-}
-
-auto readWords(const std::string& filename) -> std::vector<std::string>
-{
-    std::ifstream file(filename);
-    std::vector<std::string> out;
-
-    if (!file.is_open())
-        throw std::runtime_error("Could not open file");
-
-    while (file.good())
-    {
-        std::string word;
-        std::getline(file, word, ',');
-        out.push_back(word.substr(1, word.size() - 2)); // skip " symbols
-    }
-
-    return out;
-}
-
-auto readCards(const std::string& filename, char separator) -> std::vector<std::vector<std::string>>
+auto readStrings(const std::string& filename, char separator, char remove) -> std::vector<std::vector<std::string>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<std::string>> out;
@@ -83,6 +19,12 @@ auto readCards(const std::string& filename, char separator) -> std::vector<std::
         std::getline(file, row);
         out.push_back({});
 
+        if (separator == '\0')
+        {
+            out.back().push_back(row);
+            continue;
+        }
+
         std::size_t i = 0;
         auto pos = row.find(separator, i);
 
@@ -93,6 +35,30 @@ auto readCards(const std::string& filename, char separator) -> std::vector<std::
         }
 
         out.back().push_back(row.substr(i, row.size() - i));
+    }
+
+    if (remove != '\0')
+    {
+        for (auto& line : out)
+        {
+            for (auto& item : line)
+                item.erase(std::remove(item.begin(), item.end(), remove), item.end());
+        }
+    }
+
+    return out;
+}
+
+auto readNumbers(const std::string& filename, char separator) -> std::vector<std::vector<int>>
+{
+    auto data = readStrings(filename, separator);
+    std::vector<std::vector<int>> out;
+
+    for (const auto& line : data)
+    {
+        out.push_back({});
+        for (const auto& item : line)
+            out.back().push_back(std::stoi(item));
     }
 
     return out;
