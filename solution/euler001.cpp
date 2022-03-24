@@ -15,9 +15,9 @@ int sumMultiples(int multiple, int limit)
     return sum;
 }
 
-int sumMultiplesTwoNumbers(int a, int b, int limit)
+int sumMultiplesTwoNumbers(int num1, int num2, int limit)
 {
-    return sumMultiples(a, limit) + sumMultiples(b, limit) - sumMultiples(a * b, limit);
+    return sumMultiples(num1, limit) + sumMultiples(num2, limit) - sumMultiples(num1 * num2, limit);
 }
 
 int main()
