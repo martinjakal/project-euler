@@ -97,12 +97,14 @@ bool isCircularPrime(int number)
     int digitCnt = 0;
     int n = number;
 
-    for (; n > 0; n /= 10)
+    while (n > 0)
     {
-        if (digitCnt > 0 && n % 10 != 1 && n % 10 != 3 && n % 10 != 7 && n % 10 != 9)
+        int digit = n % 10;
+        if (digitCnt > 0 && digit != 1 && digit != 3 && digit != 7 && digit != 9)
             return false;
 
         ++digitCnt;
+        n /= 10;
     }
 
     const int rank = static_cast<int>(std::pow(10, digitCnt)) / 10;
@@ -131,7 +133,8 @@ bool isLeftTruncatablePrime(int number)
             return false;
     }
 
-    for (int i = static_cast<int>(std::pow(10, countDigits(number))); i > 1; i /= 10)
+    const int rank = static_cast<int>(std::pow(10, countDigits(number)));
+    for (int i = rank; i > 1; i /= 10)
     {
         if (!isPrime(number % i))
             return false;
@@ -146,10 +149,12 @@ bool isRightTruncatablePrime(int number)
     if (number < 2)
         return false;
 
-    for (; number > 0; number /= 10)
+    while (number > 0)
     {
         if (!isPrime(number))
             return false;
+        
+        number /= 10;
     }
 
     return true;
@@ -263,16 +268,16 @@ bool isPermutation(int number1, int number2)
 // Number is n-pandigital if it contains each digit from 1 to n exactly once.
 bool isPandigital(int number, int maxDigit)
 {
-    if (maxDigit > 9)
-        throw std::runtime_error("Invalid max digit");
-
     if (countDigits(number) != maxDigit)
         return false;
 
     std::vector<int> digits(10, 0);
 
-    for (; number > 0; number /= 10)
+    while (number > 0)
+    {
         ++digits[number % 10];
+        number /= 10;
+    }
 
     return std::count(digits.begin() + 1, digits.begin() + maxDigit + 1, 1) == maxDigit;
 }
