@@ -14,7 +14,9 @@ unsigned long long maxPrimeFactor(unsigned long long number)
         while (number % factor == 0)
         {
             number /= factor;
-            maxFactor = factor;
+
+            if (factor > maxFactor)
+                maxFactor = factor;
         }
     }
 
@@ -23,7 +25,7 @@ unsigned long long maxPrimeFactor(unsigned long long number)
 
 int main()
 {
-    unsigned long long number = 600851475143;
+    unsigned long long number = 600'851'475'143;
     auto result = maxPrimeFactor(number);
     std::cout << result << std::endl;
 
