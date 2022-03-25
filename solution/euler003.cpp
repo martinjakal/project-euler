@@ -5,7 +5,7 @@
 // Largest prime factor
 // Result: 6857
 
-unsigned long long maxPrimeFactor(unsigned long long number)
+unsigned long long findMaxPrimeFactor(unsigned long long number)
 {
     unsigned long long maxFactor = 0;
 
@@ -26,7 +26,7 @@ unsigned long long maxPrimeFactor(unsigned long long number)
 int main()
 {
     unsigned long long number = 600'851'475'143;
-    auto result = maxPrimeFactor(number);
+    auto result = findMaxPrimeFactor(number);
     std::cout << result << std::endl;
 
     return 0;
