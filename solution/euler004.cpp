@@ -9,7 +9,7 @@
 
 using namespace math;
 
-int maxPalindromeProduct(int limit)
+int calcMaxPalindromeProduct(int limit)
 {
     int maxProduct = 0;
 
@@ -30,7 +30,7 @@ int maxPalindromeProduct(int limit)
 int main()
 {
     int limit = 1000;
-    auto result = maxPalindromeProduct(limit);    
+    auto result = calcMaxPalindromeProduct(limit);
     std::cout << result << std::endl;
 
     return 0;
