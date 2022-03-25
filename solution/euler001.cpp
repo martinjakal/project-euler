@@ -7,12 +7,8 @@
 
 int sumMultiples(int multiple, int limit)
 {
-    int sum = 0;
-
-    for (int i = multiple; i < limit; i += multiple)
-        sum += i;
-
-    return sum;
+    int last = (limit - 1) / multiple;
+    return multiple * last * (last + 1) / 2;
 }
 
 int sumMultiplesTwoNumbers(int num1, int num2, int limit)
