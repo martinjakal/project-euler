@@ -8,18 +8,18 @@
 int sumEvenFibonacci(int limit)
 {
     int sum = 0;
-    int fn0 = 0;
-    int fn1 = 1;
-    int fn2 = fn0 + fn1;
+    int f0 = 0;
+    int f1 = 1;
+    int f2 = 1;
 
-    while (fn2 <= limit)
+    while (f2 < limit)
     {
-        if (fn2 % 2 == 0)
-            sum += fn2;
+        if (f2 % 2 == 0)
+            sum += f2;
 
-        fn0 = fn1;
-        fn1 = fn2;
-        fn2 = fn0 + fn1;
+        f0 = f1;
+        f1 = f2;
+        f2 = f0 + f1;
     }
 
     return sum;
@@ -27,7 +27,7 @@ int sumEvenFibonacci(int limit)
 
 int main()
 {
-    int limit = 4000000;
+    int limit = 4'000'000;
     auto result = sumEvenFibonacci(limit);
     std::cout << result << std::endl;
 
