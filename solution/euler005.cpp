@@ -6,7 +6,7 @@
 // Smallest multiple
 // Result: 232792560
 
-int minNumberDivisibleByRange(int maxDivisor)
+int findMinNumberDivisibleByRange(int maxDivisor)
 {
     int number = 1;
 
@@ -18,8 +18,8 @@ int minNumberDivisibleByRange(int maxDivisor)
 
 int main()
 {
-    int limit = 20;
-    auto result = minNumberDivisibleByRange(limit);
+    int maxDivisor = 20;
+    auto result = findMinNumberDivisibleByRange(maxDivisor);
     std::cout << result << std::endl;
 
     return 0;
