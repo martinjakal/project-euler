@@ -9,24 +9,26 @@
 
 using namespace math;
 
-int nthPrime(int position)
+int findNthPrime(int position)
 {
     int primeCnt = 0;
+    int number = 0;
 
-    for (int number = 0; ; ++number)
+    while (primeCnt < position)
     {
+        ++number;
+
         if (isPrime(number))
             ++primeCnt;
-
-        if (primeCnt == position)
-            return number;
     }
+
+    return number;
 }
 
 int main()
 {
     int position = 10001;
-    auto result = nthPrime(position);
+    auto result = findNthPrime(position);
     std::cout << result << std::endl;
 
     return 0;
