@@ -1,6 +1,6 @@
-#include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <string>
 #include <vector>
 
 #include <helper/FileReader.hpp>
@@ -12,7 +12,7 @@
 
 using namespace reader;
 
-unsigned long long maxProductInSeries(const std::vector<std::string>& numbers, int length)
+unsigned long long findMaxProductInSeries(const std::vector<std::string>& numbers, int length)
 {
     std::string concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string(""));
 
@@ -23,7 +23,12 @@ unsigned long long maxProductInSeries(const std::vector<std::string>& numbers, i
     unsigned long long maxProduct = 0;
 
     for (auto it = digits.begin(); it != digits.end() - length; ++it)
-        maxProduct = std::max(std::accumulate(it, it + length, 1ull, std::multiplies<unsigned long long>()), maxProduct);
+    {
+        auto product = std::accumulate(it, it + length, 1ull, std::multiplies<unsigned long long>());
+
+        if (product > maxProduct)
+            maxProduct = product;
+    }
 
     return maxProduct;
 }
@@ -32,8 +37,8 @@ int main()
 {
     std::string filename = "input/euler008input.txt";
     int length = 13;
-    auto numbers = readStrings(filename);
-    auto result = maxProductInSeries(numbers, length);
+    auto input = readStrings(filename, '\0');
+    auto result = findMaxProductInSeries(input.front(), length);
     std::cout << result << std::endl;
 
     return 0;
