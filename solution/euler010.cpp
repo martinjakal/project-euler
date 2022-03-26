@@ -1,5 +1,6 @@
 #include <iostream>
 #include <numeric>
+#include <vector>
 
 #include <helper/MathPackage.hpp>
 
@@ -10,16 +11,16 @@
 
 using namespace math;
 
-unsigned long long sumOfPrimes(int limit)
+unsigned long long calcSumOfPrimes(int limit)
 {
-    auto primes = sieveOfEratosthenes(limit);
-    return std::accumulate(primes.begin(), primes.end(), 0ULL);
+    std::vector<int> primes = sieveOfEratosthenes(limit);
+    return std::accumulate(primes.begin(), primes.end(), 0ull);
 }
 
 int main()
 {
-    int limit = 2000000;
-    auto result = sumOfPrimes(limit);
+    int limit = 2'000'000;
+    auto result = calcSumOfPrimes(limit);
     std::cout << result << std::endl;
 
     return 0;
