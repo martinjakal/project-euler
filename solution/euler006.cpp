@@ -5,7 +5,7 @@
 // Sum square difference
 // Result: 25164150
 
-int sumSquareDifference(int limit)
+int calcSumSquareDifference(int limit)
 {
     int sumOfSquares = 0;
     int squareOfSum = 0;
@@ -22,7 +22,7 @@ int sumSquareDifference(int limit)
 int main()
 {
     int limit = 100;
-    auto result = sumSquareDifference(limit);
+    auto result = calcSumSquareDifference(limit);
     std::cout << result << std::endl;
 
     return 0;
