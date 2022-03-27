@@ -1,6 +1,9 @@
 #include "MathPackage.hpp"
 
+#include <algorithm>
+#include <cassert>
 #include <cmath>
+#include <numeric>
 #include <sstream>
 
 namespace math 
@@ -15,44 +18,35 @@ int factorial(int number)
     return number == 0 ? 1 : number * factorial(number - 1);
 }
 
-int countDistinctFactors(int number)
+auto getProperDivisors(int number) -> std::vector<int>
 {
-    int factorCnt = 0;
-
-    if (number % 2 == 0)
-    {
-        ++factorCnt;
-        while (number % 2 == 0)
-            number /= 2;
-    }
-
-    for (int i = 3; i * i <= number; i += 2)
-    {
-        if (number % i == 0)
-        {
-            ++factorCnt;
-            while (number % i == 0)
-                number /= i;
-        }
-    }
-
-    return number != 1 ? factorCnt + 1 : factorCnt;
-}
-
-int sumProperDivisors(int number)
-{
-    int sum = 1;
+    std::vector<int> properDivisors = { 1 };
 
     for (int i = 2; i * i <= number; ++i)
     {
         if (number % i == 0)
-            sum += i + number / i;
+        {
+            properDivisors.push_back(number / i);
 
-        if (number == i * i)
-            sum -= i;
+            if (number != i * i)
+                properDivisors.push_back(i);
+        }    
     }
 
-    return sum;
+    return properDivisors;
+}
+
+auto getDivisors(int number) -> std::vector<int>
+{
+    std::vector<int> divisors = getProperDivisors(number);
+    divisors.push_back(number);
+    return divisors;
+}
+
+int sumProperDivisors(int number)
+{
+    std::vector<int> properDivisors = getProperDivisors(number);
+    return std::accumulate(properDivisors.begin(), properDivisors.end(), 0);
 }
 
 bool isAbundant(int number)
@@ -165,7 +159,7 @@ bool isTruncatablePrime(int number)
     return isLeftTruncatablePrime(number) && isRightTruncatablePrime(number);
 }
 
-auto primeFactors(int number) -> std::vector<int>
+auto getPrimeFactors(int number) -> std::vector<int>
 {
     std::vector<int> factors;
 
@@ -184,10 +178,17 @@ auto primeFactors(int number) -> std::vector<int>
         }
     }
 
-    if (number > 2)
+    if (number != 1)
         factors.push_back(number);
 
     return factors;
+}
+
+int countDistinctFactors(int number)
+{
+    std::vector<int> factors = getPrimeFactors(number);
+    assert(std::is_sorted(factors.begin(), factors.end()) && "Unsorted factors");
+    return static_cast<int>(std::unique(factors.begin(), factors.end()) - factors.begin());
 }
 
 auto sieveOfEratosthenes(int limit) -> std::vector<int>
@@ -262,7 +263,7 @@ bool isPermutation(int number1, int number2)
         number2 /= 10;
     }
 
-    return std::count(digits.begin(), digits.end(), 0) == digits.size();
+    return std::all_of(digits.begin(), digits.end(), [](int n) { return n == 0; });
 }
 
 // Number is n-pandigital if it contains each digit from 1 to n exactly once.

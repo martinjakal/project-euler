@@ -39,7 +39,8 @@ auto generateCombinations(const T& data, int length, bool repeat) -> std::vector
 }
 
 // Divisibility
-int countDistinctFactors(int number);
+auto getProperDivisors(int number) -> std::vector<int>;
+auto getDivisors(int number) -> std::vector<int>;
 int sumProperDivisors(int number);
 bool isAbundant(int number);
 
@@ -50,7 +51,8 @@ bool isCircularPrime(int number);
 bool isLeftTruncatablePrime(int number);
 bool isRightTruncatablePrime(int number);
 bool isTruncatablePrime(int number);
-auto primeFactors(int number) -> std::vector<int>;
+auto getPrimeFactors(int number) -> std::vector<int>;
+int countDistinctFactors(int number);
 auto sieveOfEratosthenes(int limit) -> std::vector<int>;
 
 // Properties
