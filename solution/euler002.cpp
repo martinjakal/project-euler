@@ -5,7 +5,7 @@
 // Even Fibonacci numbers
 // Result: 4613732
 
-int calcSumEvenFibonacci(int limit)
+int sumEvenFibonacci(int limit)
 {
     int sum = 0;
     int f0 = 0;
@@ -28,7 +28,7 @@ int calcSumEvenFibonacci(int limit)
 int main()
 {
     int limit = 4'000'000;
-    auto result = calcSumEvenFibonacci(limit);
+    auto result = sumEvenFibonacci(limit);
     std::cout << result << std::endl;
 
     return 0;

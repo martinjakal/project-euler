@@ -11,7 +11,7 @@
 
 using namespace math;
 
-unsigned long long calcSumOfPrimes(int limit)
+unsigned long long sumPrimes(int limit)
 {
     std::vector<int> primes = sieveOfEratosthenes(limit);
     return std::accumulate(primes.begin(), primes.end(), 0ull);
@@ -20,7 +20,7 @@ unsigned long long calcSumOfPrimes(int limit)
 int main()
 {
     int limit = 2'000'000;
-    auto result = calcSumOfPrimes(limit);
+    auto result = sumPrimes(limit);
     std::cout << result << std::endl;
 
     return 0;
