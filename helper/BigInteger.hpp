@@ -50,7 +50,7 @@ public:
     auto operator^=(BigInteger other) -> BigInteger&;
 
     auto digitCnt() const -> std::size_t;
-    int digitSum() const;
+    auto digitSum() const -> std::size_t;
     bool isZero() const;
     bool isEven() const;
     auto reverse() const -> BigInteger;

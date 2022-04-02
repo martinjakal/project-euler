@@ -100,7 +100,8 @@ auto BigInteger::print() const -> std::string
 
 bool BigInteger::compare(long long number) const
 {
-    if (sign_ != number >= 0 || digitCnt() != std::ceil(std::log10(std::abs(number))))
+    std::size_t numDigits = number != 0 ? static_cast<std::size_t>(std::floor(std::log10(std::abs(number)))) + 1 : 1;
+    if (sign_ != number >= 0 || digitCnt() != numDigits)
         return false;
 
     for (std::size_t i = 0; i < digitCnt(); ++i, number /= BASE)
@@ -444,7 +445,7 @@ auto BigInteger::digitCnt() const -> std::size_t
     return digits_.size();
 }
 
-int BigInteger::digitSum() const
+auto BigInteger::digitSum() const -> std::size_t
 {
     std::size_t sum = 0;
     for (auto d : digits_)
