@@ -5,7 +5,7 @@
 
 namespace reader
 {
-auto readStrings(const std::string& filename, char separator, char remove) -> std::vector<std::vector<std::string>>
+auto readStrings(const std::string& filename, char separator) -> std::vector<std::vector<std::string>>
 {
     std::ifstream file(filename);
     std::vector<std::vector<std::string>> out;
@@ -17,14 +17,17 @@ auto readStrings(const std::string& filename, char separator, char remove) -> st
     {
         std::string row;
         std::getline(file, row);
-        out.push_back({});
 
         if (separator == '\0')
         {
+            if (out.empty())
+                out.push_back({});
+
             out.back().push_back(row);
             continue;
         }
 
+        out.push_back({});
         std::size_t i = 0;
         auto pos = row.find(separator, i);
 
@@ -37,13 +40,10 @@ auto readStrings(const std::string& filename, char separator, char remove) -> st
         out.back().push_back(row.substr(i, row.size() - i));
     }
 
-    if (remove != '\0')
+    for (auto& line : out)
     {
-        for (auto& line : out)
-        {
-            for (auto& item : line)
-                item.erase(std::remove(item.begin(), item.end(), remove), item.end());
-        }
+        for (auto& item : line) // remove quotation marks
+            item.erase(std::remove(item.begin(), item.end(), '"'), item.end());
     }
 
     return out;
