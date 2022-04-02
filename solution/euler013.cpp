@@ -12,7 +12,7 @@
 
 using namespace reader;
 
-auto calcSumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -> std::string
+auto sumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -> std::string
 {
     BigInteger sum;
 
@@ -27,7 +27,7 @@ int main()
     std::string filename = "input/euler013input.txt";
     int firstDigits = 10;
     auto input = readStrings(filename, '\0');
-    auto result = calcSumLargeNumbers(input.front(), firstDigits);
+    auto result = sumLargeNumbers(input.front(), firstDigits);
     std::cout << result << std::endl;
 
     return 0;
