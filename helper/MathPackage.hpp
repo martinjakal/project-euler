@@ -47,13 +47,13 @@ bool isAbundant(int number);
 // Primes
 bool isPrime(int number);
 bool isPrime(int number, const std::vector<int>& primes);
+auto getPrimeFactors(int number) -> std::vector<int>;
+int countDistinctFactors(int number);
+auto sieveOfEratosthenes(int limit) -> std::vector<int>;
 bool isCircularPrime(int number);
 bool isLeftTruncatablePrime(int number);
 bool isRightTruncatablePrime(int number);
 bool isTruncatablePrime(int number);
-auto getPrimeFactors(int number) -> std::vector<int>;
-int countDistinctFactors(int number);
-auto sieveOfEratosthenes(int limit) -> std::vector<int>;
 
 // Properties
 bool isTriangular(unsigned long long number);

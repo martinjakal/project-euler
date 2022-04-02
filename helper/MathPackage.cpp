@@ -85,6 +85,68 @@ bool isPrime(int number, const std::vector<int>& primes)
     return true;
 }
 
+auto getPrimeFactors(int number) -> std::vector<int>
+{
+    std::vector<int> factors;
+
+    while (number % 2 == 0)
+    {
+        factors.push_back(2);
+        number /= 2;
+    }
+
+    for (int div = 3; div * div <= number; div += 2)
+    {
+        while (number % div == 0)
+        {
+            factors.push_back(div);
+            number /= div;
+        }
+    }
+
+    if (number != 1)
+        factors.push_back(number);
+
+    return factors;
+}
+
+int countDistinctFactors(int number)
+{
+    std::vector<int> factors = getPrimeFactors(number);
+    assert(std::is_sorted(factors.begin(), factors.end()) && "Unsorted factors");
+    return static_cast<int>(std::unique(factors.begin(), factors.end()) - factors.begin());
+}
+
+auto sieveOfEratosthenes(int limit) -> std::vector<int>
+{
+    if (limit < 2)
+        return {};
+
+    std::vector<bool> primeCheck(limit + 1, true);
+    std::vector<int> primes;
+
+    primes.push_back(2);
+    for (int i = 4; i <= limit; i += 2)
+        primeCheck[i] = false;
+
+    for (int i = 3; i * i <= limit; i += 2)
+    {
+        if (primeCheck[i])
+        {
+            for (int j = i * i; j <= limit; j += i)
+                primeCheck[j] = false;
+        }
+    }
+
+    for (int i = 3; i <= limit; i += 2)
+    {
+        if (primeCheck[i])
+            primes.push_back(i);
+    }
+
+    return primes;
+}
+
 // Number stays prime during cyclic rotation of the digits.
 bool isCircularPrime(int number)
 {
@@ -157,68 +219,6 @@ bool isRightTruncatablePrime(int number)
 bool isTruncatablePrime(int number)
 {
     return isLeftTruncatablePrime(number) && isRightTruncatablePrime(number);
-}
-
-auto getPrimeFactors(int number) -> std::vector<int>
-{
-    std::vector<int> factors;
-
-    while (number % 2 == 0)
-    {
-        factors.push_back(2);
-        number /= 2;
-    }
-
-    for (int div = 3; div * div <= number; div += 2)
-    {
-        while (number % div == 0)
-        {
-            factors.push_back(div);
-            number /= div;
-        }
-    }
-
-    if (number != 1)
-        factors.push_back(number);
-
-    return factors;
-}
-
-int countDistinctFactors(int number)
-{
-    std::vector<int> factors = getPrimeFactors(number);
-    assert(std::is_sorted(factors.begin(), factors.end()) && "Unsorted factors");
-    return static_cast<int>(std::unique(factors.begin(), factors.end()) - factors.begin());
-}
-
-auto sieveOfEratosthenes(int limit) -> std::vector<int>
-{
-    if (limit < 2)
-        return {};
-
-    std::vector<bool> primeCheck(limit + 1, true);
-    std::vector<int> primes;
-
-    primes.push_back(2);
-    for (int i = 4; i <= limit; i += 2)
-        primeCheck[i] = false;
-
-    for (int i = 3; i * i <= limit; i += 2)
-    {
-        if (primeCheck[i])
-        {
-            for (int j = i * i; j <= limit; j += i)
-                primeCheck[j] = false;
-        }
-    }
-
-    for (int i = 3; i <= limit; i += 2)
-    {
-        if (primeCheck[i])
-            primes.push_back(i);
-    }
-
-    return primes;
 }
 
 bool isTriangular(unsigned long long number)
