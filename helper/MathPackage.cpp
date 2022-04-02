@@ -20,6 +20,9 @@ int factorial(int number)
 
 auto getProperDivisors(int number) -> std::vector<int>
 {
+    if (number == 1)
+        return {};
+
     std::vector<int> properDivisors = { 1 };
 
     for (int i = 2; i * i <= number; ++i)
