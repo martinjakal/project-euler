@@ -7,16 +7,16 @@
 // Power digit sum
 // Result: 1366
 
-int powerDigitSum(int base, int power)
+int sumPowerDigits(int base, int power)
 {
-    return (BigInteger(base) ^ BigInteger(power)).digitSum();
+    return static_cast<int>((BigInteger(base) ^ BigInteger(power)).digitSum());
 }
 
 int main()
 {
     int base = 2;
     int power = 1000;
-    auto result = powerDigitSum(base, power);
+    auto result = sumPowerDigits(base, power);
     std::cout << result << std::endl;
 
     return 0;
