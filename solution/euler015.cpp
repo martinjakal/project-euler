@@ -6,7 +6,7 @@
 // Result: 137846528820
 
 // Both directions occur n times in square grid with size n, that is (2n n) combinations.
-unsigned long long latticePathsInSquareGrid(int gridSize)
+unsigned long long countLatticePathsInSquareGrid(int gridSize)
 {
     unsigned long long paths = 1;
 
@@ -22,7 +22,7 @@ unsigned long long latticePathsInSquareGrid(int gridSize)
 int main()
 {
     int gridSize = 20;
-    auto result = latticePathsInSquareGrid(gridSize);
+    auto result = countLatticePathsInSquareGrid(gridSize);
     std::cout << result << std::endl;
 
     return 0;
