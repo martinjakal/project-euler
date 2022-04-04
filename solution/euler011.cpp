@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,59 +11,63 @@
 
 using namespace reader;
 
-int maxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
+int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
 {
     int maxProduct = 0;
 
-    for (size_t i = 0; i < grid.size(); ++i) // rows
+    for (std::size_t i = 0; i < grid.size(); ++i) // horizontal
     {
-        for (size_t j = 0; j <= grid[i].size() - length; ++j)
+        for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {
             int product = grid[i][j];
 
             for (int k = 1; k < length; ++k)
                 product *= grid[i][j + k];
 
-            maxProduct = std::max(product, maxProduct);
+            if (product > maxProduct)
+                maxProduct = product;
         }
     }
 
-    for (size_t i = 0; i <= grid.size() - length; ++i) // columns
+    for (std::size_t i = 0; i <= grid.size() - length; ++i) // vertical
     {
-        for (size_t j = 0; j < grid[i].size(); ++j)
+        for (std::size_t j = 0; j < grid[i].size(); ++j)
         {
             int product = grid[i][j];
 
             for (int k = 1; k < length; ++k)
                 product *= grid[i + k][j];
-            
-            maxProduct = std::max(product, maxProduct);
+
+            if (product > maxProduct)
+                maxProduct = product;
         }
     }
 
-    for (size_t i = 0; i <= grid.size() - length; ++i) // left diagonal
+    for (std::size_t i = 0; i <= grid.size() - length; ++i) // left diagonal
     {
-        for (size_t j = 0; j <= grid[i].size() - length; ++j)
+        for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {
             int product = grid[i][j];
 
             for (int k = 1; k < length; ++k)
                 product *= grid[i + k][j + k];
-            
-            maxProduct = std::max(product, maxProduct);
+
+            if (product > maxProduct)
+                maxProduct = product;
         }
     }
 
-    for (size_t i = length - 1; i < grid.size(); ++i) // right diagonal
+    for (std::size_t i = length - 1; i < grid.size(); ++i) // right diagonal
     {
-        for (size_t j = 0; j <= grid[i].size() - length; ++j)
+        for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {
             int product = grid[i][j];
 
             for (int k = 1; k < length; ++k)
                 product *= grid[i - k][j + k];
-        
-            maxProduct = std::max(product, maxProduct);
+
+            if (product > maxProduct)
+                maxProduct = product;
         }
     }
 
@@ -76,7 +79,7 @@ int main()
     std::string filename = "input/euler011input.txt";
     int length = 4;
     auto input = readNumbers(filename, ' ');
-    auto result = maxProductInGrid(input, length);
+    auto result = findMaxProductInGrid(input, length);
     std::cout << result << std::endl;
 
     return 0;
