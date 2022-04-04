@@ -7,20 +7,20 @@
 // Factorial digit sum
 // Result: 648
 
-int factDigitSum(int limit)
+int sumFactorialDigits(int limit)
 {
     BigInteger factorial(1);
 
     for (int i = 2; i <= limit; ++i)
         factorial *= BigInteger(i);
 
-    return factorial.digitSum();
+    return static_cast<int>(factorial.digitSum());
 }
 
 int main()
 {
     int limit = 100;
-    auto result = factDigitSum(limit);
+    auto result = sumFactorialDigits(limit);
     std::cout << result << std::endl;
 
     return 0;
