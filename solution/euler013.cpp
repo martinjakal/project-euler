@@ -17,7 +17,7 @@ auto sumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -
     BigInteger sum;
 
     for (const auto& number : numbers)
-        sum += number;
+        sum += BigInteger(number);
 
     return sum.print().substr(0, firstDigits);
 }
