@@ -7,14 +7,13 @@
 // Longest Collatz sequence
 // Result: 837799
 
-int maxCollatzSteps(int limit)
+int findLongestCollatzSequence(int limit)
 {
-    std::vector<int> stepsStore(limit + 1, 0);
+    std::vector<int> stepsCache(limit + 1, 1);
 
     for (int i = 1; i < limit; ++i)
     {
         unsigned long long number = i;
-        int steps = 1;
 
         while (number != 1)
         {
@@ -23,26 +22,24 @@ int maxCollatzSteps(int limit)
             else
                 number = 3 * number + 1;
 
-            // Sequence length for smaller terms is stored already.
-            if (number < i)
+            if (number < i) // sequence length for smaller terms is precalculated
             {
-                steps += stepsStore[static_cast<int>(number)];
+                stepsCache[i] += stepsCache[static_cast<int>(number)];
                 break;
             }
             else
-                ++steps;
+                ++stepsCache[i];
         }
-
-        stepsStore[i] = steps;
     }
 
-    return std::distance(stepsStore.begin(), std::max_element(stepsStore.begin(), stepsStore.end()));
+    auto longestSequence = std::max_element(stepsCache.begin(), stepsCache.end());
+    return static_cast<int>(std::distance(stepsCache.begin(), longestSequence));
 }
 
 int main()
 {
-    int limit = 1000000;
-    auto result = maxCollatzSteps(limit);
+    int limit = 1'000'000;
+    auto result = findLongestCollatzSequence(limit);
     std::cout << result << std::endl;
 
     return 0;
