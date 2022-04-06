@@ -7,7 +7,7 @@
 
 int findPythagoreanTripletProduct(int limit)
 {
-    for (int a = 1; a < limit / 3; ++a) // sufficient to check up to limit / 3 because a < b < c
+    for (int a = 1; a < limit / 3; ++a) // sufficient because a < b < c
     {
         for (int b = a + 1; b < limit - a - b; ++b)
         {
