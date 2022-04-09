@@ -8,9 +8,9 @@
 // Distinct powers
 // Result: 9183
 
-int distinctPowersCount(int maxBase, int maxExp)
+int countDistinctPowers(int maxBase, int maxExp)
 {
-    std::set<BigInteger> distinctPowers;
+    std::set<BigInteger> powers;
 
     for (int base = 2; base <= maxBase; ++base)
     {
@@ -18,19 +18,20 @@ int distinctPowersCount(int maxBase, int maxExp)
 
         for (int exp = 2; exp <= maxExp; ++exp)
         {
-            number *= base;
-            distinctPowers.insert(number);
+            number *= BigInteger(base);
+            powers.insert(number);
         }
     }
 
-    return distinctPowers.size();
+    return static_cast<int>(powers.size());
 }
 
 int main()
 {
     int maxBase = 100;
     int maxExp = 100;
-    auto result = distinctPowersCount(maxBase, maxExp);
+
+    auto result = countDistinctPowers(maxBase, maxExp);
     std::cout << result << std::endl;
 
     return 0;
