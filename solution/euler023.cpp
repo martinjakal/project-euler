@@ -10,11 +10,12 @@
 
 using namespace math;
 
-int calcSumNonAbundant(int limit = 28123)
+int sumNumbersWithoutAbundantSums()
 {
-    int sumNonAbundant = 0;
+    const int limit = 28123;
     std::vector<int> abundant;
-    std::vector<bool> twoAbundant(limit + 1, false);
+    std::vector<bool> canWriteAsSum(limit + 1, false);
+    int sumWithoutAbundantSums = 0;
 
     for (int i = 1; i <= limit; ++i)
     {
@@ -23,31 +24,31 @@ int calcSumNonAbundant(int limit = 28123)
     }
 
     // Mark numbers which can be written as the sum of two abundant numbers.
-    for (int i = 0; i < static_cast<int>(abundant.size()); ++i)
+    for (int i = 0; i < abundant.size(); ++i)
     {
-        for (int j = i; j < static_cast<int>(abundant.size()); ++j)
+        for (int j = i; j < abundant.size(); ++j)
         {
             int sum = abundant[i] + abundant[j];
 
             if (sum > limit)
                 break;    
-            
-            twoAbundant[sum] = true;
+
+            canWriteAsSum[sum] = true;
         }
     }
 
-    for (int i = 0; i < static_cast<int>(twoAbundant.size()); ++i)
+    for (int i = 0; i < canWriteAsSum.size(); ++i)
     {
-        if (!twoAbundant[i])
-            sumNonAbundant += i;
+        if (!canWriteAsSum[i])
+            sumWithoutAbundantSums += i;
     }
-    
-    return sumNonAbundant;
+
+    return sumWithoutAbundantSums;
 }
 
 int main()
 {
-    auto result = calcSumNonAbundant();
+    auto result = sumNumbersWithoutAbundantSums();
     std::cout << result << std::endl;
 
     return 0;
