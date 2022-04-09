@@ -5,10 +5,10 @@
 // Number spiral diagonals
 // Result: 669171001
 
-int sumSpiralDiagonal(int length)
+int sumDiagonalsOfNumberSpiral(int length)
 {
-    int sum = 1;
     int number = 1;
+    int sum = 1;
 
     for (int step = 2; step < length; step += 2)
     {
@@ -25,7 +25,8 @@ int sumSpiralDiagonal(int length)
 int main()
 {
     int length = 1001;
-    auto result = sumSpiralDiagonal(length);
+
+    auto result = sumDiagonalsOfNumberSpiral(length);
     std::cout << result << std::endl;
 
     return 0;
