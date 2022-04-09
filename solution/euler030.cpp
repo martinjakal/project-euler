@@ -8,12 +8,12 @@
 
 // Adding extra digit (assume it is a 9) is equal to: lhs * 10 + 9, rhs + 9^5.
 // Lhs grows faster and becames greater than rhs at 6 digits.
-// The upper bound for the number becomes 6 * 9^5 = 354294.
-int sumFifthPowerDigits()
+// Therefore the upper bound for the number is 6 * 9^5 = 354294.
+int sumNumbersWithFifthPowerDigits()
 {
     const int limit = 354294;
     const int power = 5;
-    int sumFifthPower = 0;
+    int sumFifthPowerDigits = 0;
 
     for (int i = 2; i < limit; ++i)
     {
@@ -22,21 +22,21 @@ int sumFifthPowerDigits()
 
         while (number > 0)
         {
-            digitSum += static_cast<int>(pow(number % 10, power));
+            digitSum += static_cast<int>(std::pow(number % 10, power));
             number /= 10;
         }
 
         if (digitSum == i)
-            sumFifthPower += digitSum;
+            sumFifthPowerDigits += digitSum;
     }
 
-    return sumFifthPower;
+    return sumFifthPowerDigits;
 }
 
 int main()
 {
-    auto result = sumFifthPowerDigits();
+    auto result = sumNumbersWithFifthPowerDigits();
     std::cout << result << std::endl;
-    
+
     return 0;
 }
