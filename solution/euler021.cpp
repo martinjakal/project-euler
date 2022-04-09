@@ -12,20 +12,20 @@ using namespace math;
 
 int sumAmicableNumbers(int limit)
 {
-    std::unordered_map<int, int> divisorStore;
+    std::unordered_map<int, int> divisorsCache;
     int sumAmicable = 0;
 
     for (int i = 1; i < limit; ++i)
-        divisorStore[i] = sumProperDivisors(i);
+        divisorsCache[i] = sumProperDivisors(i);
 
     for (int a = 1; a < limit; ++a)
     {
         // Find second number and its divisors.
-        int b = divisorStore.find(a)->second;
-        auto pos = divisorStore.find(b);
+        int b = divisorsCache.find(a)->second;
+        auto posB = divisorsCache.find(b);
 
         // Check if numbers are amicable and distinct.
-        if (pos != divisorStore.end() && a == pos->second && a != b)
+        if (posB != divisorsCache.end() && posB->second == a && a != b)
             sumAmicable += a;
     }
 
