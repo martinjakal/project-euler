@@ -7,18 +7,18 @@
 // 1000-digit Fibonacci number
 // Result: 4782
 
-int fibTermDigits(int digits)
+int findFibonacciTermWithDigits(int digits)
 {
-    int termIdx = 3;
-    BigInteger fn0(1);
-    BigInteger fn1(1);
-    BigInteger fn2(fn0 + fn1);
+    int termIdx = 2;
+    BigInteger f0(0);
+    BigInteger f1(1);
+    BigInteger f2(1);
 
-    while (fn2.digitCnt() != digits)
+    while (f2.digitCnt() != digits)
     {
-        fn0 = fn1;
-        fn1 = fn2;
-        fn2 = fn0 + fn1;
+        f0 = f1;
+        f1 = f2;
+        f2 = f0 + f1;
         ++termIdx;
     }
 
@@ -28,7 +28,8 @@ int fibTermDigits(int digits)
 int main()
 {
     int digits = 1000;
-    auto result = fibTermDigits(digits);
+
+    auto result = findFibonacciTermWithDigits(digits);
     std::cout << result << std::endl;
 
     return 0;
