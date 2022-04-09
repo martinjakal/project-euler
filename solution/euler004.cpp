@@ -30,6 +30,7 @@ int calcMaxPalindromeProduct(int limit)
 int main()
 {
     int limit = 1000;
+
     auto result = calcMaxPalindromeProduct(limit);
     std::cout << result << std::endl;
 

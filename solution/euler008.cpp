@@ -37,6 +37,7 @@ int main()
 {
     std::string filename = "input/euler008input.txt";
     int length = 13;
+
     auto input = readStrings(filename, '\0');
     auto result = findMaxProductInSeries(input.front(), length);
     std::cout << result << std::endl;

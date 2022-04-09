@@ -28,6 +28,7 @@ int sumEvenFibonacci(int limit)
 int main()
 {
     int limit = 4'000'000;
+
     auto result = sumEvenFibonacci(limit);
     std::cout << result << std::endl;
 

@@ -20,6 +20,7 @@ int sumFactorialDigits(int limit)
 int main()
 {
     int limit = 100;
+
     auto result = sumFactorialDigits(limit);
     std::cout << result << std::endl;
 

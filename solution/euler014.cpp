@@ -39,6 +39,7 @@ int findLongestCollatzSequence(int limit)
 int main()
 {
     int limit = 1'000'000;
+
     auto result = findLongestCollatzSequence(limit);
     std::cout << result << std::endl;
 

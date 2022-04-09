@@ -45,6 +45,7 @@ int countLettersInNumbers(int limit)
 int main()
 {
     int limit = 1000;
+
     auto result = countLettersInNumbers(limit);
     std::cout << result << std::endl;
 

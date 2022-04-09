@@ -24,6 +24,7 @@ int findPythagoreanTripletProduct(int limit)
 int main()
 {
     int limit = 1000;
+
     auto result = findPythagoreanTripletProduct(limit);
     std::cout << result << std::endl;
 

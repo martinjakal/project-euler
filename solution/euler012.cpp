@@ -23,6 +23,7 @@ int findTriangleNumWithDivisors(int divisors)
 int main()
 {
     int divisors = 500;
+
     auto result = findTriangleNumWithDivisors(divisors);
     std::cout << result << std::endl;
 

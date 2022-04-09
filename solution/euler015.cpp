@@ -22,6 +22,7 @@ unsigned long long countLatticePathsInSquareGrid(int gridSize)
 int main()
 {
     int gridSize = 20;
+
     auto result = countLatticePathsInSquareGrid(gridSize);
     std::cout << result << std::endl;
 

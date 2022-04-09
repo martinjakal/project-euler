@@ -22,6 +22,7 @@ int calcSumSquareDifference(int limit)
 int main()
 {
     int limit = 100;
+
     auto result = calcSumSquareDifference(limit);
     std::cout << result << std::endl;
 

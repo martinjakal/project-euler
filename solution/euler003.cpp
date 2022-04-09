@@ -26,6 +26,7 @@ unsigned long long findMaxPrimeFactor(unsigned long long number)
 int main()
 {
     unsigned long long number = 600'851'475'143;
+
     auto result = findMaxPrimeFactor(number);
     std::cout << result << std::endl;
 

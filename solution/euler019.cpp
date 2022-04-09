@@ -73,6 +73,7 @@ int main()
     Date start(1, 1, 1901);
     Date end(31, 12, 2000);
     int startDayOfWeek = 2; // 01-01-1901 was Tuesday
+
     auto result = countSundaysFirstBetweenDates(start, end, startDayOfWeek);
     std::cout << result << std::endl;
 

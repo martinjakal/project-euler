@@ -16,6 +16,7 @@ int main()
 {
     int base = 2;
     int power = 1000;
+
     auto result = sumPowerDigits(base, power);
     std::cout << result << std::endl;
 

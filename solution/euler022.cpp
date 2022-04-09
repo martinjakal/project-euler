@@ -35,6 +35,7 @@ int sumNameScores(std::vector<std::string> names)
 int main()
 {
     std::string filename = "input/euler022input.txt";
+
     auto input = readStrings(filename, ',');
     auto result = sumNameScores(input.front());
     std::cout << result << std::endl;

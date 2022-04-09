@@ -35,6 +35,7 @@ int sumAmicableNumbers(int limit)
 int main()
 {
     int limit = 10000;
+
     auto result = sumAmicableNumbers(limit);
     std::cout << result << std::endl;
 

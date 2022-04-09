@@ -21,6 +21,7 @@ int main()
     int number1 = 3;
     int number2 = 5;
     int limit = 1000;
+
     auto result = sumMultiplesTwoNumbers(number1, number2, limit);
     std::cout << result << std::endl;
 

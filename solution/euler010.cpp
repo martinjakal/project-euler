@@ -19,6 +19,7 @@ unsigned long long sumPrimes(int limit)
 int main()
 {
     int limit = 2'000'000;
+
     auto result = sumPrimes(limit);
     std::cout << result << std::endl;
 

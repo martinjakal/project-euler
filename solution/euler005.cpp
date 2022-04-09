@@ -19,6 +19,7 @@ int findMinNumberDivisibleByRange(int maxDivisor)
 int main()
 {
     int maxDivisor = 20;
+
     auto result = findMinNumberDivisibleByRange(maxDivisor);
     std::cout << result << std::endl;
 

@@ -78,6 +78,7 @@ int main()
 {
     std::string filename = "input/euler011input.txt";
     int length = 4;
+
     auto input = readNumbers(filename, ' ');
     auto result = findMaxProductInGrid(input, length);
     std::cout << result << std::endl;
