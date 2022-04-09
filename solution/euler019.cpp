@@ -17,6 +17,9 @@ public:
     {
         ++day_;
 
+        if (day_ <= 28)
+            return;
+
         if ((day_ > 31 && (month_ == 1 || month_ == 3 || month_ == 5 || month_ == 7 || month_ == 8 || month_ == 10 || month_ == 12))
             || (day_ > 30 && (month_ == 4 || month_ == 6 || month_ == 9 || month_ == 11))
             || (day_ > 29 && month_ == 2 && leapYear_)
