@@ -6,38 +6,39 @@
 // Reciprocal cycles
 // Result: 983
 
-int numWithMaxRecurringCycle(int limit)
+int findNumberWithMaxRecurringCycle(int limit)
 {
-    int maxNumber = 0;
     int maxLength = 0;
+    int number = 0;
 
-    for (int number = 2; number < limit; ++number)
+    for (int n = 2; n < limit; ++n)
     {
         std::vector<int> remainders;
-        int length = 0;
-        int base = 10 % number;
+        int base = 10 % n;
 
         while (base != 0 && std::find(remainders.begin(), remainders.end(), base) == remainders.end())
         {
-            ++length;
             remainders.push_back(base);
-            base = base * 10 % number;
+            base = base * 10 % n;
         }
+
+        int length = static_cast<int>(remainders.size());
 
         if (length > maxLength)
         {
             maxLength = length;
-            maxNumber = number;
+            number = n;
         }
     }
 
-    return maxNumber;
+    return number;
 }
 
 int main()
 {
     int limit = 1000;
-    auto result = numWithMaxRecurringCycle(limit);
+
+    auto result = findNumberWithMaxRecurringCycle(limit);
     std::cout << result << std::endl;
 
     return 0;
