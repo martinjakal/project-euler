@@ -7,21 +7,22 @@
 // Lexicographic permutations
 // Result: 2783915460
 
-auto nthPermutation(std::string characters, int position) -> std::string
+auto findNthPermutation(std::string digits, int position) -> std::string
 {
     int permutationCnt = 1;
 
-    while (permutationCnt != position && std::next_permutation(characters.begin(), characters.end()))
+    while (permutationCnt != position && std::next_permutation(digits.begin(), digits.end()))
         ++permutationCnt;
 
-    return characters;
+    return digits;
 }
 
 int main()
 {
     std::string digits = "0123456789";
-    int position = 1000000;
-    auto result = nthPermutation(digits, position);
+    int position = 1'000'000;
+
+    auto result = findNthPermutation(digits, position);
     std::cout << result << std::endl;
 
     return 0;
