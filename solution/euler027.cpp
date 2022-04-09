@@ -1,13 +1,15 @@
 #include <iostream>
 
-#include <helper/Primes.hpp>
+#include <helper/MathPackage.hpp>
 
 // Project Euler - Problem 27
 // https://projecteuler.net/problem=27
 // Quadratic primes
-// Result: -59231 
+// Result: -59231
 
-int quadraticPrimesProduct(int maxA, int maxB)
+using namespace math;
+
+int calcProductOfBestQuadFormulaCoeffs(int maxA, int maxB)
 {
     int maxConsecutivePrimes = 0;
     int coeffProduct = 0;
@@ -40,7 +42,8 @@ int main()
 {
     int maxA = 1000;
     int maxB = 1000;
-    auto result = quadraticPrimesProduct(maxA, maxB);
+
+    auto result = calcProductOfBestQuadFormulaCoeffs(maxA, maxB);
     std::cout << result << std::endl;
 
     return 0;
