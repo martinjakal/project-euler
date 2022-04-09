@@ -16,6 +16,7 @@ int findNumberWithMaxRecurringCycle(int limit)
         std::vector<int> remainders;
         int base = 10 % n;
 
+        // The cycle continues as long as new remainders are found.
         while (base != 0 && std::find(remainders.begin(), remainders.end(), base) == remainders.end())
         {
             remainders.push_back(base);
