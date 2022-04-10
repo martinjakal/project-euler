@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <vector>
 
 #include <helper/MathPackage.hpp>
@@ -11,11 +10,11 @@
 
 using namespace math;
 
-// If the numbers a, b, c in multiplication a * b = c should have 9 digits total,
-// the only options are 1d * 4d = 4d or 2d * 3d = 4d.
+// The numbers a, b, c in the expression a * b = c can have 9 digits total
+// only if the digits are distributed as 1d * 4d = 4d or 2d * 3d = 4d.
 int sumPandigitalProducts()
 {
-    std::vector<int> productStore;
+    std::vector<int> products;
     int sumProducts = 0;
 
     for (int i = 1; i < 100; ++i)
@@ -27,10 +26,11 @@ int sumPandigitalProducts()
             if (product > 9999)
                 break;
 
-            if (isPandigital(std::stoi(std::to_string(i) + std::to_string(j) + std::to_string(product))) 
-                && std::find(productStore.begin(), productStore.end(), product) == productStore.end())
+            int concatenated = concat(concat(i, j), product);
+
+            if (isPandigital(concatenated) && std::find(products.begin(), products.end(), product) == products.end())
             {
-                productStore.push_back(product);
+                products.push_back(product);
                 sumProducts += product;
             }
         }
