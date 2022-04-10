@@ -3,9 +3,28 @@
 // Project Euler - Problem 33
 // https://projecteuler.net/problem=33
 // Digit cancelling fractions
-// Result: 100 
+// Result: 100
 
-int cancelledFractionsDenominator()
+double cancelFraction(int n, int d)
+{
+    int n1 = n / 10;
+    int n0 = n % 10;
+    int d1 = d / 10;
+    int d0 = d % 10;
+
+    if (n1 == d1)
+        return 1.0 * n0 / d0;
+    else if (n1 == d0)
+        return 1.0 * n0 / d1;
+    else if (n0 == d1 && d0 != 0) // check zero division
+        return 1.0 * n1 / d0;
+    else if (n0 == d0 && d0 != 0) // check trivial case
+        return 1.0 * n1 / d1;
+
+    return 0;
+}
+
+int calcDenominatorOfCancelledFractions()
 {
     int totalNumerator = 1;
     int totalDenominator = 1;
@@ -14,18 +33,7 @@ int cancelledFractionsDenominator()
     {
         for (int n = 10; n < d; ++n)
         {
-            double cancelledFraction = 0;
-
-            if (n / 10 == d / 10)
-                cancelledFraction = static_cast<double>(n % 10) / (d % 10);
-            else if (n / 10 == d % 10)
-                cancelledFraction = static_cast<double>(n % 10) / (d / 10);
-            else if (n % 10 == d / 10 && d % 10 != 0) // check zero division
-                cancelledFraction = static_cast<double>(n / 10) / (d % 10);
-            else if (n % 10 == d % 10 && d % 10 != 0) // check trivial case
-                cancelledFraction = static_cast<double>(n / 10) / (d / 10);
-
-            if (cancelledFraction == static_cast<double>(n) / d)
+            if (cancelFraction(n, d) == 1.0 * n / d)
             {
                 totalNumerator *= n;
                 totalDenominator *= d;
@@ -38,7 +46,7 @@ int cancelledFractionsDenominator()
 
 int main()
 {
-    auto result = cancelledFractionsDenominator();
+    auto result = calcDenominatorOfCancelledFractions();
     std::cout << result << std::endl;
 
     return 0;
