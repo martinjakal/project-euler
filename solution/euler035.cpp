@@ -11,20 +11,21 @@ using namespace math;
 
 int countCircularPrimes(int limit)
 {
-    int circPrimesCnt = 0;
+    int circularCnt = 0;
 
     for (int i = 2; i < limit; ++i)
     {
         if (isCircularPrime(i))
-            ++circPrimesCnt;
+            ++circularCnt;
     }
 
-    return circPrimesCnt;
+    return circularCnt;
 }
 
 int main()
 {
-    int limit = 1000000;
+    int limit = 1'000'000;
+
     auto result = countCircularPrimes(limit);
     std::cout << result << std::endl; 
 
