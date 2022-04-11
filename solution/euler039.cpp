@@ -5,7 +5,7 @@
 // Integer right triangles
 // Result: 840  
 
-int rightTrianglesCount(int perimeter)
+int countIntRightTriangles(int perimeter)
 {
     int triangles = 0;
 
@@ -23,29 +23,30 @@ int rightTrianglesCount(int perimeter)
     return triangles;
 }
 
-int maxRightTriangles(int limit)
+int findPerimeterWithMaxIntRightTriangles(int limit)
 {
-    int maxSolutions = 0;
-    int maxPerimeter = 0;
+    int maxTriangles = 0;
+    int perimeter = 0;
 
-    for (int perimeter = 3; perimeter <= limit; ++perimeter)
+    for (int p = 3; p <= limit; ++p)
     {
-        int solutions = rightTrianglesCount(perimeter);
+        int triangles = countIntRightTriangles(p);
 
-        if (solutions > maxSolutions)
+        if (triangles > maxTriangles)
         {
-            maxSolutions = solutions;
-            maxPerimeter = perimeter;
+            maxTriangles = triangles;
+            perimeter = p;
         }
     }
 
-    return maxPerimeter;
+    return perimeter;
 }
 
 int main()
 {
     int limit = 1000;
-    auto result = maxRightTriangles(limit);
+
+    auto result = findPerimeterWithMaxIntRightTriangles(limit);
     std::cout << result << std::endl; 
 
     return 0;
