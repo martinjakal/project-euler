@@ -11,20 +11,20 @@ using namespace math;
 
 int sumTruncatablePrimes()
 {
-    const int maxPrimeCnt = 11;
-    int primeCnt = 0;
-    int sumPrimes = 0;
+    const int maxTruncatableCnt = 11;
+    int truncatableCnt = 0;
+    int sumTruncatable = 0;
 
-    for (int i = 11; primeCnt < maxPrimeCnt; i += 2)
-    {        
+    for (int i = 11; truncatableCnt < maxTruncatableCnt; i += 2)
+    {
         if (isTruncatablePrime(i))
         {
-            sumPrimes += i;
-            ++primeCnt;
+            sumTruncatable += i;
+            ++truncatableCnt;
         }
     }
 
-    return sumPrimes;
+    return sumTruncatable;
 }
 
 int main()
