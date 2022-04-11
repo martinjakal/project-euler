@@ -25,11 +25,11 @@ int makePalindrome(int number, int base, bool isOdd)
     return palindrome;
 }
 
-// Generate palindromes and verify palindrome property in other base too.
+// Generate palindromes and verify palindrome property in the other base.
 // Odd and even numbers are generated differently.
-int sumDoubleBasePalindrome(int limit)
+int sumDoubleBasePalindromes(int limit)
 {
-    int sum = 0;
+    int sumPalindromes = 0;
 
     for (int i = 0; i < 2; ++i)
     {
@@ -43,17 +43,18 @@ int sumDoubleBasePalindrome(int limit)
                 break;
 
             if (isPalindrome(palindrome, 2))
-                sum += palindrome;
+                sumPalindromes += palindrome;
         }
     }
 
-    return sum;
+    return sumPalindromes;
 }
 
 int main()
 {
-    int limit = 1000000;
-    auto result = sumDoubleBasePalindrome(limit);
+    int limit = 1'000'000;
+
+    auto result = sumDoubleBasePalindromes(limit);
     std::cout << result << std::endl;
 
     return 0;
