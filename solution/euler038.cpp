@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 #include <helper/MathPackage.hpp>
 
@@ -10,28 +9,28 @@
 
 using namespace math;
 
-int maxPandigitalProduct()
+int calcMaxPandigitalProduct()
 {
-    std::string maxProduct = "0";
+    int maxProduct = 0;
 
     // Only numbers with max 4 digits can create 9 digit concatenated product.
     for (int i = 1; i < 10000; ++i) 
     {
-        std::string product;
+        int product = 0;
 
-        for (int n = 1; product.size() < 9; ++n)
-            product += std::to_string(i * n);
+        for (int n = 1; countDigits(product) < 9; ++n)
+            product = concat(product, i * n);
 
-        if (product.size() == 9 && isPandigital(std::stoi(product)) && product > maxProduct)
+        if (product > maxProduct && isPandigital(product, 9))
             maxProduct = product;
     }
 
-    return std::stoi(maxProduct);
+    return maxProduct;
 }
 
 int main()
 {
-    auto result = maxPandigitalProduct();
+    auto result = calcMaxPandigitalProduct();
     std::cout << result << std::endl;
 
     return 0;
