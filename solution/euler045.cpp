@@ -10,22 +10,23 @@
 using namespace math;
 
 // Generate hexagonal number and verify the pentagonal property.
-// Skip triangular check because each hexagonal number is triangular.
-unsigned long long findPentaHexaNumber(int prevNumber)
+// Skip triangular check because each hexagonal number is also triangular.
+unsigned long long findNextPentaHexaNumber(int previous)
 {
     for (int i = 1; ; ++i)
     {
-        auto hexagonal = 2ULL * i * i - i;
+        auto hexagonal = 2ull * i * i - i;
 
-        if (hexagonal > prevNumber && isPentagonal(hexagonal))
-            return hexagonal;          
+        if (hexagonal > previous && isPentagonal(hexagonal))
+            return hexagonal;
     }
 }
 
 int main()
 {
-    int prevNumber = 40755;
-    auto result = findPentaHexaNumber(prevNumber);
+    int previous = 40755;
+
+    auto result = findNextPentaHexaNumber(previous);
     std::cout << result << std::endl;
 
     return 0;
