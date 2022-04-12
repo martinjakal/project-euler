@@ -7,17 +7,17 @@
 // Sub-string divisibility
 // Result: 16695334890
 
-unsigned long long sumSubstringDivisible()
+unsigned long long sumDivisiblePandigitalNumbers()
 {
     const std::vector<int> primes = { 2, 3, 5, 7, 11, 13, 17 };
     std::vector<int> digits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    unsigned long long sumDivisible = 0;
+    unsigned long long sumDivisiblePandigital = 0;
 
     do
     {
         bool divisible = true;
 
-        for (int i = 0; i < static_cast<int>(primes.size()); ++i)
+        for (int i = 0; i < primes.size(); ++i)
         {
             int substr = digits[i + 1] * 100 + digits[i + 2] * 10 + digits[i + 3];
 
@@ -35,17 +35,16 @@ unsigned long long sumSubstringDivisible()
             for (auto d : digits)
                 number = number * 10 + d;
 
-            sumDivisible += number;
-        } 
-        
+            sumDivisiblePandigital += number;
+        }
     } while (std::next_permutation(digits.begin(), digits.end()));
 
-    return sumDivisible;
+    return sumDivisiblePandigital;
 }
 
 int main()
 {
-    auto result = sumSubstringDivisible();
+    auto result = sumDivisiblePandigitalNumbers();
     std::cout << result << std::endl;
 
     return 0;
