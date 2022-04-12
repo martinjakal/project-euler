@@ -10,7 +10,7 @@
 
 int calcProductOfDigitsChampernowne(const std::vector<int>& digits)
 {
-    std::size_t maxDigit = *std::max_element(digits.begin(), digits.end());
+    const std::size_t maxDigit = *std::max_element(digits.begin(), digits.end());
     std::string champernowne;
     int product = 1;
 
