@@ -19,25 +19,26 @@ const std::unordered_map<char, int> alphabet = { { 'A', 1 }, { 'B', 2 }, { 'C', 
         { 'N', 14 }, { 'O', 15 }, { 'P', 16 }, { 'Q', 17 }, { 'R', 18 }, { 'S', 19 }, { 'T', 20 },
         { 'U', 21 }, { 'V', 22 }, { 'W', 23 }, { 'X', 24 }, { 'Y', 25 }, { 'Z', 26 } };
 
-int triangleWordsCnt(const std::vector<std::string>& words)
+int countTriangleWords(const std::vector<std::string>& words)
 {
     auto letterSum = [](int sum, char letter) { return sum + alphabet.find(letter)->second; };
-    int triangleWords = 0;
+    int triangleCnt = 0;
 
     for (const auto& word : words)
     {
         if (isTriangular(std::accumulate(word.begin(), word.end(), 0, letterSum)))
-            ++triangleWords;
+            ++triangleCnt;
     }
 
-    return triangleWords;
+    return triangleCnt;
 }
 
 int main()
 {
     std::string filename = "input/euler042input.txt";
-    auto words = readWords(filename);
-    auto result = triangleWordsCnt(words);
+
+    auto input = readStrings(filename, ',');
+    auto result = countTriangleWords(input.front());
     std::cout << result << std::endl;
 
     return 0;
