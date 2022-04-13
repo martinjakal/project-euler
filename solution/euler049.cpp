@@ -10,27 +10,27 @@
 
 using namespace math;
 
-unsigned long long secondPrimePermutationTriple(int digits)
+unsigned long long concatSecondPrimePermutationTriple(int digits)
 {
-    const int rank = static_cast<int>(pow(10, digits));
+    const int rank = static_cast<int>(std::pow(10, digits));
     bool foundFirst = false;
 
     for (int n1 = rank / 10 + 1; n1 < rank; n1 += 2)
     {
-        if (isPrime(n1))
+        if (!isPrime(n1))
+            continue;
+
+        for (int step = 2; n1 + 2 * step < rank; step += 2)
         {
-            for (int step = 2; n1 + 2 * step < rank; step += 2)
+            int n2 = n1 + step;
+            int n3 = n1 + 2 * step;
+
+            if (isPrime(n2) && isPrime(n3) && isPermutation(n1, n2) && isPermutation(n1, n3))
             {
-                int n2 = n1 + step;
-                int n3 = n2 + step;
+                if (foundFirst)
+                    return std::stoull(std::to_string(n1) + std::to_string(n2) + std::to_string(n3));
 
-                if (isPrime(n2) && isPrime(n3) && isPermutation(n1, n2) && isPermutation(n1, n3))
-                {
-                    if (foundFirst)
-                        return std::stoull(std::to_string(n1) + std::to_string(n2) + std::to_string(n3));
-
-                    foundFirst = true;
-                }
+                foundFirst = true;
             }
         }
     }
@@ -41,7 +41,8 @@ unsigned long long secondPrimePermutationTriple(int digits)
 int main()
 {
     int digits = 4;
-    auto result = secondPrimePermutationTriple(digits);
+
+    auto result = concatSecondPrimePermutationTriple(digits);
     std::cout << result << std::endl;
 
     return 0;
