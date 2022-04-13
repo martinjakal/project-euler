@@ -9,24 +9,28 @@
 
 using namespace math;
 
-int consecutivePrimeFactors(int factorCnt)
+int findConsecNumberWithDistinctFactors(int factorsCnt)
 {
-    int consecutive = 0;
+    int consecutiveCnt = 0;
 
     for (int number = 1; ; ++number)
     {
-        consecutive = countDistinctFactors(number) == factorCnt ? ++consecutive : 0;
+        if (countDistinctFactors(number) == factorsCnt)
+            ++consecutiveCnt;
+        else
+            consecutiveCnt = 0;
 
-        if (consecutive == factorCnt)
-            return number - factorCnt + 1;
+        if (consecutiveCnt == factorsCnt)
+            return number - factorsCnt + 1;
     }
 }
 
 int main()
-{   
+{
     int factors = 4;
-    auto result = consecutivePrimeFactors(factors);
+
+    auto result = findConsecNumberWithDistinctFactors(factors);
     std::cout << result << std::endl;
 
-    return 0;    
+    return 0;
 }
