@@ -9,33 +9,36 @@
 
 using namespace math;
 
-int minGoldbachOther()
+bool canSplitAsPrimeAndTwoSquares(int number)
 {
-    for (int number = 3; ; number += 2)
+    int i = 0;
+    int twoSquares = 0;
+
+    while (twoSquares < number)
     {
-        if (isPrime(number))
-            continue;
+        ++i;
+        twoSquares = 2 * i * i;
 
-        bool valid = false;
+        if (isPrime(number - twoSquares))
+            return true;
+    }
 
-        for (int i = 1, twoSquares = 2 * i * i; twoSquares < number; ++i, twoSquares = 2 * i * i)
-        {
-            if (isPrime(number - twoSquares)) // check if: prime + two squares = number
-            {
-                valid = true;
-                break;
-            }
-        }
+    return false;
+}
 
-        if (!valid)
+int findMinNumberBreakingGoldbachOther()
+{
+    for (int number = 3; ; number += 2) // must be odd and composite
+    {
+        if (!isPrime(number) && !canSplitAsPrimeAndTwoSquares(number))
             return number;
     }
 }
 
 int main()
 {
-    auto result = minGoldbachOther();
+    auto result = findMinNumberBreakingGoldbachOther();
     std::cout << result << std::endl;
-    
+
     return 0;
 }
