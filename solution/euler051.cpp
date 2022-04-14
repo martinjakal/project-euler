@@ -1,4 +1,5 @@
 #include <iostream>
+#include <optional>
 #include <unordered_map>
 
 #include <helper/MathPackage.hpp>
@@ -9,8 +10,6 @@
 // Result: 121313
 
 using namespace math;
-
-using PrimeFamilyCandidate = std::pair<int, int>;
 
 int replaceDigits(int number, int oldDigit, int newDigit)
 {
@@ -28,12 +27,10 @@ int replaceDigits(int number, int oldDigit, int newDigit)
     return replaced;
 }
 
-// Prime family candidate consits of number and its digit to be replaced specified number of times 
-// (-1 if no such replacement exists). In general the digit should not be equal to the last digit 
-// to be able to create larger families.
-auto makeCandidate(int number, int count) -> PrimeFamilyCandidate
+// Check if the number contains a digit which can be replaced specified number of times.
+// The digit should not be equal to the last digit to be able to create larger families.
+auto findDigitForReplacement(int number, int count) -> std::optional<int>
 {
-    PrimeFamilyCandidate candidate(number, -1);
     const int lastDigit = number % 10;
     std::unordered_map<int, int> digitCounts;
 
@@ -46,30 +43,31 @@ auto makeCandidate(int number, int count) -> PrimeFamilyCandidate
     for (const auto& d : digitCounts)
     {
         if (d.second == count && d.first != lastDigit)
-            candidate.second = d.first;
+            return d.first;
     }
 
-    return candidate;
+    return {};
 }
 
-int minMemberOfEightPrimeFamily()
+int calcMinMemberOfEightPrimeFamily()
 {
     for (int i = 0;; ++i)
     {
         if (!isPrime(i))
             continue;
 
-        auto candidate = makeCandidate(i, 3); // 3 digits must be replaced to possibly make size 8 prime family
-        if (candidate.second == -1)
+        auto digitToRepl = findDigitForReplacement(i, 3); // 3 digits must be replaced to possibly make size 8 prime family
+        if (!digitToRepl)
             continue;
 
+        int number = i;
         int familySize = 0;
 
         for (int digit = 0; digit < 10; ++digit)
         {
-            int replaced = replaceDigits(candidate.first, candidate.second, digit);
+            int replaced = replaceDigits(number, digitToRepl.value(), digit);
 
-            if (digit == 0 && countDigits(replaced) != countDigits(candidate.first)) // check for leading zeros when replacing with 0
+            if (digit == 0 && countDigits(replaced) != countDigits(number)) // check for leading zeros when replacing with 0
                 continue;
 
             if (isPrime(replaced))
@@ -77,13 +75,13 @@ int minMemberOfEightPrimeFamily()
         }
 
         if (familySize == 8)
-            return candidate.first;
+            return number;
     }
 }
 
 int main()
 {
-    auto result = minMemberOfEightPrimeFamily();
+    auto result = calcMinMemberOfEightPrimeFamily();
     std::cout << result << std::endl;
 
     return 0;
