@@ -10,20 +10,20 @@
 
 using namespace math;
 
-int maxConsecutivePrimeSum(int limit)
+int findPrimeWithLongestPrimeSum(int limit)
 {
     auto primes = sieveOfEratosthenes(limit);
     std::vector<int> primeSums(primes.size() + 1, 0);
 
     // Generate consecutive sum of primes.
-    for (int i = 0; i < static_cast<int>(primes.size()); ++i)
+    for (int i = 0; i < primes.size(); ++i)
         primeSums[i + 1] = primeSums[i] + primes[i];
 
-    int maxPrime = 0;
+    int bestPrime = 0;
     int maxLength = 0;
 
     // Iterate through possible consecutive sums and check if the difference is prime.
-    for (int i = 0; i < static_cast<int>(primes.size()); ++i)
+    for (int i = 0; i < primes.size(); ++i)
     {
         for (int j = i - maxLength; j >= 0; --j)
         {
@@ -35,20 +35,21 @@ int maxConsecutivePrimeSum(int limit)
 
             if (length > maxLength && isPrime(number))
             {
-                maxPrime = number;
+                bestPrime = number;
                 maxLength = length;
             }
         }
     }
 
-    return maxPrime;
+    return bestPrime;
 }
 
 int main()
 {
-    int limit = 1000000;
-    auto result = maxConsecutivePrimeSum(limit);
+    int limit = 1'000'000;
+
+    auto result = findPrimeWithLongestPrimeSum(limit);
     std::cout << result << std::endl;
 
-    return 0;    
+    return 0;
 }
