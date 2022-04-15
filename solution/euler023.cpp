@@ -24,20 +24,21 @@ int sumNumbersWithoutAbundantSums()
     }
 
     // Mark numbers which can be written as the sum of two abundant numbers.
-    for (int i = 0; i < abundant.size(); ++i)
+    const int abundantCnt = static_cast<int>(abundant.size());
+    for (int i = 0; i < abundantCnt; ++i)
     {
-        for (int j = i; j < abundant.size(); ++j)
+        for (int j = i; j < abundantCnt; ++j)
         {
             int sum = abundant[i] + abundant[j];
 
             if (sum > limit)
-                break;    
+                break;
 
             canWriteAsSum[sum] = true;
         }
     }
 
-    for (int i = 0; i < canWriteAsSum.size(); ++i)
+    for (int i = 1; i <= limit; ++i)
     {
         if (!canWriteAsSum[i])
             sumWithoutAbundantSums += i;
