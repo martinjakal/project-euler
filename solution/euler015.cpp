@@ -10,9 +10,9 @@ unsigned long long countLatticePathsInSquareGrid(int gridSize)
 {
     unsigned long long paths = 1;
 
-    for (unsigned long long i = 1; i <= gridSize; ++i)
+    for (int i = 1; i <= gridSize; ++i)
     {
-        paths *= i + gridSize;
+        paths *= 1ull * i + gridSize;
         paths /= i;
     }
 
