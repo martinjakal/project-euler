@@ -15,7 +15,7 @@ using namespace reader;
 class Card
 {
 public:
-    Card(char rank, char suit) : suit_(suit) 
+    Card(char rank, char suit) : suit_(suit)
     {
         rank_ = rank == 'T' ? 10 : rank == 'J' ? 11 :
                 rank == 'Q' ? 12 : rank == 'K' ? 13 :
@@ -44,25 +44,26 @@ public:
     {
         cards_.push_back(c);
 
-        if (fullHand())
+        if (isHandFull())
             std::sort(cards_.begin(), cards_.end());
     }
 
-    // A hand with 5 cards receives 11-digit score for easy comparison determined by poker rules. The first digit determines 
-    // the rank of the hand. Following digits store necessary information to decide a winner if two hands tie (i.e. highest card).
-    // For example, score 60805000000 means: 6 - full house, 08 - in three, 05 - in pair.
+    // A hand with 5 cards is evaluated to obtain 11-digit score for easy comparison determined by poker rules.
+    // The first digit determines the total rank of the hand. Following digits store necessary information
+    // to decide a winner if two hands tie (i.e. highest card).
+    // For example, score 60805000000 means: 6 - full house, 08 - three, 05 - pair.
     auto calcScore() const -> std::string
     {
-        if (!fullHand())
+        if (!isHandFull())
             throw std::runtime_error("Invalid poker hand");
 
-        bool flush = sameSuit();
-        bool straight = consecutive();
+        bool isFlush = sameSuit();
+        bool isStraight = consecutive();
 
-        if (straight && flush && cards_[0].rank_ == 10)
+        if (isStraight && isFlush && cards_[0].rank_ == 10)
             return "90000000000";
 
-        if (straight && flush)
+        if (isStraight && isFlush)
             return "8" + str(cards_[4]) + "00000000";
 
         if (isFour(0))
@@ -75,10 +76,10 @@ public:
         if (isThree(2) && isPair(0))
             return "6" + str(cards_[2]) + str(cards_[0]) + "000000";
 
-        if (flush)
+        if (isFlush)
             return "5" + str(cards_[4]) + str(cards_[3]) + str(cards_[2]) + str(cards_[1]) + str(cards_[0]);
 
-        if (straight)
+        if (isStraight)
             return "4" + str(cards_[4]) + "00000000";
 
         if (isThree(0))
@@ -112,28 +113,30 @@ private:
 
     auto str(const Card& card) const -> std::string { return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_); }
 
-    bool fullHand() const { return cards_.size() == 5; }
+    bool isHandFull() const { return cards_.size() == 5; }
     bool isPair(int i) const { return cards_[i].rank_ == cards_[i + 1].rank_; }
     bool isThree(int i) const { return isPair(i) && isPair(i + 1); }
     bool isFour(int i) const { return isPair(i) && isThree(i + 1); }
 
     bool consecutive() const
     {
-        for (int i = 0; i < cards_.size() - 1; ++i)
+        for (int i = 0; i < static_cast<int>(cards_.size()) - 1; ++i)
         {
             if (cards_[i].rank_ != cards_[i + 1].rank_ - 1)
                 return false;
         }
+
         return true;
     }
 
     bool sameSuit() const
     {
-        for (int i = 0; i < cards_.size() - 1; ++i)
+        for (int i = 0; i < static_cast<int>(cards_.size()) - 1; ++i)
         {
             if (cards_[i].suit_ != cards_[i + 1].suit_)
                 return false;
         }
+
         return true;
     } 
 };
@@ -147,7 +150,7 @@ int countPokerWins(const std::vector<std::vector<std::string>>& games)
         Hand player1;
         Hand player2;
 
-        for (int i = 0; i < game.size(); ++i)
+        for (std::size_t i = 0; i < game.size(); ++i)
         {
             Card card(game[i][0], game[i][1]);
             i < 5 ? player1.drawCard(card) : player2.drawCard(card);
@@ -163,7 +166,8 @@ int countPokerWins(const std::vector<std::vector<std::string>>& games)
 int main()
 {
     std::string filename = "input/euler054input.txt";
-    auto input = readCards(filename);
+
+    auto input = readStrings(filename, ' ');
     auto result = countPokerWins(input);
     std::cout << result << std::endl;
 
