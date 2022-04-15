@@ -13,13 +13,16 @@ using namespace math;
 
 int replaceDigits(int number, int oldDigit, int newDigit)
 {
+    if (number == 0)
+        return oldDigit == 0 ? newDigit : 0;
+
     int replaced = 0;
     int rank = 1;
 
     while (number != 0)
     {
-        int digit = number % 10;
-        replaced += (digit == oldDigit ? newDigit : digit) * rank;
+        int curDigit = number % 10;
+        replaced += rank * (curDigit == oldDigit ? newDigit : curDigit);
         rank *= 10;
         number /= 10;
     }
@@ -51,13 +54,14 @@ auto findDigitForReplacement(int number, int count) -> std::optional<int>
 
 int calcMinMemberOfEightPrimeFamily()
 {
-    for (int i = 0; ; ++i)
+    for (int i = 2; ; ++i)
     {
         if (!isPrime(i))
             continue;
 
-        auto digitToRepl = findDigitForReplacement(i, 3); // 3 digits must be replaced to possibly make size 8 prime family
-        if (!digitToRepl)
+        // Exactly 3 digits must be replaced to possibly make size 8 prime family.
+        auto digitToRepl = findDigitForReplacement(i, 3);
+        if (!digitToRepl.has_value())
             continue;
 
         int number = i;
@@ -67,7 +71,8 @@ int calcMinMemberOfEightPrimeFamily()
         {
             int replaced = replaceDigits(number, digitToRepl.value(), digit);
 
-            if (digit == 0 && countDigits(replaced) != countDigits(number)) // check for leading zeros when replacing with 0
+            // Check for leading zeros when replacing with 0.
+            if (digit == 0 && countDigits(replaced) != countDigits(number))
                 continue;
 
             if (isPrime(replaced))
