@@ -9,29 +9,29 @@
 
 using namespace math;
 
-int digitPermutedMultiples()
+int findMinNumberWithPermutedMultiples()
 {
     for (int number = 1; ; ++number)
     {
-        bool isValid = true;
+        bool canPermuteMultiples = true;
 
         for (int i = 2; i <= 6; ++i)
         {
             if (!isPermutation(number, i * number))
             {
-                isValid = false;
+                canPermuteMultiples = false;
                 break;
             }
         }
 
-        if (isValid)
+        if (canPermuteMultiples)
             return number;
     }
 }
 
 int main()
 {
-    auto result = digitPermutedMultiples();
+    auto result = findMinNumberWithPermutedMultiples();
     std::cout << result << std::endl;
 
     return 0;
