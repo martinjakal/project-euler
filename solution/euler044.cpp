@@ -34,7 +34,7 @@ int calcMinPentagonalDifference()
 int main()
 {
     auto result = calcMinPentagonalDifference();
-    std::cout << result << std::endl; 
+    std::cout << result << std::endl;
 
     return 0;
 }
