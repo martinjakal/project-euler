@@ -12,18 +12,19 @@ using namespace math;
 
 int findPrimeWithLongestPrimeSum(int limit)
 {
-    auto primes = sieveOfEratosthenes(limit);
-    std::vector<int> primeSums(primes.size() + 1, 0);
+    const auto primes = sieveOfEratosthenes(limit);
+    const int primeCnt = static_cast<int>(primes.size());
+    std::vector<int> primeSums(primeCnt + 1, 0);
 
     // Generate consecutive sum of primes.
-    for (int i = 0; i < primes.size(); ++i)
+    for (int i = 0; i < primeCnt; ++i)
         primeSums[i + 1] = primeSums[i] + primes[i];
 
     int bestPrime = 0;
     int maxLength = 0;
 
     // Iterate through possible consecutive sums and check if the difference is prime.
-    for (int i = 0; i < primes.size(); ++i)
+    for (int i = 0; i < primeCnt; ++i)
     {
         for (int j = i - maxLength; j >= 0; --j)
         {
