@@ -13,7 +13,7 @@ int countCoinSums(int amount)
     std::vector<int> ways(amount + 1, 0);
     ways[0] = 1;
 
-    for (int i = 0; i < coins.size(); ++i)
+    for (int i = 0; i < static_cast<int>(coins.size()); ++i)
     {
         // Add number of ways to create the remainder for each coin value.
         for (int j = coins[i]; j <= amount; ++j)
