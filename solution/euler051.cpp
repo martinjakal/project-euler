@@ -28,7 +28,7 @@ int replaceDigits(int number, int oldDigit, int newDigit)
 }
 
 // Check if the number contains a digit which can be replaced specified number of times.
-// The digit should not be equal to the last digit to be able to create larger families.
+// The digit should not be equal to the last digit to be able to create large prime families.
 auto findDigitForReplacement(int number, int count) -> std::optional<int>
 {
     const int lastDigit = number % 10;
@@ -51,7 +51,7 @@ auto findDigitForReplacement(int number, int count) -> std::optional<int>
 
 int calcMinMemberOfEightPrimeFamily()
 {
-    for (int i = 0;; ++i)
+    for (int i = 0; ; ++i)
     {
         if (!isPrime(i))
             continue;

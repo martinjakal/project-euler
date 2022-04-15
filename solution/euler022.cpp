@@ -26,7 +26,7 @@ int sumNameScores(std::vector<std::string> names)
 
     std::sort(names.begin(), names.end());
 
-    for (int i = 0; i < names.size(); ++i)
+    for (int i = 0; i < static_cast<int>(names.size()); ++i)
         score += std::accumulate(names[i].begin(), names[i].end(), 0, letterSum) * (i + 1);
 
     return score;
