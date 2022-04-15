@@ -15,7 +15,7 @@ int countLychrelNumbers(int limit, int maxIter)
     {
         BigInteger number(i);
 
-        for (int j = 1; j <= maxIter; ++j)
+        for (int it = 1; it <= maxIter; ++it)
         {
             number += number.reverse();
 
@@ -32,8 +32,9 @@ int countLychrelNumbers(int limit, int maxIter)
 
 int main()
 {
-    int limit = 10000;
+    int limit = 10'000;
     int maxIteration = 50;
+
     auto result = countLychrelNumbers(limit, maxIteration);
     std::cout << result << std::endl;
 
