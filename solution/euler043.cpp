@@ -10,6 +10,7 @@
 unsigned long long sumDivisiblePandigitalNumbers()
 {
     const std::vector<int> primes = { 2, 3, 5, 7, 11, 13, 17 };
+    const int primeCnt = static_cast<int>(primes.size());
     std::vector<int> digits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     unsigned long long sumDivisiblePandigital = 0;
 
@@ -17,7 +18,8 @@ unsigned long long sumDivisiblePandigitalNumbers()
     {
         bool divisible = true;
 
-        for (int i = 0; i < primes.size(); ++i)
+        // Check if the substrings are divisible by respective primes.
+        for (int i = 0; i < primeCnt; ++i)
         {
             int substr = digits[i + 1] * 100 + digits[i + 2] * 10 + digits[i + 3];
 
