@@ -11,19 +11,24 @@ int countCombinatoricSelections(int limit, int target)
 
     for (int n = 1; n <= limit; ++n)
     {
-        // Check r only up to n/2 because solutions are symmetrical (n r) = (n n-r).
+        // Check r only up to n/2 because the solutions are symmetrical: (n r) = (n n-r).
         for (int r = 1; r <= n / 2; ++r)
         {
-            double result = 1;
+            double combinations = 1;
 
             for (int i = 0; i < r; ++i)
             {
-                result *= static_cast<double>(n) - i;
-                result /= static_cast<double>(r) - i;
+                combinations *= 1.0 * n - i;
+                combinations /= 1.0 * r - i;
             }
 
-            if (result > target)
-                solutions += n == 2 * r ? 1 : 2;
+            if (combinations > target)
+            {
+                if (n != 2 * r)
+                    solutions += 2;
+                else
+                    ++solutions;
+            }
         }
     }
 
@@ -33,7 +38,8 @@ int countCombinatoricSelections(int limit, int target)
 int main()
 {
     int limit = 100;
-    int target = 1000000;
+    int target = 1'000'000;
+
     auto result = countCombinatoricSelections(limit, target);
     std::cout << result << std::endl;
 
