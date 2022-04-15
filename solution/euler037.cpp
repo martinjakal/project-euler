@@ -19,8 +19,8 @@ int sumTruncatablePrimes()
     {
         if (isTruncatablePrime(i))
         {
-            sumTruncatable += i;
             ++truncatableCnt;
+            sumTruncatable += i;
         }
     }
 
