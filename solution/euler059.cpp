@@ -37,7 +37,7 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
             for (char z = 'a'; z <= 'z'; ++z)
             {
                 const std::string key = { x, y, z };
-                std::string decoded;
+                std::string decodedMessage;
 
                 for (std::size_t i = 0; i < message.size(); ++i)
                 {
@@ -46,13 +46,16 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
                     if (c < 32 || c == 127) // must be a valid ASCII character
                         break;
 
-                    decoded.push_back(c);
+                    decodedMessage.push_back(c);
                 }
 
                 // Discard the message if the lengths are not matching (meaning the key produced some invalid characters).
                 // Verify the correct result by assuming that a valid English text would contain the word "the" multiple times.
-                if (decoded.size() == message.size() && countSubstrings(decoded, "the") > 2)
-                    return std::accumulate(decoded.begin(), decoded.end(), 0);
+                if (decodedMessage.size() == message.size() && countSubstrings(decodedMessage, " the ") >= 3)
+                {
+                    //std::cout << decodedMessage << std::endl;
+                    return std::accumulate(decodedMessage.begin(), decodedMessage.end(), 0);
+                }
             }
         }
     }
@@ -63,6 +66,7 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
 int main()
 {
     std::string filename = "input/euler059input.txt";
+
     auto input = readNumbers(filename, ',');
     auto result = sumCharsInDecryptedMessage(input);
     std::cout << result << std::endl;
