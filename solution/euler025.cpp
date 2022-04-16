@@ -14,7 +14,7 @@ int findFibonacciTermWithDigits(int digits)
     BigInteger f1(1);
     BigInteger f2(1);
 
-    while (static_cast<int>(f2.digitCnt()) != digits)
+    while (f2.digitCnt() != digits)
     {
         f0 = f1;
         f1 = f2;
