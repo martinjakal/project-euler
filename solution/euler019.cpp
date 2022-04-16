@@ -8,10 +8,20 @@
 class Date
 {
 public:
-    Date(int day, int month, int year) : day_(day), month_(month), year_(year) { updateLeapYear(); }
+    Date(int day, int month, int year) : day_(day), month_(month), year_(year)
+    {
+        updateLeapYear();
+    }
 
-    bool operator==(const Date& other) const { return year_ == other.year_ && month_ == other.month_ && day_ == other.day_; }
-    bool operator!=(const Date& other) const { return !(*this == other); }
+    bool operator==(const Date& other) const
+    {
+        return year_ == other.year_ && month_ == other.month_ && day_ == other.day_;
+    }
+
+    bool operator!=(const Date& other) const
+    {
+        return !(*this == other);
+    }
 
     void addDay()
     {
