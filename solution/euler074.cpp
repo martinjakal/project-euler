@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -23,7 +25,7 @@ int sumDigitFactorial(int number, const std::vector<int>& factorials)
     return digitSum + factorials[number];
 }
 
-int chainsDigitFactorial(int limit, int length)
+int countDigitFactorialChains(int limit, int length)
 {
     std::vector<int> factorials;
     for (int i = 0; i < 10; ++i)
@@ -33,7 +35,7 @@ int chainsDigitFactorial(int limit, int length)
     const int digits = static_cast<int>(std::ceil(std::log10(limit - 1)));
     std::vector<int> factDigitSums(digits * factorials[9] + 1, 0);
 
-    for (int i = 0; i < factDigitSums.size(); ++i)
+    for (int i = 0; i < static_cast<int>(factDigitSums.size()); ++i)
         factDigitSums[i] = sumDigitFactorial(i, factorials);
 
     std::vector<int> chainLengths(limit + 1, 0);
@@ -49,8 +51,7 @@ int chainsDigitFactorial(int limit, int length)
             ++chainLengths[i];
             number = factDigitSums[number];
 
-            // Reuse the chain length for smaller terms which is already stored.
-            if (number < i)
+            if (number < i) // chain length for smaller terms is precalculated
             {
                 chainLengths[i] += chainLengths[number];
                 break;
@@ -63,9 +64,10 @@ int chainsDigitFactorial(int limit, int length)
 
 int main()
 {
-    int limit = 1000000;
+    int limit = 1'000'000;
     int length = 60;
-    auto result = chainsDigitFactorial(limit, length);
+
+    auto result = countDigitFactorialChains(limit, length);
     std::cout << result << std::endl;
 
     return 0;
