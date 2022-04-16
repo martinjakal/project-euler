@@ -13,7 +13,7 @@ int countLychrelNumbers(int limit, int maxIter)
 
     for (int i = 1; i < limit; ++i)
     {
-        BigInteger number(i);
+        BigInteger number = i;
 
         for (int it = 1; it <= maxIter; ++it)
         {

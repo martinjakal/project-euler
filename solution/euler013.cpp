@@ -14,7 +14,7 @@ using namespace reader;
 
 auto sumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -> std::string
 {
-    BigInteger sum;
+    BigInteger sum = 0;
 
     for (const auto& number : numbers)
         sum += BigInteger(number);

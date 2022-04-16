@@ -14,7 +14,7 @@ int countDistinctPowers(int maxBase, int maxExp)
 
     for (int base = 2; base <= maxBase; ++base)
     {
-        BigInteger number(base);
+        BigInteger number = base;
 
         for (int exp = 2; exp <= maxExp; ++exp)
         {

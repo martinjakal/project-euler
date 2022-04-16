@@ -9,7 +9,7 @@
 
 int sumFactorialDigits(int limit)
 {
-    BigInteger factorial(1);
+    BigInteger factorial = 1;
 
     for (int i = 2; i <= limit; ++i)
         factorial *= BigInteger(i);

@@ -10,7 +10,7 @@
 
 auto sumSelfPowers(int maxPower, int lastDigits) -> std::string
 {
-    BigInteger sumPowers;
+    BigInteger sumPowers = 0;
 
     for (int i = 1; i <= maxPower; ++i)
         sumPowers += BigInteger(i) ^ BigInteger(i);

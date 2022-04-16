@@ -13,11 +13,11 @@ int calcMaxDigitSumOfPowers(int limit)
 
     for (int a = 1; a < limit; ++a)
     {
-        BigInteger number(a);
+        BigInteger number = a;
 
         for (int b = 1; b < limit; ++b)
         {
-            number *= a;
+            number *= BigInteger(a);
 
             int digitSum = static_cast<int>(number.digitSum());
 
