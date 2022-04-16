@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include <helper/BigInteger.hpp>
@@ -8,20 +9,20 @@
 // Result: 661
 
 // Continued franctions are used to solve Pell's equations.
-int solveDiophantineEquations(int limit)
+int analyzeCoeffsOfDiophantineEquations(int limit)
 {
-    int bestD = 0;
     BigInteger maxX = 0;
+    int bestD = 0;
 
     for (int D = 2; D <= limit; ++D)
     {
-        const BigInteger a0 = static_cast<int>(sqrt(D));
-        if (a0 * a0 == D)
+        const BigInteger root(static_cast<int>(std::sqrt(D)));
+        if (root * root == D)
             continue;
 
-        BigInteger m = 0;
+        BigInteger n = 0;
         BigInteger d = 1;
-        BigInteger a = a0;
+        BigInteger a = root;
 
         BigInteger x0 = 1;
         BigInteger y0 = 0;
@@ -30,9 +31,9 @@ int solveDiophantineEquations(int limit)
 
         while (x1 * x1 - y1 * y1 * D != 1)
         {
-            m = d * a - m;
-            d = (m * m * -1 + D) / d;
-            a = (a0 + m) / d;
+            n = d * a - n;
+            d = (n * n * -1 + D) / d;
+            a = (root + n) / d;
 
             BigInteger x2 = x1 * a + x0;
             BigInteger y2 = y1 * a + y0;
@@ -41,7 +42,7 @@ int solveDiophantineEquations(int limit)
             x1 = x2;
             y1 = y2;
         }
-        
+
         if (x1 > maxX)
         {
             maxX = x1;
@@ -55,7 +56,8 @@ int solveDiophantineEquations(int limit)
 int main()
 {
     int limit = 1000;
-    auto result = solveDiophantineEquations(limit);
+
+    auto result = analyzeCoeffsOfDiophantineEquations(limit);
     std::cout << result << std::endl;
 
     return 0;
