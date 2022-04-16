@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 
 #include <helper/BigInteger.hpp>
@@ -8,7 +7,7 @@
 // Powerful digit sum
 // Result: 972
 
-int maxDigitSumPowers(int limit)
+int calcMaxDigitSumOfPowers(int limit)
 {
     int maxDigitSum = 0;
 
@@ -19,7 +18,11 @@ int maxDigitSumPowers(int limit)
         for (int b = 1; b < limit; ++b)
         {
             number *= a;
-            maxDigitSum = std::max(number.digitSum(), maxDigitSum);
+
+            int digitSum = static_cast<int>(number.digitSum());
+
+            if (digitSum > maxDigitSum)
+                maxDigitSum = digitSum;
         }
     }
 
@@ -29,7 +32,8 @@ int maxDigitSumPowers(int limit)
 int main()
 {
     int limit = 100;
-    auto result = maxDigitSumPowers(limit);
+
+    auto result = calcMaxDigitSumOfPowers(limit);
     std::cout << result << std::endl;
 
     return 0;
