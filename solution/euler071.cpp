@@ -6,33 +6,34 @@
 // Ordered fractions
 // Result: 428570
 
-int maxNumeratorOrderedFractions(int limit)
+int findNumeratorOfOrderedFractions(int limit)
 {
-    int maxNumerator = 0;
     double maxFraction = 0;
+    int numerator = 0;
 
     for (int d = 1; d <= limit; ++d)
     {
-        // Numerator starts at max numerator because n / d > n / (d + 1).
-        for (int n = maxNumerator; n < 3.0 * d / 7; ++n)
+        // Continue from already found numerator because n / d > n / (d + 1).
+        for (int n = numerator; n < 3.0 * d / 7; ++n)
         {
             double fraction = static_cast<double>(n) / d;
 
             if (fraction > maxFraction && std::gcd(n, d) == 1)
             {
-                maxNumerator = n;
+                numerator = n;
                 maxFraction = fraction;
             }
         }
     }
 
-    return maxNumerator;
+    return numerator;
 }
 
 int main()
 {
-    int limit = 1000000;
-    auto result = maxNumeratorOrderedFractions(limit);   
+    int limit = 1'000'000;
+
+    auto result = findNumeratorOfOrderedFractions(limit);
     std::cout << result << std::endl;
 
     return 0;
