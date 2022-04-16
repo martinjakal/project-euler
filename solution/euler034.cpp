@@ -28,7 +28,7 @@ int sumDigitFactorials(int number, const std::vector<int>& factorials)
 // Therefore the upper bound for the number is 7 * 9! = 2540160.
 int sumFactorions()
 {
-    const int limit = 2540160;
+    const int limit = 2'540'160;
     int sumFact = 0;
 
     std::vector<int> factorialsCache;
