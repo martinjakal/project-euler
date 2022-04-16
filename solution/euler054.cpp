@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,9 +13,8 @@
 
 using namespace reader;
 
-class Card
+struct Card
 {
-public:
     Card(char rank, char suit) : suit_(suit)
     {
         rank_ = rank == 'T' ? 10 : rank == 'J' ? 11 :
@@ -30,9 +30,6 @@ public:
         return rank_ < other.rank_;
     }
 
-    friend class Hand;
-
-private:
     int rank_;
     char suit_;
 };
@@ -40,6 +37,11 @@ private:
 class Hand
 {
 public:
+    bool isHandFull() const
+    {
+        return cards_.size() == MAX_CARDS;
+    }
+
     void drawCard(const Card& c)
     {
         cards_.push_back(c);
@@ -54,8 +56,7 @@ public:
     // For example, score 60805000000 means: 6 - full house, 08 - three, 05 - pair.
     auto calcScore() const -> std::string
     {
-        if (!isHandFull())
-            throw std::runtime_error("Invalid poker hand");
+        assert(isHandFull() && "Cannot calculate score because hand is not full");
 
         bool isFlush = sameSuit();
         bool isStraight = consecutive();
@@ -109,18 +110,33 @@ public:
     }
 
 private:
+    static constexpr int MAX_CARDS = 5;
+
     std::vector<Card> cards_;
 
-    auto str(const Card& card) const -> std::string { return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_); }
+    auto str(const Card& card) const -> std::string
+    {
+        return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_);
+    }
 
-    bool isHandFull() const { return cards_.size() == 5; }
-    bool isPair(int i) const { return cards_[i].rank_ == cards_[i + 1].rank_; }
-    bool isThree(int i) const { return isPair(i) && isPair(i + 1); }
-    bool isFour(int i) const { return isPair(i) && isThree(i + 1); }
+    bool isPair(int i) const
+    {
+        return cards_[i].rank_ == cards_[i + 1].rank_;
+    }
+
+    bool isThree(int i) const
+    {
+        return isPair(i) && isPair(i + 1);
+    }
+
+    bool isFour(int i) const
+    {
+        return isPair(i) && isThree(i + 1);
+    }
 
     bool consecutive() const
     {
-        for (int i = 0; i < static_cast<int>(cards_.size()) - 1; ++i)
+        for (int i = 0; i < MAX_CARDS - 1; ++i)
         {
             if (cards_[i].rank_ != cards_[i + 1].rank_ - 1)
                 return false;
@@ -131,7 +147,7 @@ private:
 
     bool sameSuit() const
     {
-        for (int i = 0; i < static_cast<int>(cards_.size()) - 1; ++i)
+        for (int i = 0; i < MAX_CARDS - 1; ++i)
         {
             if (cards_[i].suit_ != cards_[i + 1].suit_)
                 return false;
@@ -153,7 +169,7 @@ int countPokerWins(const std::vector<std::vector<std::string>>& games)
         for (std::size_t i = 0; i < game.size(); ++i)
         {
             Card card(game[i][0], game[i][1]);
-            i < 5 ? player1.drawCard(card) : player2.drawCard(card);
+            !player1.isHandFull() ? player1.drawCard(card) : player2.drawCard(card);
         }
 
         if (player1.calcScore() > player2.calcScore())
