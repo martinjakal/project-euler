@@ -60,7 +60,7 @@ bool findNextLink(const std::vector<std::vector<int>>& figurate, int idx, std::v
 
         chain.push_back(number);
 
-        // If the chain contains distinct number from each set, check the final loop. 
+        // If the chain contains distinct number from each set, check the final loop.
         if (chain.size() == figurate.size() && number % 100 == chain.front() / 100)
             return true;
 
@@ -82,7 +82,7 @@ int sumCyclicalFigurateNumbers()
 
     std::sort(figurateNumbers.begin(), figurateNumbers.end());
 
-    // Different permutations of number sets are checked. Starting from the first set, backtracking is used to find 
+    // Different permutations of number sets are checked. Starting from the first set, backtracking is used to find
     // the chain of distinct numbers from the following sets connected by digits.
     do
     {
@@ -97,15 +97,14 @@ int sumCyclicalFigurateNumbers()
 
             chain.pop_back();
         }
-    } 
-    while (std::next_permutation(figurateNumbers.begin(), figurateNumbers.end()));
+    } while (std::next_permutation(figurateNumbers.begin(), figurateNumbers.end()));
 
     return 0;
 }
 
 int main()
 {
-    auto result = sumCyclicalFigurateNumbers(); 
+    auto result = sumCyclicalFigurateNumbers();
     std::cout << result << std::endl;
 
     return 0;
