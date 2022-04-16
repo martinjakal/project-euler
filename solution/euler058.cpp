@@ -9,11 +9,12 @@
 
 using namespace math;
 
-int diagLengthWithPrimesBelowRatio(double ratio)
+int findDiagLengthWithPrimesBelowRatio(double ratio)
 {
     double primeRatio = 1;
     int primeCnt = 0;
     int diagCnt = 1;
+
     int number = 1;
     int step = 0;
 
@@ -39,7 +40,8 @@ int diagLengthWithPrimesBelowRatio(double ratio)
 int main()
 {
     double ratio = 0.1;
-    auto result = diagLengthWithPrimesBelowRatio(ratio);
+
+    auto result = findDiagLengthWithPrimesBelowRatio(ratio);
     std::cout << result << std::endl;
 
     return 0;
