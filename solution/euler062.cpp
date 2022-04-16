@@ -8,15 +8,15 @@
 // Cubic permutations
 // Result: 127035954683
 
-unsigned long long minCubeWithDigitPermutations(int permCnt)
-{    
+unsigned long long findMinCubeWithDigitPermutations(int permCnt)
+{
     // String of sorted digits is used as a key for fast permutation check, 
     // value stores the original number and occurrence of its permutations.
-    std::unordered_map<std::string, std::pair<unsigned long long, int>> permutations; 
+    std::unordered_map<std::string, std::pair<unsigned long long, int>> permutations;
 
     for (int number = 1; ; ++number)
     {
-        unsigned long long cube = static_cast<unsigned long long>(pow(number, 3));
+        auto cube = 1ull * number * number * number;
         std::string cubeStr = std::to_string(cube);
 
         std::sort(cubeStr.begin(), cubeStr.end());
@@ -29,7 +29,7 @@ unsigned long long minCubeWithDigitPermutations(int permCnt)
 
             if (pos->second.second == permCnt)
                 return pos->second.first;
-        }    
+        }
         else
             permutations[cubeStr] = { cube, 1 };
     }
@@ -38,8 +38,9 @@ unsigned long long minCubeWithDigitPermutations(int permCnt)
 int main()
 {
     int permutationCount = 5;
-    auto result = minCubeWithDigitPermutations(permutationCount); 
+
+    auto result = findMinCubeWithDigitPermutations(permutationCount);
     std::cout << result << std::endl;
-    
+
     return 0;
 }
