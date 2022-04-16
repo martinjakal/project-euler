@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 // Project Euler - Problem 64
@@ -5,19 +6,19 @@
 // Odd period square roots
 // Result: 1322
 
-int squareRootPeriod(int number)
+int calcSquareRootPeriod(int number)
 {
-    const int a0 = static_cast<int>(sqrt(number));
+    const int root = static_cast<int>(std::sqrt(number));
     int period = 0;
-    int m = 0;
+    int n = 0;
     int d = 1;
-    int a = a0;
+    int a = root;
 
-    while (a != 2 * a0)
+    while (a != 2 * root)
     {
-        m = d * a - m;
-        d = (number - m * m) / d;
-        a = (a0 + m) / d;
+        n = d * a - n;
+        d = (number - n * n) / d;
+        a = (root + n) / d;
         ++period;
     }
 
@@ -26,24 +27,26 @@ int squareRootPeriod(int number)
 
 int countOddPeriodsOfSquareRoots(int limit)
 {
-    int oddPeriodCount = 0;
+    int oddPeriodCnt = 0;
 
     for (int i = 2; i <= limit; ++i)
     {
-        if (sqrt(i) == static_cast<int>(sqrt(i)))
+        if (std::sqrt(i) == static_cast<int>(std::sqrt(i)))
             continue;
 
-        oddPeriodCount += squareRootPeriod(i) % 2 == 1;
+        if (calcSquareRootPeriod(i) % 2 != 0)
+            ++oddPeriodCnt;
     }
 
-    return oddPeriodCount;
+    return oddPeriodCnt;
 }
 
 int main()
 {
     int limit = 10000;
+
     auto result = countOddPeriodsOfSquareRoots(limit);
     std::cout << result << std::endl;
-    
+
     return 0;
 }
