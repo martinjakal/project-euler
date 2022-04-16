@@ -12,7 +12,7 @@ using namespace math;
 
 int sumNumbersWithoutAbundantSums()
 {
-    const int limit = 28123;
+    const int limit = 28'123;
     std::vector<int> abundant;
     std::vector<bool> canWriteAsSum(limit + 1, false);
     int sumWithoutAbundantSums = 0;

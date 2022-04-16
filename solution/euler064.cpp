@@ -43,7 +43,7 @@ int countOddPeriodsOfSquareRoots(int limit)
 
 int main()
 {
-    int limit = 10000;
+    int limit = 10'000;
 
     auto result = countOddPeriodsOfSquareRoots(limit);
     std::cout << result << std::endl;

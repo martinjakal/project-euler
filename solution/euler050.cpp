@@ -20,8 +20,8 @@ int findPrimeWithLongestPrimeSum(int limit)
     for (int i = 0; i < primeCnt; ++i)
         primeSums[i + 1] = primeSums[i] + primes[i];
 
-    int bestPrime = 0;
     int maxLength = 0;
+    int bestPrime = 0;
 
     // Iterate through possible consecutive sums and check if the difference is prime.
     for (int i = 0; i < primeCnt; ++i)
@@ -36,8 +36,8 @@ int findPrimeWithLongestPrimeSum(int limit)
 
             if (length > maxLength && isPrime(number))
             {
-                bestPrime = number;
                 maxLength = length;
+                bestPrime = number;
             }
         }
     }

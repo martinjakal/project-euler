@@ -25,7 +25,7 @@ int calcProductOfDigitsChampernowne(const std::vector<int>& digits)
 
 int main()
 {
-    std::vector<int> digits = { 1, 10, 100, 1000, 10000, 100'000, 1'000'000 };
+    std::vector<int> digits = { 1, 10, 100, 1000, 10'000, 100'000, 1'000'000 };
 
     auto result = calcProductOfDigitsChampernowne(digits);
     std::cout << result << std::endl;

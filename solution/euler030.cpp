@@ -11,7 +11,7 @@
 // Therefore the upper bound for the number is 6 * 9^5 = 354294.
 int sumNumbersWithFifthPowerDigits()
 {
-    const int limit = 354294;
+    const int limit = 354'294;
     const int power = 5;
     int sumFifthPowerDigits = 0;
 

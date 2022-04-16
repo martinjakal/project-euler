@@ -27,7 +27,7 @@ int findNthPrime(int position)
 
 int main()
 {
-    int position = 10001;
+    int position = 10'001;
 
     auto result = findNthPrime(position);
     std::cout << result << std::endl;

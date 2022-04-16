@@ -24,7 +24,7 @@ unsigned long long findNextPentaHexaNumber(int previous)
 
 int main()
 {
-    int previous = 40755;
+    int previous = 40'755;
 
     auto result = findNextPentaHexaNumber(previous);
     std::cout << result << std::endl;
