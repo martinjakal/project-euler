@@ -10,7 +10,7 @@
 using namespace math;
 
 // Euler's totient function is used: phi(n) = n * product (1 - 1 / p), where p is a prime which divides n.
-// To maximize n / phi(n), the product of primes must be maximized.
+// To maximize n / phi(n), the number of primes in the product must be maximized.
 int findNumberWithMaxTotient(int limit)
 {
     int totient = 1;
