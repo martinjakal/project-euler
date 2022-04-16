@@ -4,7 +4,7 @@
 // Project Euler - Problem 73
 // https://projecteuler.net/problem=73
 // Counting fractions in a range
-// Result: 7295372 
+// Result: 7295372
 
 int countFractionsInRange(int limit)
 {
@@ -24,7 +24,8 @@ int countFractionsInRange(int limit)
 
 int main()
 {
-    int limit = 12000;
+    int limit = 12'000;
+
     auto result = countFractionsInRange(limit);
     std::cout << result << std::endl;
 
