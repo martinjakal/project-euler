@@ -7,17 +7,20 @@
 // Square root convergents
 // Result: 153
 
-int moreDigitsNumeratorSqrtTwo(int maxIter)
+int countFractionsWithMoreDigitsInNumerator(int maxIter)
 {
-    int moreDigitsNumCnt = 0;
     BigInteger numerator(1);
     BigInteger denominator(1);
+    int moreDigitsNumCnt = 0;
 
-    // Next iteration of p / q fraction is obtained as (p + 2q) / (p + q).
-    for (int i = 1; i <= maxIter; ++i)
+    // Next iteration of p / q continued fraction of the square root of two is obtained as (p + 2q) / (p + q).
+    for (int it = 1; it <= maxIter; ++it)
     {
-        numerator += denominator * 2;
-        denominator = numerator - denominator;
+        BigInteger n(numerator);
+        BigInteger d(denominator);
+
+        numerator += d * 2;
+        denominator += n;
 
         if (numerator.digitCnt() > denominator.digitCnt())
             ++moreDigitsNumCnt;
@@ -28,8 +31,9 @@ int moreDigitsNumeratorSqrtTwo(int maxIter)
 
 int main()
 {
-    int maxIter = 1000;
-    auto result = moreDigitsNumeratorSqrtTwo(maxIter);
+    int maxIteration = 1000;
+
+    auto result = countFractionsWithMoreDigitsInNumerator(maxIteration);
     std::cout << result << std::endl;
 
     return 0;
