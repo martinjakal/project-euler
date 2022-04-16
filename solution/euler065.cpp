@@ -7,17 +7,17 @@
 // Convergents of e
 // Result: 272
 
-int digitSumConvergentOfE(int maxIter)
+int sumDigitsInConvergentOfE(int maxIter)
 {
     BigInteger a = 1;
-    BigInteger b = 2;
+    BigInteger b = 1;
 
-    for (int i = 2, k = 1; i <= maxIter; ++i)
+    for (int it = 1, k = 1; it <= maxIter; ++it)
     {
         BigInteger c;
 
-        // The pattern for multiplication is (1, 1, 2k, 1...).
-        if (i % 3 == 0)
+        // The pattern for multiplication is (1, 1, 2k).
+        if (it % 3 == 0)
         {
             c = a + b * 2 * k;
             ++k;
@@ -29,14 +29,15 @@ int digitSumConvergentOfE(int maxIter)
         b = c;
     }
 
-    return b.digitSum();
+    return static_cast<int>(b.digitSum());
 }
 
 int main()
 {
     int maxIteration = 100;
-    auto result = digitSumConvergentOfE(maxIteration); 
+
+    auto result = sumDigitsInConvergentOfE(maxIteration);
     std::cout << result << std::endl;
-    
+
     return 0;
 }
