@@ -14,16 +14,16 @@ using namespace math;
 // To minimize n / phi(n), the number of primes in the product must be minimized. At least two primes must be used,
 // because if n is a prime, then phi(n) = n - 1 and n - 1 is never a permutation of n.
 // Also phi(m * n) = phi(m) * phi(n) * d / phi(d), where d = gcd(m, n).
-// If m and n are prime, then phi(m * n) = phi(m) * phi(n).
-int minTotientPermutation(int limit)
+// If m and n are primes, then phi(m * n) = phi(m) * phi(n).
+int findNumberWithMinTotientPermutation(int limit)
 {
-    auto primes = sieveOfEratosthenes(limit / 2);
+    const auto primes = sieveOfEratosthenes(limit / 2);
     double minRatio = std::numeric_limits<double>::max();
-    int numberWithMinRatio = 0;
+    int bestNumber = 0;
 
-    for (int i = 0; i < primes.size(); ++i)
+    for (std::size_t i = 0; i < primes.size(); ++i)
     {
-        for (int j = i; j < primes.size() && 1ull * primes[i] * primes[j] < limit; ++j)
+        for (std::size_t j = i; j < primes.size() && 1ull * primes[i] * primes[j] < limit; ++j)
         {
             int number = primes[i] * primes[j];
             int totient = (primes[i] - 1) * (primes[j] - 1);
@@ -36,18 +36,19 @@ int minTotientPermutation(int limit)
             if (ratio < minRatio)
             {
                 minRatio = ratio;
-                numberWithMinRatio = number;
+                bestNumber = number;
             }
         }
     }
 
-    return numberWithMinRatio;
+    return bestNumber;
 }
 
 int main()
 {
-    int limit = 10000000;
-    auto result = minTotientPermutation(limit);
+    int limit = 10'000'000;
+
+    auto result = findNumberWithMinTotientPermutation(limit);
     std::cout << result << std::endl;
 
     return 0;
