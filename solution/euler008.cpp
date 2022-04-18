@@ -14,7 +14,7 @@ using namespace reader;
 
 unsigned long long findMaxProductInSeries(const std::vector<std::string>& numbers, int length)
 {
-    std::string concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string(""));
+    const std::string concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string());
 
     std::vector<int> digits;
     for (auto digit : concatNumber)
