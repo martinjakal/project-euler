@@ -13,9 +13,8 @@ using namespace math;
 int sumNumbersWithoutAbundantSums()
 {
     const int limit = 28'123;
+
     std::vector<int> abundant;
-    std::vector<bool> canWriteAsSum(limit + 1, false);
-    int sumWithoutAbundantSums = 0;
 
     for (int i = 1; i <= limit; ++i)
     {
@@ -25,6 +24,8 @@ int sumNumbersWithoutAbundantSums()
 
     // Mark numbers which can be written as the sum of two abundant numbers.
     const int abundantCnt = static_cast<int>(abundant.size());
+    std::vector<bool> canWriteAsSum(limit + 1, false);
+
     for (int i = 0; i < abundantCnt; ++i)
     {
         for (int j = i; j < abundantCnt; ++j)
@@ -37,6 +38,8 @@ int sumNumbersWithoutAbundantSums()
             canWriteAsSum[sum] = true;
         }
     }
+
+    int sumWithoutAbundantSums = 0;
 
     for (int i = 1; i <= limit; ++i)
     {
