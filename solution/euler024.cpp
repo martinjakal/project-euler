@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <string>
 
@@ -9,6 +10,8 @@
 
 auto findNthPermutation(std::string digits, int position) -> std::string
 {
+    assert(std::is_sorted(digits.begin(), digits.end()) && "Input must be sorted to find the correct permutation");
+
     int permutationCnt = 1;
 
     while (permutationCnt != position && std::next_permutation(digits.begin(), digits.end()))
