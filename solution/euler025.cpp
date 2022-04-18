@@ -9,10 +9,10 @@
 
 int findFibonacciTermWithDigits(int digits)
 {
-    int termIdx = 2;
     BigInteger f0 = 0;
     BigInteger f1 = 1;
     BigInteger f2 = 1;
+    int termIdx = 2;
 
     while (f2.digitCnt() != digits)
     {
