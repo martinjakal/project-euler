@@ -13,6 +13,7 @@ int sumNumbersWithFifthPowerDigits()
 {
     const int limit = 354'294;
     const int power = 5;
+
     int sumFifthPowerDigits = 0;
 
     for (int i = 2; i < limit; ++i)
