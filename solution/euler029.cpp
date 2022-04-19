@@ -14,11 +14,12 @@ int countDistinctPowers(int maxBase, int maxExp)
 
     for (int base = 2; base <= maxBase; ++base)
     {
-        BigInteger number = base;
+        const BigInteger b = base;
+        BigInteger number = b;
 
         for (int exp = 2; exp <= maxExp; ++exp)
         {
-            number *= BigInteger(base);
+            number *= b;
             powers.insert(number);
         }
     }
