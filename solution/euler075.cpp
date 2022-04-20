@@ -22,7 +22,7 @@ int countPerimetersWithSingleRightTriangle(int limit)
         for (int n = 1; n < m; ++n)
         {
             // Coefficients must be coprime and not both odd. 
-            if (std::gcd(m, n) != 1 || (m % 2 == 1 && n % 2 == 1))
+            if (std::gcd(m, n) != 1 || (m % 2 != 0 && n % 2 != 0))
                 continue;
 
             int length = 2 * m * (m + n);
