@@ -36,10 +36,7 @@ int calcDenominatorOfCancelledFractions()
         {
             auto cancelled = cancelFraction(n, d);
 
-            if (!cancelled.has_value())
-                continue;
-
-            if (cancelled.value() == static_cast<double>(n) / d)
+            if (cancelled.has_value() && cancelled.value() == static_cast<double>(n) / d)
             {
                 totalNumerator *= n;
                 totalDenominator *= d;
