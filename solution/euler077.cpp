@@ -10,7 +10,7 @@
 
 using namespace math;
 
-int countPrimePartitions(int limit)
+int findFirstNumberWithEnoughPrimePartitions(int limit)
 {
     std::vector<int> primes;
 
@@ -36,7 +36,8 @@ int countPrimePartitions(int limit)
 int main()
 {
     int limit = 5000;
-    auto result = countPrimePartitions(limit);
+
+    auto result = findFirstNumberWithEnoughPrimePartitions(limit);
     std::cout << result << std::endl;
 
     return 0;
