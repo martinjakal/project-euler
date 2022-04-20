@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <string>
 #include <vector>
 
@@ -11,16 +12,13 @@
 int calcProductOfDigitsChampernowne(const std::vector<int>& digits)
 {
     const std::size_t maxDigit = *std::max_element(digits.begin(), digits.end());
-    std::string champernowne;
-    int product = 1;
 
+    std::string champernowne;
     for (int i = 1; champernowne.size() < maxDigit; ++i)
         champernowne += std::to_string(i);
 
-    for (auto digit : digits)
-        product *= champernowne[digit - 1] - '0';
-
-    return product;
+    return std::accumulate(digits.begin(), digits.end(), 1,
+        [&](int product, int digit) { return product * (champernowne[digit - 1] - '0'); });
 }
 
 int main()

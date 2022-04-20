@@ -33,7 +33,7 @@ int sumDoubleBasePalindromes(int limit)
 
     for (int i = 0; i < 2; ++i)
     {
-        bool isOdd = i % 2;
+        bool isOdd = i % 2 == 0;
 
         for (int number = 1; ; ++number)
         {
