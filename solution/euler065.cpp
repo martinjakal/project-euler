@@ -12,12 +12,12 @@ int sumDigitsInConvergentOfE(int maxIter)
     BigInteger a = 1;
     BigInteger b = 1;
 
-    for (int it = 1, k = 1; it <= maxIter; ++it)
+    for (int iter = 1, k = 1; iter <= maxIter; ++iter)
     {
         BigInteger c;
 
         // The pattern for multiplication is (1, 1, 2k).
-        if (it % 3 == 0)
+        if (iter % 3 == 0)
         {
             c = a + b * 2 * k;
             ++k;
