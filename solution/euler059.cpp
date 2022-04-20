@@ -14,7 +14,7 @@ using namespace reader;
 
 int countSubstrings(const std::string& text, const std::string& substring)
 {
-    const auto subLen = substring.length();
+    const auto subLen = substring.size();
     int count = 0;
 
     for (std::size_t i = 0; i < text.size() - subLen + 1; ++i)
