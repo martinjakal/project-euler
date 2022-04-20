@@ -6,7 +6,7 @@
 // Counting fractions in a range
 // Result: 7295372
 
-int countFractionsInRange(int limit)
+int countReducedProperFractionsInRange(int limit)
 {
     int fractionCnt = 0;
 
@@ -26,7 +26,7 @@ int main()
 {
     int limit = 12'000;
 
-    auto result = countFractionsInRange(limit);
+    auto result = countReducedProperFractionsInRange(limit);
     std::cout << result << std::endl;
 
     return 0;
