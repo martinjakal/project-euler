@@ -1,11 +1,12 @@
 #include <iostream>
+#include <optional>
 
 // Project Euler - Problem 33
 // https://projecteuler.net/problem=33
 // Digit cancelling fractions
 // Result: 100
 
-double cancelFraction(int numerator, int denominator)
+auto cancelFraction(int numerator, int denominator) -> std::optional<double>
 {
     int n1 = numerator / 10;
     int n0 = numerator % 10;
@@ -21,7 +22,7 @@ double cancelFraction(int numerator, int denominator)
     else if (n0 == d0 && d0 != 0) // check trivial case
         return 1.0 * n1 / d1;
 
-    return 0;
+    return {};
 }
 
 int calcDenominatorOfCancelledFractions()
@@ -33,7 +34,12 @@ int calcDenominatorOfCancelledFractions()
     {
         for (int n = 10; n < d; ++n)
         {
-            if (cancelFraction(n, d) == static_cast<double>(n) / d)
+            auto cancelled = cancelFraction(n, d);
+
+            if (!cancelled.has_value())
+                continue;
+
+            if (cancelled.value() == static_cast<double>(n) / d)
             {
                 totalNumerator *= n;
                 totalDenominator *= d;
