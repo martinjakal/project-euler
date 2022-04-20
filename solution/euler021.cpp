@@ -13,7 +13,6 @@ using namespace math;
 int sumAmicableNumbers(int limit)
 {
     std::unordered_map<int, int> divisorsCache;
-
     for (int i = 1; i < limit; ++i)
         divisorsCache[i] = sumProperDivisors(i);
 

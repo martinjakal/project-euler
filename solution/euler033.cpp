@@ -5,12 +5,12 @@
 // Digit cancelling fractions
 // Result: 100
 
-double cancelFraction(int n, int d)
+double cancelFraction(int numerator, int denominator)
 {
-    int n1 = n / 10;
-    int n0 = n % 10;
-    int d1 = d / 10;
-    int d0 = d % 10;
+    int n1 = numerator / 10;
+    int n0 = numerator % 10;
+    int d1 = denominator / 10;
+    int d0 = denominator % 10;
 
     if (n1 == d1)
         return 1.0 * n0 / d0;
@@ -33,7 +33,7 @@ int calcDenominatorOfCancelledFractions()
     {
         for (int n = 10; n < d; ++n)
         {
-            if (cancelFraction(n, d) == 1.0 * n / d)
+            if (cancelFraction(n, d) == static_cast<double>(n) / d)
             {
                 totalNumerator *= n;
                 totalDenominator *= d;

@@ -15,7 +15,6 @@ int sumNumbersWithoutAbundantSums()
     const int limit = 28'123;
 
     std::vector<int> abundant;
-
     for (int i = 1; i <= limit; ++i)
     {
         if (isAbundant(i))

@@ -29,11 +29,12 @@ int sumDigitFactorials(int number, const std::vector<int>& factorials)
 int sumFactorions()
 {
     const int limit = 2'540'160;
-    int sumFact = 0;
 
     std::vector<int> factorialsCache;
     for (int i = 0; i < 10; ++i)
         factorialsCache.push_back(factorial(i));
+
+    int sumFact = 0;
 
     for (int i = 3; i < limit; ++i)
     {
