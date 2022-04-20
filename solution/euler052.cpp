@@ -9,22 +9,22 @@
 
 using namespace math;
 
+bool canPermuteMultiples(int number)
+{
+    for (int i = 2; i <= 6; ++i)
+    {
+        if (!isPermutation(number, i * number))
+            return false;
+    }
+
+    return true;
+}
+
 int findMinNumberWithPermutedMultiples()
 {
     for (int number = 1; ; ++number)
     {
-        bool canPermuteMultiples = true;
-
-        for (int i = 2; i <= 6; ++i)
-        {
-            if (!isPermutation(number, i * number))
-            {
-                canPermuteMultiples = false;
-                break;
-            }
-        }
-
-        if (canPermuteMultiples)
+        if (canPermuteMultiples(number))
             return number;
     }
 }
