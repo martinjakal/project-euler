@@ -1,14 +1,18 @@
 #include <cmath>
 #include <iostream>
+#include <optional>
 
 // Project Euler - Problem 64
 // https://projecteuler.net/problem=64
 // Odd period square roots
 // Result: 1322
 
-int calcSquareRootPeriod(int number)
+auto calcSquareRootPeriod(int number) -> std::optional<int>
 {
     const int root = static_cast<int>(std::sqrt(number));
+    if (root * root == number)
+        return {};
+
     int period = 0;
     int n = 0;
     int d = 1;
@@ -31,11 +35,10 @@ int countOddPeriodsOfSquareRoots(int limit)
 
     for (int i = 2; i <= limit; ++i)
     {
-        if (std::sqrt(i) == static_cast<int>(std::sqrt(i)))
-            continue;
+        auto period = calcSquareRootPeriod(i);
 
-        if (calcSquareRootPeriod(i) % 2 != 0)
-            ++oddPeriodCnt;
+        if (period.has_value() && period.value() % 2 != 0)
+            ++oddPeriodCnt; 
     }
 
     return oddPeriodCnt;
