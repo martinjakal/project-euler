@@ -15,7 +15,7 @@ int countLychrelNumbers(int limit, int maxIter)
     {
         BigInteger number = i;
 
-        for (int it = 1; it <= maxIter; ++it)
+        for (int iter = 1; iter <= maxIter; ++iter)
         {
             number += number.reverse();
 
