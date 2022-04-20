@@ -21,7 +21,6 @@ public:
     PrimePairFamilySolver(int familySize) : familySize_(familySize)
     {
         initPrimePairs();
-
         findNextPrimeForFamily();
     }
 
