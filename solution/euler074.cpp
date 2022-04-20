@@ -25,15 +25,14 @@ int sumDigitFactorial(int number, const std::vector<int>& factorials)
     return digitSum + factorials[number];
 }
 
-int countDigitFactorialChains(int limit, int length)
+int countDigitFactorialChainsWithLength(int limit, int length)
 {
     std::vector<int> factorials;
     for (int i = 0; i < 10; ++i)
         factorials.push_back(factorial(i));
 
     // Precompute all sums of digit factorials up to the range obtained as number of digits * 9!.
-    const int digits = static_cast<int>(std::ceil(std::log10(limit - 1)));
-    std::vector<int> factDigitSums(digits * factorials[9] + 1, 0);
+    std::vector<int> factDigitSums(countDigits(limit - 1) * factorials.back() + 1, 0);
 
     for (int i = 0; i < static_cast<int>(factDigitSums.size()); ++i)
         factDigitSums[i] = sumDigitFactorial(i, factorials);
@@ -67,7 +66,7 @@ int main()
     int limit = 1'000'000;
     int length = 60;
 
-    auto result = countDigitFactorialChains(limit, length);
+    auto result = countDigitFactorialChainsWithLength(limit, length);
     std::cout << result << std::endl;
 
     return 0;
