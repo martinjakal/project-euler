@@ -14,9 +14,9 @@ int findPrimeWithLongestPrimeSum(int limit)
 {
     const auto primes = sieveOfEratosthenes(limit);
     const int primeCnt = static_cast<int>(primes.size());
-    std::vector<int> primeSums(primeCnt + 1, 0);
 
     // Generate consecutive sum of primes.
+    std::vector<int> primeSums(primeCnt + 1, 0);
     for (int i = 0; i < primeCnt; ++i)
         primeSums[i + 1] = primeSums[i] + primes[i];
 
