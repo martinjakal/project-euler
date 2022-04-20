@@ -23,12 +23,7 @@ int countCombinatoricSelections(int limit, int target)
             }
 
             if (combinations > target)
-            {
-                if (n != 2 * r)
-                    solutions += 2;
-                else
-                    ++solutions;
-            }
+                solutions += n != 2 * r ? 2 : 1;
         }
     }
 
