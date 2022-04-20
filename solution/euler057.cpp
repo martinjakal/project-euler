@@ -14,7 +14,7 @@ int countFractionsWithMoreDigitsInNumerator(int maxIter)
     int moreDigitsNumCnt = 0;
 
     // Next iteration of p / q continued fraction of the square root of two is obtained as (p + 2q) / (p + q).
-    for (int it = 1; it <= maxIter; ++it)
+    for (int iter = 1; iter <= maxIter; ++iter)
     {
         BigInteger n(numerator);
         BigInteger d(denominator);
