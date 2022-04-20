@@ -15,15 +15,14 @@ using namespace math;
 unsigned long long countReducedProperFractions(int limit)
 {
     const auto primes = sieveOfEratosthenes(limit);
-    std::vector<int> totients(limit + 1);
-    const int totientCnt = static_cast<int>(totients.size());
 
-    for (int i = 0; i < totientCnt; ++i)
+    std::vector<int> totients(limit + 1);
+    for (int i = 0; i <= limit; ++i)
         totients[i] = i;
 
     for (auto p : primes)
     {
-        for (int i = p; i < totientCnt; i += p)
+        for (int i = p; i <= limit; i += p)
         {
             totients[i] /= p; // no data lost because i % p = 0
             totients[i] *= p - 1;
