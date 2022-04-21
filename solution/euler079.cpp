@@ -31,21 +31,21 @@ auto crackPassword(const std::vector<std::string>& logins) -> std::string
     char lastChar;
 
     // First character has a unique value found only in the first column.
-    std::set_difference(characters[0].begin(), characters[0].end(), characters[1].begin(), characters[1].end(), 
+    std::set_difference(characters[0].begin(), characters[0].end(), characters[1].begin(), characters[1].end(),
         std::inserter(candidates, candidates.end()));
     curChar = *candidates.begin();
     password += curChar;
     candidates.clear();
 
     // Last character has a unique value found only in the last column.
-    std::set_difference(characters[length - 1].begin(), characters[length - 1].end(), 
+    std::set_difference(characters[length - 1].begin(), characters[length - 1].end(),
         characters[length - 2].begin(), characters[length - 2].end(), std::inserter(candidates, candidates.end()));
     lastChar = *candidates.begin();
     candidates.clear();
 
     while (curChar != lastChar)
     {
-        // Create set of candidate characters as characters appearing right after the current character.
+        // Create a set of candidate characters as characters appearing right after the current character.
         for (const auto& login : logins)
         {
             for (int i = 0; i < length - 1; ++i)
@@ -55,7 +55,7 @@ auto crackPassword(const std::vector<std::string>& logins) -> std::string
             }
         }
 
-        // If both A and B are candidates and login combination AB is found, remove B from the candidates.
+        // If both A and B are candidates and login combination AB is found, remove B from candidates.
         for (const auto& login : logins)
         {
             bool isFirstCand = candidates.find(login[0]) != candidates.end();
@@ -82,8 +82,9 @@ auto crackPassword(const std::vector<std::string>& logins) -> std::string
 int main()
 {
     std::string filename = "input/euler079input.txt";
-    auto input = readStrings(filename);
-    auto result = crackPassword(input);
+
+    auto input = readStrings(filename, '\0');
+    auto result = crackPassword(input.front());
     std::cout << result << std::endl;
 
     return 0;
