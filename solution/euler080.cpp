@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -9,9 +10,9 @@
 // Result: 40886
 
 // Algorithm to calculate square root by substraction.
-auto squareRoot(int number, int digits) -> BigInteger
+auto squareRootWithPrecision(int number, int digits) -> BigInteger
 {
-    // Extra digits ensure the desired digits don't change with more iterations.
+    // Extra digits ensure that the desired digits do not change with more iterations.
     const int extraDigits = 2;
     BigInteger a = 5 * number;
     BigInteger b = 5;
@@ -30,21 +31,19 @@ auto squareRoot(int number, int digits) -> BigInteger
         }
     }
 
-    return b / static_cast<int>(pow(10, extraDigits));
+    return b / static_cast<int>(std::pow(10, extraDigits));
 }
 
-int sumSquareRootDigits(int limit, int digits)
+int sumDigitsOfSquareRoots(int limit, int digits)
 {
     int sumDigits = 0;
-    std::vector<int> squares;
 
-    for (int i = 1; i * i <= limit; ++i)
-        squares.push_back(i * i);
-
-    for (int i = 1; i <= limit; ++i)
+    for (int number = 1; number <= limit; ++number)
     {
-        if (std::find(squares.begin(), squares.end(), i) == squares.end())
-            sumDigits += squareRoot(i, digits).digitSum();
+        const int root = static_cast<int>(std::sqrt(number));
+
+        if (root * root != number)
+            sumDigits += static_cast<int>(squareRootWithPrecision(number, digits).digitSum());
     }
 
     return sumDigits;
@@ -54,7 +53,8 @@ int main()
 {
     int limit = 100;
     int digits = 100;
-    auto result = sumSquareRootDigits(limit, digits);
+
+    auto result = sumDigitsOfSquareRoots(limit, digits);
     std::cout << result << std::endl;
 
     return 0;
