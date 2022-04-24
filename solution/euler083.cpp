@@ -14,31 +14,30 @@ using namespace reader;
 
 struct Node
 {
-    Node(int i, int j, int distance) : i(i), j(j), distance(distance) {}
+    Node(int i, int j, int distance) : i_(i), j_(j), distance_(distance) {}
 
     bool operator<(const Node& other) const
     {
-        if (distance == other.distance)
-            return i != other.i ? i < other.i : j < other.j;
+        if (distance_ == other.distance_)
+            return i_ != other.i_ ? i_ < other.i_ : j_ < other.j_;
 
-        return distance < other.distance;
+        return distance_ < other.distance_;
     }
 
-    int i;
-    int j;
-    int distance;
+    int i_;
+    int j_;
+    int distance_;
 };
 
 // Implementation of Dijkstra's algorithm.
-int minPathFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
+int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
+    const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 1, 0 }, { 0, -1 },  { 0, 1 } };
     const std::size_t rows = matrix.size();
     const std::size_t cols = matrix[0].size();
 
     std::vector<std::vector<int>> distances(rows, std::vector<int>(cols, std::numeric_limits<int>::max()));
     distances[0][0] = matrix[0][0];
-
-    const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 1, 0 }, { 0, -1 },  { 0, 1 } };
 
     std::set<Node> remainingNodes;
     remainingNodes.insert(Node(0, 0, distances[0][0]));
@@ -50,19 +49,22 @@ int minPathFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 
         for (const auto& dir : directions)
         {
-            int nextI = cur.i + dir.first;
-            int nextJ = cur.j + dir.second;
+            int nextI = cur.i_ + dir.first;
+            int nextJ = cur.j_ + dir.second;
 
             if (nextI < 0 || nextI >= rows || nextJ < 0 || nextJ >= cols)
                 continue;
 
-            if (distances[cur.i][cur.j] + matrix[nextI][nextJ] < distances[nextI][nextJ])
-            {
-                if (distances[nextI][nextJ] != std::numeric_limits<int>::max()) // node is already visited
-                    remainingNodes.erase(remainingNodes.find(Node(nextI, nextJ, distances[nextI][nextJ])));
+            int newDistance = distances[cur.i_][cur.j_] + matrix[nextI][nextJ];
+            int& curDistance = distances[nextI][nextJ];
 
-                distances[nextI][nextJ] = distances[cur.i][cur.j] + matrix[nextI][nextJ];
-                remainingNodes.insert(Node(nextI, nextJ, distances[nextI][nextJ]));
+            if (newDistance < curDistance)
+            {
+                if (curDistance != std::numeric_limits<int>::max()) // node is already visited
+                    remainingNodes.erase(remainingNodes.find(Node(nextI, nextJ, curDistance)));
+
+                curDistance = newDistance;
+                remainingNodes.insert(Node(nextI, nextJ, curDistance));
             }
         }
     }
@@ -73,8 +75,9 @@ int minPathFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 int main()
 {
     std::string filename = "input/euler083input.txt";
+
     auto input = readNumbers(filename, ',');
-    auto result = minPathFourDirectionMatrix(input);
+    auto result = sumMinPathInFourDirectionMatrix(input);
     std::cout << result << std::endl;
 
     return 0;
