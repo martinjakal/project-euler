@@ -11,61 +11,36 @@
 class Monopoly
 {
 public:
-    Monopoly(int dice) : dice_(dice) { prepareBoard(); }
+    Monopoly(int dice) : dice_(dice) {}
 
+    // Simulate dice rolls and count square visits to obtain the three most visited squares.
     int analyzeDiceRolls()
     {
-        int pos = go_;
-        int doubles = 0;
+        initBoard();
 
         for (int i = 0; i < maxIteration_; ++i)
         {
-            int roll1 = (std::rand() % dice_) + 1;
-            int roll2 = (std::rand() % dice_) + 1;
-
-            pos = (pos + roll1 + roll2) % squares_;
-
-            if (roll1 == roll2)
-                ++doubles;
-            else
-                doubles = 0;
-
-            if (doubles == 3)
-            {
-                pos = jail_;
-                doubles = 0;
-            }
-            else
-            {
-                if (pos == 7 || pos == 22 || pos == 36)
-                    pos = chance(pos);
-
-                if (pos == 2 || pos == 17 || pos == 33)
-                    pos = communityChest(pos);
-
-                if (pos == goToJail_)
-                    pos = jail_;
-            }
-
-            ++board_[pos];
+            diceRoll();
+            ++board_[position_];
         }
 
         std::vector<std::pair<int, int>> visitedSquares;
         for (int i = 0; i < board_.size(); ++i)
             visitedSquares.emplace_back(i, board_[i]);
-        std::sort(visitedSquares.begin(), visitedSquares.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b) 
+
+        std::sort(visitedSquares.begin(), visitedSquares.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b)
             { return a.second > b.second; });
 
         return visitedSquares[0].first * 10000 + visitedSquares[1].first * 100 + visitedSquares[2].first;
     }
 
 private:
-    std::random_device rd_;
     const int maxIteration_ = 10'000'000;
-    const int dice_;
     const int squares_ = 40;
-    std::vector<int> board_;
+    const int dice_;
 
+    std::random_device rd_;
+    std::vector<int> board_;
     std::vector<int> communityChest_;
     std::vector<int> chance_;
 
@@ -73,9 +48,18 @@ private:
     const int jail_ = 10;
     const int goToJail_ = 30;
 
-    void prepareBoard()
+    int position_ = go_;
+    int doubles_ = 0;
+
+    void initBoard()
     {
+        board_.clear();
+        communityChest_.clear();
+        chance_.clear();
+
         board_.resize(squares_);
+        position_ = go_;
+        doubles_ = 0;
 
         for (int i = 0; i < 16; ++i)
         {
@@ -87,41 +71,82 @@ private:
         std::shuffle(chance_.begin(), chance_.end(), rd_);
     }
 
-    int communityChest(int pos)
+    void diceRoll()
     {
-        int i = communityChest_.front();
+        const int roll1 = (std::rand() % dice_) + 1;
+        const int roll2 = (std::rand() % dice_) + 1;
+
+        if (roll1 == roll2)
+            ++doubles_;
+        else
+            doubles_ = 0;
+
+        if (doubles_ == 3)
+        {
+            position_ = jail_;
+            doubles_ = 0;
+        }
+        else
+        {
+            position_ = (position_ + roll1 + roll2) % squares_;
+
+            if (position_ == 7 || position_ == 22 || position_ == 36)
+                applyChance();
+
+            if (position_ == 2 || position_ == 17 || position_ == 33)
+                applyCommunityChest();
+
+            if (position_ == goToJail_)
+                position_ = jail_;
+        }
+    }
+
+    void applyCommunityChest()
+    {
+        int cc = communityChest_.front();
         std::rotate(communityChest_.begin(), communityChest_.begin() + 1, communityChest_.end());
 
-        return i == 1 ? go_ : i == 2 ? jail_ : pos;
+        position_ = cc == 1 ? go_ :
+                    cc == 2 ? jail_ :
+                    position_;
     }
 
-    int chance(int pos)
+    void applyChance()
     {
-        int i = chance_.front();
+        int ch = chance_.front();
         std::rotate(chance_.begin(), chance_.begin() + 1, chance_.end());
 
-        return i == 1 ? go_ : i == 2 ? jail_ : i == 3 ? 11 : i == 4 ? 24 : i == 5 ? 39 : i == 6 ? 5 : 
-            i == 7 ? nextRailway(pos) : i == 8 ? nextRailway(pos) : i == 9 ? nextUtility(pos) : 
-            i == 10 ? (pos - 3) % squares_ : pos;
+        position_ = ch == 1 ? go_ :
+                    ch == 2 ? jail_ :
+                    ch == 3 ? 11 :
+                    ch == 4 ? 24 :
+                    ch == 5 ? 39 :
+                    ch == 6 ? 5 :
+                    ch == 7 ? nextRailway() :
+                    ch == 8 ? nextRailway() :
+                    ch == 9 ? nextUtility() :
+                    ch == 10 ? (position_ - 3) % squares_ :
+                    position_;
     }
 
-    int nextRailway(int pos) const
+    int nextRailway() const
     {
-        return 5 <= pos && pos < 15 ? 15 :
-            15 <= pos && pos < 25 ? 25 :
-            25 <= pos && pos < 35 ? 35 : 5;
+        return 5 <= position_ && position_ < 15 ? 15 :
+               15 <= position_ && position_ < 25 ? 25 :
+               25 <= position_ && position_ < 35 ? 35 : 5;
     }
 
-    int nextUtility(int pos) const
+    int nextUtility() const
     {
-        return 12 <= pos && pos < 28 ? 28 : 12;
+        return 12 <= position_ && position_ < 28 ? 28 : 12;
     }
 };
 
 int main()
 {
-    int size = 4;
-    auto result = Monopoly(size).analyzeDiceRolls();
+    int dice = 4;
+
+    auto result = Monopoly(dice).analyzeDiceRolls();
     std::cout << result << std::endl;
 
     return 0;
