@@ -12,7 +12,7 @@
 
 using namespace reader;
 
-int minPathTwoDirectionMatrix(std::vector<std::vector<int>> matrix)
+int sumMinPathInTwoDirectionMatrix(std::vector<std::vector<int>> matrix)
 {
     const std::size_t rows = matrix.size();
     const std::size_t cols = matrix[0].size();
@@ -36,9 +36,10 @@ int minPathTwoDirectionMatrix(std::vector<std::vector<int>> matrix)
 int main()
 {
     std::string filename = "input/euler081input.txt";
+
     auto input = readNumbers(filename, ',');
-    auto result = minPathTwoDirectionMatrix(input);
+    auto result = sumMinPathInTwoDirectionMatrix(input);
     std::cout << result << std::endl;
-    
+
     return 0;
 }
