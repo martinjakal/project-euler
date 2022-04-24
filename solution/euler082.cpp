@@ -12,36 +12,38 @@
 
 using namespace reader;
 
-int minPathThreeDirectionMatrix(const std::vector<std::vector<int>>& matrix)
+int sumMinPathInThreeDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
     const std::size_t rows = matrix.size();
     const std::size_t cols = matrix[0].size();
-    std::vector<int> path;
 
-    for (std::size_t i = 0; i < rows; ++i) // store paths separately, starting in the last column
-        path.push_back(matrix[i].back());
+    // Store paths to each cell separately, starting in the last column.
+    std::vector<int> paths;
+    for (std::size_t i = 0; i < rows; ++i)
+        paths.push_back(matrix[i].back());
 
-    // Traverse the matrix from right to left and check if it is better to reach each cell from right, top or bottom.
+    // Traverse the matrix from right to left and decide the best direction to visit each cell (left, top or bottom).
     for (std::size_t j = cols - 1; j-- > 0; )
     {
-        path[0] += matrix[0][j];
+        paths[0] += matrix[0][j];
 
         for (std::size_t i = 1; i < rows; ++i)
-            path[i] = std::min(path[i], path[i - 1]) + matrix[i][j];
+            paths[i] = std::min(paths[i], paths[i - 1]) + matrix[i][j];
 
         for (std::size_t i = rows - 1; i-- > 0; )
-            path[i] = std::min(path[i], path[i + 1] + matrix[i][j]);
+            paths[i] = std::min(paths[i], paths[i + 1] + matrix[i][j]);
     }
 
-    return *std::min_element(path.begin(), path.end());
+    return *std::min_element(paths.begin(), paths.end());
 }
 
 int main()
 {
     std::string filename = "input/euler082input.txt";
+
     auto input = readNumbers(filename, ',');
-    auto result = minPathThreeDirectionMatrix(input);
+    auto result = sumMinPathInThreeDirectionMatrix(input);
     std::cout << result << std::endl;
-    
+
     return 0;
 }
