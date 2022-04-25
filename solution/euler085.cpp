@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 // Project Euler - Problem 85
@@ -5,38 +6,38 @@
 // Counting rectangles
 // Result: 2772
 
-// For grid with size n * m, there are n * (n + 1) * m * (m + 1) / 4 rectangles.
-int gridRectangleCount(int limit)
+int findGridAreaContainingRectangles(int targetRectangles)
 {
-    // Max size of n (when m = 1) is a solution of n^2 + n = 2 * limit.
-    const int maxSize = (-1 + sqrt(1 + 4 * 2 * limit)) / 2;
-    int minDiff = limit;
-    int bestWidth = 0;
-    int bestHeight = 0;
+    // Grid with sides n and m contains n * (n + 1) * m * (m + 1) / 4 rectangles.
+    // Maximum value of n is obtained for m = 1 as a solution of n * (n + 1) = 2 * target.
+    const int maxSize = static_cast<int>((-1 + std::sqrt(1 + 8 * targetRectangles)) / 2);
+
+    int minDiff = targetRectangles;
+    int bestArea = 0;
 
     for (int w = 1; w <= maxSize; ++w)
     {
-        for (int h = w; h <= maxSize - w + 1; ++h)
+        for (int h = 1; h <= w; ++h)
         {
             int rectangles = w * (w + 1) * h * (h + 1) / 4;
-            int diff = std::abs(limit - rectangles);
+            int diff = std::abs(targetRectangles - rectangles);
 
             if (diff < minDiff)
             {
                 minDiff = diff;
-                bestWidth = w;
-                bestHeight = h;
+                bestArea = w * h;
             }
         }
     }
 
-    return bestWidth * bestHeight;
+    return bestArea;
 }
 
 int main()
 {
-    int limit = 2000000;
-    auto result = gridRectangleCount(limit);
+    int rectangles = 2'000'000;
+
+    auto result = findGridAreaContainingRectangles(rectangles);
     std::cout << result << std::endl;
 
     return 0;
