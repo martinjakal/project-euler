@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <string>
 #include <vector>
 
 // Project Euler - Problem 84
@@ -14,51 +15,54 @@ public:
     Monopoly(int dice) : dice_(dice) {}
 
     // Simulate dice rolls and count square visits to obtain the three most visited squares.
-    int analyzeDiceRolls()
+    auto analyzeDiceRolls() -> std::string
     {
-        initBoard();
+        initGame();
+        std::vector<int> board(squares_);
 
-        for (int i = 0; i < maxIteration_; ++i)
+        for (int roll = 0; roll < maxRolls_; ++roll)
         {
             diceRoll();
-            ++board_[position_];
+            ++board[position_];
         }
 
         std::vector<std::pair<int, int>> visitedSquares;
-        for (int i = 0; i < board_.size(); ++i)
-            visitedSquares.emplace_back(i, board_[i]);
+        for (int i = 0; i < board.size(); ++i)
+            visitedSquares.emplace_back(i, board[i]);
 
         std::sort(visitedSquares.begin(), visitedSquares.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b)
             { return a.second > b.second; });
 
-        return visitedSquares[0].first * 10000 + visitedSquares[1].first * 100 + visitedSquares[2].first;
+        return str(visitedSquares[0].first) + str(visitedSquares[1].first) + str(visitedSquares[2].first);
     }
 
 private:
-    const int maxIteration_ = 10'000'000;
+    const int maxRolls_ = 10'000'000;
     const int squares_ = 40;
     const int dice_;
 
     std::random_device rd_;
-    std::vector<int> board_;
     std::vector<int> communityChest_;
     std::vector<int> chance_;
 
-    const int go_ = 0;
-    const int jail_ = 10;
-    const int goToJail_ = 30;
+    static constexpr int GO = 0;
+    static constexpr int JAIL = 10;
+    static constexpr int GO_TO_JAIL = 30;
 
-    int position_ = go_;
+    int position_ = GO;
     int doubles_ = 0;
 
-    void initBoard()
+    auto str(int value) const -> std::string
     {
-        board_.clear();
+        return (value < 10 ? "0" : "") + std::to_string(value);
+    }
+
+    void initGame()
+    {
         communityChest_.clear();
         chance_.clear();
 
-        board_.resize(squares_);
-        position_ = go_;
+        position_ = GO;
         doubles_ = 0;
 
         for (int i = 0; i < 16; ++i)
@@ -83,7 +87,7 @@ private:
 
         if (doubles_ == 3)
         {
-            position_ = jail_;
+            position_ = JAIL;
             doubles_ = 0;
         }
         else
@@ -96,8 +100,8 @@ private:
             if (position_ == 2 || position_ == 17 || position_ == 33)
                 applyCommunityChest();
 
-            if (position_ == goToJail_)
-                position_ = jail_;
+            if (position_ == GO_TO_JAIL)
+                position_ = JAIL;
         }
     }
 
@@ -106,8 +110,8 @@ private:
         int cc = communityChest_.front();
         std::rotate(communityChest_.begin(), communityChest_.begin() + 1, communityChest_.end());
 
-        position_ = cc == 1 ? go_ :
-                    cc == 2 ? jail_ :
+        position_ = cc == 1 ? GO :
+                    cc == 2 ? JAIL :
                     position_;
     }
 
@@ -116,8 +120,8 @@ private:
         int ch = chance_.front();
         std::rotate(chance_.begin(), chance_.begin() + 1, chance_.end());
 
-        position_ = ch == 1 ? go_ :
-                    ch == 2 ? jail_ :
+        position_ = ch == 1 ? GO :
+                    ch == 2 ? JAIL :
                     ch == 3 ? 11 :
                     ch == 4 ? 24 :
                     ch == 5 ? 39 :
@@ -125,7 +129,7 @@ private:
                     ch == 7 ? nextRailway() :
                     ch == 8 ? nextRailway() :
                     ch == 9 ? nextUtility() :
-                    ch == 10 ? (position_ - 3) % squares_ :
+                    ch == 10 ? (position_ - 3) % squares_ : // 3 steps back
                     position_;
     }
 
