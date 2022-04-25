@@ -42,15 +42,16 @@ public:
         return cards_.size() == MAX_CARDS;
     }
 
-    void drawCard(const Card& c)
+    void drawCard(const Card& card)
     {
-        cards_.push_back(c);
-
-        if (isHandFull())
+        if (!isHandFull())
+        {
+            cards_.push_back(card);
             std::sort(cards_.begin(), cards_.end());
+        }     
     }
 
-    // A hand with 5 cards is evaluated to obtain 11-digit score for easy comparison determined by poker rules.
+    // A sorted hand with 5 cards is evaluated to obtain 11-digit score for easy comparison determined by poker rules.
     // The first digit determines the total rank of the hand. Following digits store necessary information
     // to decide a winner if two hands tie (i.e. highest card).
     // For example, score 60805000000 means: 6 - full house, 08 - three, 05 - pair.
