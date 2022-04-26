@@ -15,17 +15,17 @@ int findGridAreaContainingRectangles(int targetRectangles)
     int minDiff = targetRectangles;
     int bestArea = 0;
 
-    for (int w = 1; w <= maxSize; ++w)
+    for (int n = 1; n <= maxSize; ++n)
     {
-        for (int h = 1; h <= w; ++h)
+        for (int m = 1; m <= n; ++m)
         {
-            int rectangles = w * (w + 1) * h * (h + 1) / 4;
+            int rectangles = n * (n + 1) * m * (m + 1) / 4;
             int diff = std::abs(targetRectangles - rectangles);
 
             if (diff < minDiff)
             {
                 minDiff = diff;
-                bestArea = w * h;
+                bestArea = n * m;
             }
         }
     }
