@@ -7,7 +7,7 @@
 // Convergents of e
 // Result: 272
 
-int sumDigitsInConvergentOfE(int maxIter)
+auto sumDigitsInConvergentOfE(int maxIter) -> std::size_t
 {
     BigInteger a = 1;
     BigInteger b = 1;
@@ -29,7 +29,7 @@ int sumDigitsInConvergentOfE(int maxIter)
         b = c;
     }
 
-    return static_cast<int>(b.digitSum());
+    return b.digitSum();
 }
 
 int main()

@@ -1,6 +1,7 @@
 #include "MathPackage.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cassert>
 #include <cmath>
 #include <numeric>
@@ -41,14 +42,14 @@ auto getProperDivisors(int number) -> std::vector<int>
 
 auto getDivisors(int number) -> std::vector<int>
 {
-    std::vector<int> divisors = getProperDivisors(number);
+    auto divisors = getProperDivisors(number);
     divisors.push_back(number);
     return divisors;
 }
 
 int sumProperDivisors(int number)
 {
-    std::vector<int> properDivisors = getProperDivisors(number);
+    auto properDivisors = getProperDivisors(number);
     return std::accumulate(properDivisors.begin(), properDivisors.end(), 0);
 }
 
@@ -68,20 +69,6 @@ bool isPrime(int number)
     for (int div = 3; div * div <= number; div += 2)
     {
         if (number % div == 0)
-            return false;
-    }
-
-    return true;
-}
-
-bool isPrime(int number, const std::vector<int>& primes)
-{
-    if (number < 2)
-        return false;
-
-    for (int i = 0; primes[i] * primes[i] <= number; ++i)
-    {
-        if (number % primes[i] == 0)
             return false;
     }
 
@@ -115,7 +102,7 @@ auto getPrimeFactors(int number) -> std::vector<int>
 
 int countDistinctFactors(int number)
 {
-    std::vector<int> factors = getPrimeFactors(number);
+    auto factors = getPrimeFactors(number);
     assert(std::is_sorted(factors.begin(), factors.end()) && "Unsorted factors");
     return static_cast<int>(std::unique(factors.begin(), factors.end()) - factors.begin());
 }
@@ -252,7 +239,7 @@ bool isPalindrome(int number, int base)
 
 bool isPermutation(int number1, int number2)
 {
-    std::vector<int> digits(10, 0);
+    std::array<int, 10> digits{};
 
     while (number1 > 0)
     {
@@ -275,7 +262,7 @@ bool isPandigital(int number, int maxDigit)
     if (countDigits(number) != maxDigit)
         return false;
 
-    std::vector<int> digits(10, 0);
+    std::array<int, 10> digits{};
 
     while (number > 0)
     {

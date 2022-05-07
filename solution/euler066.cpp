@@ -16,7 +16,7 @@ int analyzeCoeffsOfDiophantineEquations(int limit)
 
     for (int D = 2; D <= limit; ++D)
     {
-        const BigInteger root(static_cast<int>(std::sqrt(D)));
+        const BigInteger root = static_cast<int>(std::sqrt(D));
         if (root * root == D)
             continue;
 

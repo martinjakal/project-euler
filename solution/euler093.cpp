@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <iostream>
 #include <vector>
 
@@ -19,7 +20,7 @@ double op(double a, double b, char sign)
            sign == '/' && b != 0 ? a / b : 0;
 }
 
-int arithmeticExpressionsMaxLength()
+int findArithmeticExpressionWithLongestSequence()
 {
     const std::vector<int> digits = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     const std::vector<char> signs = { '+', '-', '*', '/' };
@@ -36,7 +37,7 @@ int arithmeticExpressionsMaxLength()
         {
             for (const auto& s : signCombinations) // sign selection
             {
-                std::vector<double> results(5);
+                std::array<double, 5> results; // bracket combinations
 
                 results[0] = op(op(op(d[0], d[1], s[0]), d[2], s[1]), d[3], s[2]); // ((1)2)3
                 results[1] = op(d[0], op(d[1], op(d[2], d[3], s[2]), s[1]), s[0]); // 3(2(1))
@@ -51,15 +52,14 @@ int arithmeticExpressionsMaxLength()
                         resultStore.push_back(resInt);
                 }
             }
-        } 
-        while (std::next_permutation(d.begin(), d.end()));
+        } while (std::next_permutation(d.begin(), d.end()));
 
         std::sort(resultStore.begin(), resultStore.end());
-        if (resultStore.empty() || resultStore[0] != 1)
+        if (resultStore.empty() || resultStore[0] != 1) // sequence must start with 1
             continue;
 
         int length = 1;
-        for (int i = 1; i < resultStore.size(); ++i) // find longest chain from 1 to n
+        for (std::size_t i = 1; i < resultStore.size(); ++i) // find longest sequence from 1 to n
         {
             if (resultStore[i] == resultStore[i - 1] + 1)
                 ++length;
@@ -79,7 +79,7 @@ int arithmeticExpressionsMaxLength()
 
 int main()
 {
-    auto result = arithmeticExpressionsMaxLength();
+    auto result = findArithmeticExpressionWithLongestSequence();
     std::cout << result << std::endl;
 
     return 0;

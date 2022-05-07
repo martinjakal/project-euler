@@ -1,10 +1,14 @@
 #include <iostream>
 #include <vector>
 
+#include <helper/MathPackage.hpp>
+
 // Project Euler - Problem 92
 // https://projecteuler.net/problem=92
 // Square digit chains
 // Result: 8581146
+
+using namespace math;
 
 int sumSquareDigits(int number)
 {
@@ -19,39 +23,45 @@ int sumSquareDigits(int number)
 
     return sum;
 }
- 
-int squareDigitChainsEndingAt89(int limit)
-{
-    const int maxSumSquareDigits = static_cast<int>(ceil(log10(limit - 1)) * pow(9, 2));
-    std::vector<int> chainStore(maxSumSquareDigits + 1);
-    int endAt89Count = 0;
 
-    // Calculate all chain results for numbers below max possible sum of square digits 
-    // which is obtained as number of digits * (9 ^ 2).
-    for (int i = 1; i <= maxSumSquareDigits; ++i)
+int countSquareDigitChainsEndingAt89(int limit)
+{
+    const int maxSumSquareDigits = countDigits(limit - 1) * 9 * 9;
+    std::vector<int> chains(maxSumSquareDigits + 1);
+    chains[1] = 1;
+
+    // Calculate chains for all possible sums of square digits.
+    for (int i = 2; i <= maxSumSquareDigits; ++i)
     {
         int number = i;
 
-        while (number != 1 && number != 89)
+        while (chains[i] != 1 && chains[i] != 89)
+        {
             number = sumSquareDigits(number);
 
-        chainStore[i] = number;
+            // Chain for smaller terms is precalculated (also covers chain ending at 1).
+            if (number < i)
+                chains[i] = chains[number];
+            else if (number == 89)
+                chains[i] = number;
+        }
     }
 
-    // Use cached results instead of calculating all chains.
+    int chainsAt89 = 0;
     for (int i = 1; i < limit; ++i)
     {
-        if (chainStore[sumSquareDigits(i)] == 89)
-            ++endAt89Count;
+        if (chains[sumSquareDigits(i)] == 89)
+            ++chainsAt89;
     }
 
-    return endAt89Count;
+    return chainsAt89;
 }
 
 int main()
 {
-    int limit = 10000000;
-    auto result = squareDigitChainsEndingAt89(limit);
+    int limit = 10'000'000;
+
+    auto result = countSquareDigitChainsEndingAt89(limit);
     std::cout << result << std::endl;
 
     return 0;

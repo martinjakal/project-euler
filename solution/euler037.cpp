@@ -12,7 +12,6 @@ using namespace math;
 int sumTruncatablePrimes()
 {
     const int maxTruncatableCnt = 11;
-
     int truncatableCnt = 0;
     int sumTruncatable = 0;
 

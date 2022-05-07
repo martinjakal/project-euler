@@ -31,9 +31,10 @@ int countDigitFactorialChainsWithLength(int limit, int length)
         factorials.push_back(factorial(i));
 
     // Precompute all sums of digit factorials up to the range obtained as number of digits * 9!.
-    std::vector<int> factDigitSums(countDigits(limit - 1) * factorials.back() + 1, 0);
+    const int factLimit = countDigits(limit - 1) * factorials.back();
+    std::vector<int> factDigitSums(factLimit + 1, 0);
 
-    for (int i = 0; i < static_cast<int>(factDigitSums.size()); ++i)
+    for (int i = 0; i <= factLimit; ++i)
         factDigitSums[i] = sumDigitFactorial(i, factorials);
 
     std::vector<int> chainLengths(limit + 1, 0);

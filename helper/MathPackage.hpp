@@ -7,7 +7,7 @@ namespace math
 namespace impl
 {
 template <typename T>
-void generateCombinations(const T& data, int length, int start, T& result, std::vector<T>& carrier, bool repeat)
+void generateCombinations(const T& data, int length, std::size_t startIdx, T& result, std::vector<T>& carrier, bool repeat)
 {
     if (length == 0)
     {
@@ -15,8 +15,8 @@ void generateCombinations(const T& data, int length, int start, T& result, std::
         return;
     }
 
-    int first = repeat ? 0 : start;
-    for (int i = first; i < data.size(); ++i)
+    std::size_t first = repeat ? 0 : startIdx;
+    for (auto i = first; i < data.size(); ++i)
     {
         result[result.size() - length] = data[i];
         generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
@@ -46,7 +46,6 @@ bool isAbundant(int number);
 
 // Primes
 bool isPrime(int number);
-bool isPrime(int number, const std::vector<int>& primes);
 auto getPrimeFactors(int number) -> std::vector<int>;
 int countDistinctFactors(int number);
 auto sieveOfEratosthenes(int limit) -> std::vector<int>;

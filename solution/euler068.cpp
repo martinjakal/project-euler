@@ -21,7 +21,7 @@ auto findArrangementInMagic5GonRing() -> std::string
     {
         do
         {
-            int sumGroup = outer[0] + inner[0] + inner[1];
+            const int sumGroup = outer[0] + inner[0] + inner[1];
             bool validArrangement = true;
 
             for (int i = 1; i < length; ++i)
@@ -46,7 +46,7 @@ auto findArrangementInMagic5GonRing() -> std::string
                 maxSolution = solution;
             }
         } while (std::next_permutation(inner.begin(), inner.end()));
-    } while (std::next_permutation(outer.begin() + 1, outer.end())); // keep the lowest outer number in place
+    } while (std::next_permutation(outer.begin() + 1, outer.end())); // keep the lowest outer number locked in place
 
     return maxSolution;
 }

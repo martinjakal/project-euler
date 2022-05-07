@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <numeric>
 #include <regex>
@@ -13,8 +14,8 @@
 
 using namespace reader;
 
-const std::vector<std::pair<std::string, std::string>> replacements = { 
-    { "DCCCC", "CM" }, { "LXXXX", "XC" }, { "VIIII", "IX" }, 
+const std::vector<std::pair<std::string, std::string>> replacements = {
+    { "DCCCC", "CM" }, { "LXXXX", "XC" }, { "VIIII", "IX" },
     { "CCCC", "CD" }, { "XXXX", "XL" }, { "IIII", "IV" } };
 
 int countLetters(const std::vector<std::string>& words)
@@ -31,7 +32,7 @@ auto minimizeRomanNumber(std::string romanNumber) -> std::string
     return romanNumber;
 }
 
-int charsSavedInRomanNumbers(const std::vector<std::string>& original)
+int countSavedCharsInMinimizedRomanNumbers(const std::vector<std::string>& original)
 {
     std::vector<std::string> minimized;
     std::transform(original.begin(), original.end(), std::back_inserter(minimized), minimizeRomanNumber);
@@ -41,9 +42,10 @@ int charsSavedInRomanNumbers(const std::vector<std::string>& original)
 int main()
 {
     std::string filename = "input/euler089input.txt";
-    auto input = readStrings(filename);
-    auto result = charsSavedInRomanNumbers(input);
+
+    auto input = readStrings(filename, '\0');
+    auto result = countSavedCharsInMinimizedRomanNumbers(input.front());
     std::cout << result << std::endl;
-    
+
     return 0;
 }

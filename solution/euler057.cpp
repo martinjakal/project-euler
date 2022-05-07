@@ -18,7 +18,6 @@ int countFractionsWithMoreDigitsInNumerator(int maxIter)
     {
         BigInteger n(numerator);
         BigInteger d(denominator);
-
         numerator += d * 2;
         denominator += n;
 

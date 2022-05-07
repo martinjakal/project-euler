@@ -15,7 +15,7 @@ bool canObtainAllPairs(const std::vector<std::string>& pairs, const std::string&
 {
     for (const auto& p : pairs)
     {
-        if ((dice1.find(p[0]) == std::string::npos || dice2.find(p[1]) == std::string::npos) && 
+        if ((dice1.find(p[0]) == std::string::npos || dice2.find(p[1]) == std::string::npos) &&
             (dice1.find(p[1]) == std::string::npos || dice2.find(p[0]) == std::string::npos))
             return false;
     }
@@ -23,15 +23,14 @@ bool canObtainAllPairs(const std::vector<std::string>& pairs, const std::string&
     return true;
 }
 
-int countDiceArrangements()
+int countDiceArrangementsAllowingAllSquares()
 {
-    const std::string numbers = "0123456789";
-    const std::vector<std::string> pairs = { "01", "04", "06", "16", "18", "25", "36", "46" }; // some digits switched, 9 replaced with 6
+    const std::string digits = "0123456789";
+    const std::vector<std::string> pairs = { "01", "04", "06", "16", "18", "25", "36", "46" }; // some digits are switched, 9 is replaced with 6
 
-    auto dices = generateCombinations(numbers, 6, false);
-    int arrangements = 0;
+    auto dices = generateCombinations(digits, 6, false);
 
-    // Dices are generated with all numbers, but 9 is then replaced with 6 for easier checking.
+    // The dices are generated with all digits, but 9 is replaced with 6 for easier checking.
     for (auto& dice : dices)
     {
         auto pos = dice.find("9");
@@ -39,9 +38,11 @@ int countDiceArrangements()
             dice.replace(pos, 1, "6");
     }
 
-    for (int i = 0; i < dices.size() - 1; ++i)
+    int arrangements = 0;
+
+    for (std::size_t i = 0; i < dices.size() - 1; ++i)
     {
-        for (int j = i + 1; j < dices.size(); ++j)
+        for (std::size_t j = i + 1; j < dices.size(); ++j)
         {
             if (canObtainAllPairs(pairs, dices[i], dices[j]))
                 ++arrangements;
@@ -53,7 +54,7 @@ int countDiceArrangements()
 
 int main()
 {
-    auto result = countDiceArrangements();
+    auto result = countDiceArrangementsAllowingAllSquares();
     std::cout << result << std::endl;
 
     return 0;

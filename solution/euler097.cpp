@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include <helper/BigInteger.hpp>
@@ -7,9 +8,8 @@
 // Large non-Mersenne prime
 // Result: 8739992577
 
-// Algorithm for fast computation of large positive integer powers of a number. 
-// It is already used in BigInteger, but this implementation includes modulo.
-auto expBySquaringWithMod(BigInteger base, int exponent, const BigInteger& mod) -> BigInteger
+// Algorithm for fast computation of large positive integer powers of a number with modulo.
+auto expBySquaringWithMod(BigInteger base, BigInteger exponent, const BigInteger& mod) -> BigInteger
 {
     BigInteger result = 1;
 
@@ -18,32 +18,33 @@ auto expBySquaringWithMod(BigInteger base, int exponent, const BigInteger& mod) 
         if (exponent % 2 == 0)
         {
             base *= base;
-            exponent /= 2;
             base %= mod;
+            exponent /= 2;
         }
         else
         {
             result *= base;
-            --exponent;
             result %= mod;
+            --exponent;
         }
     }
 
     return result;
 }
 
-auto nonMersennePrimeWithMod(int exponent, int multiplier, int lastDigits) -> BigInteger
+auto findLastDigitsOfNonMersennePrime(int exponent, int multiplier, int lastDigits) -> BigInteger
 {
-    const BigInteger mod = static_cast<long long>(pow(10, lastDigits));
+    const BigInteger mod = static_cast<long long>(std::pow(10, lastDigits));
     return (expBySquaringWithMod(2, exponent, mod) * multiplier + 1) % mod;
 }
 
 int main()
 {
-    int exponent = 7830457;
-    int multiplier = 28433;
+    int exponent = 7'830'457;
+    int multiplier = 28'433;
     int lastDigits = 10;
-    auto result = nonMersennePrimeWithMod(exponent, multiplier, lastDigits);
+
+    auto result = findLastDigitsOfNonMersennePrime(exponent, multiplier, lastDigits);
     std::cout << result << std::endl;
 
     return 0;

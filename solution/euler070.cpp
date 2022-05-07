@@ -18,7 +18,6 @@ using namespace math;
 int findNumberWithMinTotientPermutation(int limit)
 {
     const auto primes = sieveOfEratosthenes(limit / 2);
-
     double minRatio = std::numeric_limits<double>::max();
     int bestNumber = 0;
 

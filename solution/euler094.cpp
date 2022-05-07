@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 // Project Euler - Problem 94
@@ -5,16 +6,13 @@
 // Almost equilateral triangles
 // Result: 518408346
 
-// In triangle with integral sides a-a-b, we get 4 * a^2 = b^2 + 4 * h^2.
-// Because b = a +/- 1, we get Pell's equation x^2 - 3 * y^2 = 1,
-// where x = (3a +/- 1) / 2 and y = h.
-auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsigned long long
+// The expression 4 * a^2 = b^2 + 4 * h^2 is true for triangle with integral sides (a, a, b).
+// Because b = a +/- 1, it can be written as Pell's equation x^2 - 3 * y^2 = 1 where x = (3a +/- 1) / 2 and y = h.
+unsigned long long sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit)
 {
     unsigned long long sumPerimeters = 0;
-    unsigned long long x = 1;
-    unsigned long long y = 0;
 
-    for (unsigned long long perimeter = 0; ;)
+    for (unsigned long long perimeter = 0, x = 1, y = 0; ;)
     {
         unsigned long long xNext = 2 * x + 3 * y;
         unsigned long long yNext = x + 2 * y;
@@ -40,8 +38,8 @@ auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsi
         if (perimeter > limit)
             break;
 
-        double half = 1.0 * perimeter / 2;
-        double area = (half - a) * sqrt(half * (half - b)); // Heron's formula
+        double half = static_cast<double>(perimeter) / 2;
+        double area = (half - a) * std::sqrt(half * (half - b)); // Heron's formula
 
         if (area != 0 && area == static_cast<unsigned long long>(area))
             sumPerimeters += perimeter;
@@ -53,6 +51,7 @@ auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsi
 int main()
 {
     unsigned long long limit = 1'000'000'000;
+
     auto result = sumPerimetersOfAlmostEquilateralTriangles(limit);
     std::cout << result << std::endl;
 

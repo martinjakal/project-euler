@@ -26,6 +26,7 @@ int countRightTrianglesInSquareGrid(int limit)
 int main()
 {
     int limit = 50;
+
     auto result = countRightTrianglesInSquareGrid(limit);
     std::cout << result << std::endl;
 

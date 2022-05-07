@@ -34,16 +34,16 @@ auto squareRootWithPrecision(int number, int digits) -> BigInteger
     return b / static_cast<int>(std::pow(10, extraDigits));
 }
 
-int sumDigitsOfSquareRoots(int limit, int digits)
+auto sumDigitsOfSquareRoots(int limit, int digits) -> std::size_t
 {
-    int sumDigits = 0;
+    std::size_t sumDigits = 0;
 
     for (int number = 1; number <= limit; ++number)
     {
         const int root = static_cast<int>(std::sqrt(number));
 
         if (root * root != number)
-            sumDigits += static_cast<int>(squareRootWithPrecision(number, digits).digitSum());
+            sumDigits += squareRootWithPrecision(number, digits).digitSum();
     }
 
     return sumDigits;

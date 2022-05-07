@@ -26,20 +26,20 @@ int countIntRightTriangles(int perimeter)
 int findPerimeterWithMaxIntRightTriangles(int limit)
 {
     int maxTriangles = 0;
-    int perimeter = 0;
+    int bestPerimeter = 0;
 
-    for (int p = 3; p <= limit; ++p)
+    for (int perimeter = 3; perimeter <= limit; ++perimeter)
     {
-        int triangles = countIntRightTriangles(p);
+        int triangles = countIntRightTriangles(perimeter);
 
         if (triangles > maxTriangles)
         {
             maxTriangles = triangles;
-            perimeter = p;
+            bestPerimeter = perimeter;
         }
     }
 
-    return perimeter;
+    return bestPerimeter;
 }
 
 int main()

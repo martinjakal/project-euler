@@ -7,9 +7,9 @@
 // Powerful digit sum
 // Result: 972
 
-int calcMaxDigitSumOfPowers(int limit)
+auto calcMaxDigitSumOfPowers(int limit) -> std::size_t
 {
-    int maxDigitSum = 0;
+    std::size_t maxDigitSum = 0;
 
     for (int a = 1; a < limit; ++a)
     {
@@ -20,10 +20,8 @@ int calcMaxDigitSumOfPowers(int limit)
         {
             number *= base;
 
-            int digitSum = static_cast<int>(number.digitSum());
-
-            if (digitSum > maxDigitSum)
-                maxDigitSum = digitSum;
+            if (number.digitSum() > maxDigitSum)
+                maxDigitSum = number.digitSum();
         }
     }
 

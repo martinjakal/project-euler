@@ -7,14 +7,14 @@
 // Factorial digit sum
 // Result: 648
 
-int sumFactorialDigits(int limit)
+auto sumFactorialDigits(int limit) -> std::size_t
 {
     BigInteger factorial = 1;
 
     for (int i = 2; i <= limit; ++i)
         factorial *= BigInteger(i);
 
-    return static_cast<int>(factorial.digitSum());
+    return factorial.digitSum();
 }
 
 int main()

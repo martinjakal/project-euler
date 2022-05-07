@@ -7,7 +7,7 @@
 
 int sumEvenFibonacci(int limit)
 {
-    int sum = 0;
+    int sumFib = 0;
     int f0 = 0;
     int f1 = 1;
     int f2 = 1;
@@ -15,14 +15,14 @@ int sumEvenFibonacci(int limit)
     while (f2 < limit)
     {
         if (f2 % 2 == 0)
-            sum += f2;
+            sumFib += f2;
 
         f0 = f1;
         f1 = f2;
         f2 = f0 + f1;
     }
 
-    return sum;
+    return sumFib;
 }
 
 int main()

@@ -11,13 +11,12 @@ using namespace math;
 
 int findTriangleNumWithDivisors(int divisors)
 {
-    for (int i = 1; ; ++i)
-    {
-        int triangle = i * (i + 1) / 2;
+    int triangle = 0;
 
-        if (getDivisors(triangle).size() > divisors)
-            return triangle;
-    }
+    for (int i = 1; getDivisors(triangle).size() <= divisors; ++i)
+        triangle = i * (i + 1) / 2;
+
+    return triangle;
 }
 
 int main()

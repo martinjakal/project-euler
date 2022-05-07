@@ -6,9 +6,9 @@
 // Amicable chains
 // Result: 14316
 
-int maxAmicableChain(int limit)
+int findMinNumberInLongestAmicableChain(int limit)
 {
-    // Precalculate the sums of proper divisors.
+    // Use sieve to precalculate the sums of proper divisors.
     std::vector<int> sumProperDivisors(limit + 1, 1);
     for (int i = 2; i <= (limit + 1) / 2; ++i)
     {
@@ -27,8 +27,9 @@ int maxAmicableChain(int limit)
 
         for (int number = sumProperDivisors[i]; number != i; number = sumProperDivisors[number])
         {
-            // If the current number is already in the chain, there is a loop which never goes back to the starting number.
-            if (number > limit || std::find(chain.begin(), chain.end(), number) != chain.end())
+            // The solution must be the smallest number in the chain. Also if the number is already in the chain,
+            // there is a loop which never goes back to the starting number. 
+            if (number > limit || number < i || std::find(chain.begin(), chain.end(), number) != chain.end())
             {
                 validChain = false;
                 break;
@@ -44,15 +45,16 @@ int maxAmicableChain(int limit)
             minNumber = i;
         }
     }
-    
+
     return minNumber;
 }
 
 int main()
 {
-    int limit = 1000000;
-    auto result = maxAmicableChain(limit); 
+    int limit = 1'000'000;
+
+    auto result = findMinNumberInLongestAmicableChain(limit); 
     std::cout << result << std::endl;
-    
+
     return 0;
 }

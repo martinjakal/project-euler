@@ -8,18 +8,18 @@
 int sumDiagonalsOfNumberSpiral(int length)
 {
     int number = 1;
-    int sum = 1;
+    int sumDiag = 1;
 
     for (int step = 2; step < length; step += 2)
     {
         for (int i = 0; i < 4; ++i)
         {
             number += step;
-            sum += number;
+            sumDiag += number;
         }
     }
 
-    return sum;
+    return sumDiag;
 }
 
 int main()

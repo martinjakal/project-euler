@@ -52,9 +52,9 @@ private:
         }
     }
 
-    void findNextPrimeForFamily(int idx = 0)
+    void findNextPrimeForFamily(std::size_t idx = 0)
     {
-        for (int i = idx; i < static_cast<int>(primes_.size()) && familySum_ + primes_[i] < minFamilySum_; ++i)
+        for (std::size_t i = idx; i < primes_.size() && familySum_ + primes_[i] < minFamilySum_; ++i)
         {
             if (!makesFamily(primes_[i]))
                 continue;

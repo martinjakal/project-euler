@@ -11,7 +11,6 @@ int findGridAreaContainingRectangles(int targetRectangles)
     // Grid with sides n and m contains n * (n + 1) * m * (m + 1) / 4 rectangles.
     // Maximum value of n is obtained for m = 1 as a solution of n * (n + 1) = 2 * target.
     const int maxSize = static_cast<int>((-1 + std::sqrt(1 + 8 * targetRectangles)) / 2);
-
     int minDiff = targetRectangles;
     int bestArea = 0;
 

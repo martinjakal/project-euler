@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -12,30 +13,31 @@ using namespace reader;
 
 int findLineWithMaxExponential(const std::vector<std::vector<int>>& numbers)
 {
-    double maxExp = 0;
-    int lineNumber = 0;
+    double maxExponential = 0;
+    int lineIdx = 0;
 
-    // If a ^ b = c ^ d, then b * log(a) = d * log(c).
+    // If a^b = c^d, then b * log(a) = d * log(c).
     for (int i = 0; i < static_cast<int>(numbers.size()); ++i)
     {
-        double exp = numbers[i][1] * log(numbers[i][0]);
+        double exponential = numbers[i][1] * std::log(numbers[i][0]);
 
-        if (exp > maxExp)
+        if (exponential > maxExponential)
         {
-            maxExp = exp;
-            lineNumber = i + 1;
+            maxExponential = exponential;
+            lineIdx = i + 1;
         }
     }
 
-    return lineNumber;
+    return lineIdx;
 }
 
 int main()
 {
     std::string filename = "input/euler099input.txt";
+
     auto input = readNumbers(filename, ',');
     auto result = findLineWithMaxExponential(input);
-    std::cout << result << std::endl; 
+    std::cout << result << std::endl;
 
     return 0;
 }

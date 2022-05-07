@@ -7,9 +7,9 @@
 // Power digit sum
 // Result: 1366
 
-int sumPowerDigits(int base, int power)
+auto sumPowerDigits(int base, int power) -> std::size_t
 {
-    return static_cast<int>((BigInteger(base) ^ BigInteger(power)).digitSum());
+    return (BigInteger(base) ^ BigInteger(power)).digitSum();
 }
 
 int main()
