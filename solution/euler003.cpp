@@ -14,9 +14,7 @@ unsigned long long findMaxPrimeFactor(unsigned long long number)
         while (number % factor == 0)
         {
             number /= factor;
-
-            if (factor > maxFactor)
-                maxFactor = factor;
+            maxFactor = factor;
         }
     }
 
