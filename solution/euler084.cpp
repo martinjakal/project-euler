@@ -91,7 +91,7 @@ private:
             doubles_ = 0;
             return;
         }
-        
+
         position_ = (position_ + roll1 + roll2) % squares_;
 
         if (position_ == 7 || position_ == 22 || position_ == 36)
