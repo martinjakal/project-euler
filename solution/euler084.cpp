@@ -89,20 +89,19 @@ private:
         {
             position_ = JAIL;
             doubles_ = 0;
+            return;
         }
-        else
-        {
-            position_ = (position_ + roll1 + roll2) % squares_;
+        
+        position_ = (position_ + roll1 + roll2) % squares_;
 
-            if (position_ == 7 || position_ == 22 || position_ == 36)
-                applyChance();
+        if (position_ == 7 || position_ == 22 || position_ == 36)
+            applyChance();
 
-            if (position_ == 2 || position_ == 17 || position_ == 33)
-                applyCommunityChest();
+        if (position_ == 2 || position_ == 17 || position_ == 33)
+            applyCommunityChest();
 
-            if (position_ == GO_TO_JAIL)
-                position_ = JAIL;
-        }
+        if (position_ == GO_TO_JAIL)
+            position_ = JAIL;
     }
 
     void applyCommunityChest()
