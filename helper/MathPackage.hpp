@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <vector>
 
 namespace math
@@ -7,21 +8,8 @@ namespace math
 namespace impl
 {
 template <typename T>
-void generateCombinations(const T& data, int length, std::size_t startIdx, T& result, std::vector<T>& carrier, bool repeat)
-{
-    if (length == 0)
-    {
-        carrier.push_back(result);
-        return;
-    }
+void generateCombinations(const T& data, std::size_t length, std::size_t startIdx, T& result, std::vector<T>& carrier, bool repeat);
 
-    std::size_t first = repeat ? 0 : startIdx;
-    for (auto i = first; i < data.size(); ++i)
-    {
-        result[result.size() - length] = data[i];
-        generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
-    }
-}
 } // namespace impl
 
 // General
@@ -30,13 +18,7 @@ int factorial(int number);
 
 // Combinatorics
 template <typename T>
-auto generateCombinations(const T& data, int length, bool repeat) -> std::vector<T>
-{
-    std::vector<T> combinations;
-    T result(length, ' ');
-    impl::generateCombinations(data, length, 0, result, combinations, repeat);
-    return combinations;
-}
+auto generateCombinations(const T& data, int length, bool repeat) -> std::vector<T>;
 
 // Divisibility
 auto getProperDivisors(int number) -> std::vector<int>;
@@ -64,4 +46,36 @@ bool isPandigital(int number, int maxDigit = 9);
 // Helper
 int concat(int number1, int number2);
 
+} // namespace math
+
+namespace math
+{
+namespace impl
+{
+template <typename T>
+void generateCombinations(const T& data, std::size_t length, std::size_t startIdx, T& result, std::vector<T>& carrier, bool repeat)
+{
+    if (length == 0)
+    {
+        carrier.push_back(result);
+        return;
+    }
+
+    std::size_t first = repeat ? 0 : startIdx;
+    for (auto i = first; i < data.size(); ++i)
+    {
+        result[result.size() - length] = data[i];
+        generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
+    }
+}
+} // namespace impl
+
+template <typename T>
+auto generateCombinations(const T& data, int length, bool repeat) -> std::vector<T>
+{
+    std::vector<T> combinations;
+    T result(length, ' ');
+    impl::generateCombinations(data, length, 0, result, combinations, repeat);
+    return combinations;
+}
 } // namespace math
