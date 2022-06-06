@@ -68,6 +68,7 @@ void generateCombinations(const T& data, std::size_t length, std::size_t startId
         generateCombinations(data, length - 1, i + 1, result, carrier, repeat);
     }
 }
+
 } // namespace impl
 
 template <typename T>
@@ -78,4 +79,5 @@ auto generateCombinations(const T& data, int length, bool repeat) -> std::vector
     impl::generateCombinations(data, length, 0, result, combinations, repeat);
     return combinations;
 }
+
 } // namespace math
