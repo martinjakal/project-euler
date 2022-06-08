@@ -1,5 +1,6 @@
 #include <iostream>
 #include <numeric>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -26,6 +27,28 @@ int countSubstrings(const std::string& text, const std::string& substring)
     return count;
 }
 
+auto decryptMessageWithKey(const std::vector<int>& message, const std::string& key) -> std::optional<std::string>
+{
+    std::string decodedMessage;
+
+    for (std::size_t i = 0; i < message.size(); ++i)
+    {
+        char c = message[i] ^ key[i % 3];
+
+        if (c < 32 || c == 127) // must be a valid ASCII character
+            break;
+
+        decodedMessage.push_back(c);
+    }
+
+    // Discard the message if the lengths are not matching (meaning the key produced some invalid characters).
+    // Verify the correct result by assuming that a valid English text would contain the word "the" multiple times.
+    if (decodedMessage.size() == message.size() && countSubstrings(decodedMessage, " the ") >= 3)
+        return decodedMessage;
+
+    return {};
+}
+
 int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
 {
     const std::vector<int> message = numbers.back();
@@ -37,24 +60,13 @@ int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
             for (char z = 'a'; z <= 'z'; ++z)
             {
                 const std::string key = { x, y, z };
-                std::string decodedMessage;
+                const auto decodedMessage = decryptMessageWithKey(message, key);
 
-                for (std::size_t i = 0; i < message.size(); ++i)
+                if (decodedMessage.has_value())
                 {
-                    char c = message[i] ^ key[i % 3];
-
-                    if (c < 32 || c == 127) // must be a valid ASCII character
-                        break;
-
-                    decodedMessage.push_back(c);
-                }
-
-                // Discard the message if the lengths are not matching (meaning the key produced some invalid characters).
-                // Verify the correct result by assuming that a valid English text would contain the word "the" multiple times.
-                if (decodedMessage.size() == message.size() && countSubstrings(decodedMessage, " the ") >= 3)
-                {
-                    //std::cout << decodedMessage << std::endl;
-                    return std::accumulate(decodedMessage.begin(), decodedMessage.end(), 0);
+                    const auto& originalMessage = decodedMessage.value();
+                    //std::cout << originalMessage << std::endl;
+                    return std::accumulate(originalMessage.begin(), originalMessage.end(), 0);
                 }
             }
         }
