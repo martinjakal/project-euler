@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <unordered_map>
 
 inline const std::unordered_map<int, int> numberLetters = { { 1, 3 }, { 2, 3 }, { 3, 5 }, { 4, 4 }, { 5, 4 }, { 6, 3 },
@@ -11,3 +12,5 @@ inline const std::unordered_map<char, int> alphabet = { { 'A', 1 }, { 'B', 2 }, 
         { 'F', 6 }, { 'G', 7 }, { 'H', 8 }, { 'I', 9 }, { 'J', 10 }, { 'K', 11 }, { 'L', 12 }, { 'M', 13 },
         { 'N', 14 }, { 'O', 15 }, { 'P', 16 }, { 'Q', 17 }, { 'R', 18 }, { 'S', 19 }, { 'T', 20 },
         { 'U', 21 }, { 'V', 22 }, { 'W', 23 }, { 'X', 24 }, { 'Y', 25 }, { 'Z', 26 } };
+
+inline const std::array<int, 8> coins = { 1, 2, 5, 10, 20, 50, 100, 200 };

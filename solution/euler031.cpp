@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
+#include <helper/Constants.hpp>
+
 // Project Euler - Problem 31
 // https://projecteuler.net/problem=31
 // Coin sums
 // Result: 73682
-
-const std::vector<int> coins = { 1, 2, 5, 10, 20, 50, 100, 200 };
 
 int countCoinSums(int amount)
 {
