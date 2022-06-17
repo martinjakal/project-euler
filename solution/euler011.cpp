@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,8 +25,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
             for (int k = 1; k < length; ++k)
                 product *= grid[i][j + k];
 
-            if (product > maxProduct)
-                maxProduct = product;
+            maxProduct = std::max(maxProduct, product);
         }
     }
 
@@ -38,8 +38,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
             for (int k = 1; k < length; ++k)
                 product *= grid[i + k][j];
 
-            if (product > maxProduct)
-                maxProduct = product;
+            maxProduct = std::max(maxProduct, product);
         }
     }
 
@@ -52,8 +51,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
             for (int k = 1; k < length; ++k)
                 product *= grid[i + k][j + k];
 
-            if (product > maxProduct)
-                maxProduct = product;
+            maxProduct = std::max(maxProduct, product);
         }
     }
 
@@ -66,8 +64,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
             for (int k = 1; k < length; ++k)
                 product *= grid[i - k][j + k];
 
-            if (product > maxProduct)
-                maxProduct = product;
+            maxProduct = std::max(maxProduct, product);
         }
     }
 
