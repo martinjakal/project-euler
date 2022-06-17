@@ -11,16 +11,10 @@ using namespace math;
 
 int findNthPrime(int position)
 {
-    int primeCnt = 0;
     int number = 0;
 
-    while (primeCnt < position)
-    {
-        ++number;
-
-        if (isPrime(number))
-            ++primeCnt;
-    }
+    for (int primeCnt = 0; primeCnt < position;)
+        primeCnt += isPrime(++number);
 
     return number;
 }
