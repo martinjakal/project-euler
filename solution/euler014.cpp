@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -9,7 +8,9 @@
 
 int findLongestCollatzSequence(int limit)
 {
-    std::vector<int> stepsCache(limit + 1, 1);
+    std::vector<int> seqLengthCache(limit + 1, 1);
+    int maxSeqLength = 0;
+    int bestNumber = 0;
 
     for (int i = 1; i < limit; ++i)
     {
@@ -24,16 +25,21 @@ int findLongestCollatzSequence(int limit)
 
             if (number < i) // sequence length for smaller terms is precalculated
             {
-                stepsCache[i] += stepsCache[static_cast<int>(number)];
+                seqLengthCache[i] += seqLengthCache[static_cast<int>(number)];
                 break;
             }
             else
-                ++stepsCache[i];
+                ++seqLengthCache[i];
+        }
+
+        if (seqLengthCache[i] > maxSeqLength)
+        {
+            maxSeqLength = seqLengthCache[i];
+            bestNumber = i;
         }
     }
 
-    auto longestSequence = std::max_element(stepsCache.begin(), stepsCache.end());
-    return static_cast<int>(std::distance(stepsCache.begin(), longestSequence));
+    return bestNumber;
 }
 
 int main()
