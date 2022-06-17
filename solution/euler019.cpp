@@ -61,14 +61,12 @@ private:
     }
 };
 
-int countSundaysFirstBetweenDates(const Date& start, const Date& end, int dayOfWeek)
+int countSundaysFirstBetweenDates(const Date& startDate, const Date& endDate, int dayOfWeek)
 {
     int sundays = 0;
-    Date curDate = start;
 
-    while (curDate != end)
+    for (Date curDate = startDate; curDate != endDate; curDate.addDay())
     {
-        curDate.addDay();
         ++dayOfWeek;
 
         if (curDate.getDay() == 1 && dayOfWeek % 7 == 0)
@@ -80,11 +78,11 @@ int countSundaysFirstBetweenDates(const Date& start, const Date& end, int dayOfW
 
 int main()
 {
-    Date start(1, 1, 1901);
-    Date end(31, 12, 2000);
+    Date startDate(1, 1, 1901);
+    Date endDate(31, 12, 2000);
     int startDayOfWeek = 2; // 01-01-1901 was Tuesday
 
-    auto result = countSundaysFirstBetweenDates(start, end, startDayOfWeek);
+    auto result = countSundaysFirstBetweenDates(startDate, endDate, startDayOfWeek);
     std::cout << result << std::endl;
 
     return 0;
