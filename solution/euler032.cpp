@@ -1,4 +1,5 @@
 #include <iostream>
+#include <numeric>
 #include <vector>
 
 #include <helper/MathPackage.hpp>
@@ -15,7 +16,6 @@ using namespace math;
 int sumPandigitalProducts()
 {
     std::vector<int> products;
-    int sumProducts = 0;
 
     for (int i = 1; i < 100; ++i)
     {
@@ -29,14 +29,11 @@ int sumPandigitalProducts()
             int concatenated = concat(concat(i, j), product);
 
             if (isPandigital(concatenated) && std::find(products.begin(), products.end(), product) == products.end())
-            {
                 products.push_back(product);
-                sumProducts += product;
-            }
         }
     }
 
-    return sumProducts;
+    return std::accumulate(products.begin(), products.end(), 0);
 }
 
 int main()
