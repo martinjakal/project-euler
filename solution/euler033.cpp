@@ -8,21 +8,16 @@
 
 auto cancelFraction(int numerator, int denominator) -> std::optional<double>
 {
-    int n1 = numerator / 10;
-    int n0 = numerator % 10;
-    int d1 = denominator / 10;
-    int d0 = denominator % 10;
+    const int n1 = numerator / 10;
+    const int n0 = numerator % 10;
+    const int d1 = denominator / 10;
+    const int d0 = denominator % 10;
 
-    if (n1 == d1)
-        return 1.0 * n0 / d0;
-    else if (n1 == d0)
-        return 1.0 * n0 / d1;
-    else if (n0 == d1 && d0 != 0) // check zero division
-        return 1.0 * n1 / d0;
-    else if (n0 == d0 && d0 != 0) // check trivial case
-        return 1.0 * n1 / d1;
-
-    return {};
+    return n1 == d1 ? 1.0 * n0 / d0 :
+           n1 == d0 ? 1.0 * n0 / d1 :
+           n0 == d1 && d0 != 0 ? 1.0 * n1 / d0 : // check zero division
+           n0 == d0 && d0 != 0 ? 1.0 * n1 / d1 : // check trivial case
+           std::optional<double>{};
 }
 
 int calcDenominatorOfCancelledFractions()
