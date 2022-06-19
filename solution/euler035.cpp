@@ -14,10 +14,7 @@ int countCircularPrimes(int limit)
     int circularCnt = 0;
 
     for (int i = 2; i < limit; ++i)
-    {
-        if (isCircularPrime(i))
-            ++circularCnt;
-    }
+        circularCnt += isCircularPrime(i);
 
     return circularCnt;
 }
