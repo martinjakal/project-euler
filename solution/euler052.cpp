@@ -16,17 +16,17 @@ bool canPermuteMultiples(int number)
         if (!isPermutation(number, i * number))
             return false;
     }
-
     return true;
 }
 
 int findMinNumberWithPermutedMultiples()
 {
-    for (int number = 1; ; ++number)
-    {
-        if (canPermuteMultiples(number))
-            return number;
-    }
+    int number = 1;
+
+    while (!canPermuteMultiples(number))
+        ++number;
+
+    return number;
 }
 
 int main()
