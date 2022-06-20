@@ -11,18 +11,11 @@ using namespace math;
 
 bool canSplitAsPrimeAndTwoSquares(int number)
 {
-    int i = 0;
-    int twoSquares = 0;
-
-    while (twoSquares < number)
+    for (int i = 0, twoSquares = 0; twoSquares < number; ++i, twoSquares = 2 * i * i)
     {
-        ++i;
-        twoSquares = 2 * i * i;
-
         if (isPrime(number - twoSquares))
             return true;
     }
-
     return false;
 }
 

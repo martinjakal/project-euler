@@ -16,7 +16,7 @@ int calcMinPentagonalDifference()
 
     for (int i = 1; ; ++i)
     {
-        int number = i * (3 * i - 1) / 2;
+        const int number = i * (3 * i - 1) / 2;
 
         for (auto p : pentagonal)
         {
