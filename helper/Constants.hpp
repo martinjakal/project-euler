@@ -13,4 +13,4 @@ inline const std::unordered_map<char, int> alphabet = { { 'A', 1 }, { 'B', 2 }, 
         { 'N', 14 }, { 'O', 15 }, { 'P', 16 }, { 'Q', 17 }, { 'R', 18 }, { 'S', 19 }, { 'T', 20 },
         { 'U', 21 }, { 'V', 22 }, { 'W', 23 }, { 'X', 24 }, { 'Y', 25 }, { 'Z', 26 } };
 
-inline const std::array<int, 8> coins = { 1, 2, 5, 10, 20, 50, 100, 200 };
+inline constexpr std::array<int, 8> coins = { 1, 2, 5, 10, 20, 50, 100, 200 };
