@@ -75,8 +75,7 @@ int calcMinMemberOfEightPrimeFamily()
             if (digit == 0 && countDigits(replaced) != countDigits(number))
                 continue;
 
-            if (isPrime(replaced))
-                ++familySize;
+            familySize += isPrime(replaced);
         }
 
         if (familySize == 8)
