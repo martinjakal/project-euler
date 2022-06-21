@@ -37,6 +37,8 @@ struct Card
 class Hand
 {
 public:
+    static constexpr std::size_t MAX_CARDS = 5;
+
     bool isHandFull() const
     {
         return cards_.size() == MAX_CARDS;
@@ -48,7 +50,7 @@ public:
         {
             cards_.push_back(card);
             std::sort(cards_.begin(), cards_.end());
-        }     
+        }
     }
 
     // A sorted hand with 5 cards is evaluated to obtain 11-digit score for easy comparison determined by poker rules.
@@ -110,9 +112,7 @@ public:
         return "0" + str(cards_[4]) + str(cards_[3]) + str(cards_[2]) + str(cards_[1]) + str(cards_[0]);
     }
 
-private:
-    static constexpr int MAX_CARDS = 5;
-
+private: 
     std::vector<Card> cards_;
 
     auto str(const Card& card) const -> std::string
@@ -120,40 +120,27 @@ private:
         return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_);
     }
 
-    bool isPair(int i) const
-    {
-        return cards_[i].rank_ == cards_[i + 1].rank_;
-    }
-
-    bool isThree(int i) const
-    {
-        return isPair(i) && isPair(i + 1);
-    }
-
-    bool isFour(int i) const
-    {
-        return isPair(i) && isThree(i + 1);
-    }
+    bool isPair(int i) const { return cards_[i].rank_ == cards_[i + 1].rank_; }
+    bool isThree(int i) const { return isPair(i) && isPair(i + 1); }
+    bool isFour(int i) const { return isPair(i) && isThree(i + 1); }
 
     bool consecutive() const
     {
-        for (int i = 0; i < MAX_CARDS - 1; ++i)
+        for (std::size_t i = 0; i < MAX_CARDS - 1; ++i)
         {
             if (cards_[i].rank_ != cards_[i + 1].rank_ - 1)
                 return false;
         }
-
         return true;
     }
 
     bool sameSuit() const
     {
-        for (int i = 0; i < MAX_CARDS - 1; ++i)
+        for (std::size_t i = 0; i < MAX_CARDS - 1; ++i)
         {
             if (cards_[i].suit_ != cards_[i + 1].suit_)
                 return false;
         }
-
         return true;
     } 
 };
@@ -167,14 +154,13 @@ int countPokerWins(const std::vector<std::vector<std::string>>& games)
         Hand player1;
         Hand player2;
 
-        for (std::size_t i = 0; i < game.size(); ++i)
+        for (std::size_t i1 = 0, i2 = Hand::MAX_CARDS; i1 < Hand::MAX_CARDS; ++i1, ++i2)
         {
-            Card card(game[i][0], game[i][1]);
-            !player1.isHandFull() ? player1.drawCard(card) : player2.drawCard(card);
+            player1.drawCard(Card(game[i1][0], game[i1][1]));
+            player2.drawCard(Card(game[i2][0], game[i2][1]));
         }
 
-        if (player1.calcScore() > player2.calcScore())
-            ++firstPlayerWins;
+        firstPlayerWins += player1.calcScore() > player2.calcScore();
     }
 
     return firstPlayerWins;
