@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 
 #include <helper/BigInteger.hpp>
@@ -19,9 +20,7 @@ auto calcMaxDigitSumOfPowers(int limit) -> std::size_t
         for (int b = 1; b < limit; ++b)
         {
             number *= base;
-
-            if (number.digitSum() > maxDigitSum)
-                maxDigitSum = number.digitSum();
+            maxDigitSum = std::max(maxDigitSum, number.digitSum());
         }
     }
 
