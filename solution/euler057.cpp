@@ -20,9 +20,7 @@ int countFractionsWithMoreDigitsInNumerator(int maxIter)
         BigInteger d(denominator);
         numerator += d * 2;
         denominator += n;
-
-        if (numerator.digitCnt() > denominator.digitCnt())
-            ++moreDigitsNumCnt;
+        moreDigitsNumCnt += numerator.digitCnt() > denominator.digitCnt();
     }
 
     return moreDigitsNumCnt;
