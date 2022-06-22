@@ -20,14 +20,20 @@ class PrimePairFamilySolver
 public:
     PrimePairFamilySolver(int familySize) : familySize_(familySize)
     {
-        initPrimePairs();
-        findNextPrimeForFamily();
+        while (minFamilySum_ == std::numeric_limits<int>::max() && primeLimit_ <= LIMIT)
+        {
+            primeLimit_ += STEP;
+            initPrimePairs();
+            findNextPrimeForFamily();
+        }
     }
 
     int getMinFamilySum() const { return minFamilySum_; }
 
 private:
+    static constexpr int STEP = 5'000; // reasonable guess for range of primes which could make family size of 4 or 5
     static constexpr int LIMIT = 20'000; // enough to avoid overflow during integer concatenation
+    int primeLimit_ = 0;
     std::vector<int> primes_;
     std::unordered_map<int, std::unordered_set<int>> pairsCache_;
 
@@ -38,7 +44,7 @@ private:
 
     void initPrimePairs()
     {
-        primes_ = sieveOfEratosthenes(LIMIT);
+        primes_ = sieveOfEratosthenes(primeLimit_);
 
         for (std::size_t i = 0; i < primes_.size(); ++i)
         {
