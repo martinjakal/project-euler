@@ -14,7 +14,6 @@ int findDiagLengthWithPrimesBelowRatio(double ratio)
     double primeRatio = 1;
     int primeCnt = 0;
     int diagCnt = 1;
-
     int number = 1;
     int step = 0;
 
@@ -26,9 +25,7 @@ int findDiagLengthWithPrimesBelowRatio(double ratio)
         for (int i = 0; i < 4; ++i)
         {
             number += step;
-
-            if (isPrime(number))
-                ++primeCnt;
+            primeCnt += isPrime(number);
         }
 
         primeRatio = static_cast<double>(primeCnt) / diagCnt;
