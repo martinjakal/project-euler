@@ -76,8 +76,8 @@ bool findNextLink(const std::vector<std::vector<int>>& figurate, int idx, std::v
 
 int sumCyclicalFigurateNumbers()
 {
-    const int minRange = 1000;
-    const int maxRange = 10'000;
+    constexpr int minRange = 1000;
+    constexpr int maxRange = 10'000;
     auto figurateNumbers = generateFigurateNumbersInRange(minRange, maxRange);
 
     std::sort(figurateNumbers.begin(), figurateNumbers.end());
