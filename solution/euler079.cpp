@@ -16,7 +16,7 @@ using namespace reader;
 // The algorithm assumes all logins contain non-repeating digits.
 auto crackPassword(const std::vector<std::string>& logins) -> std::string
 {
-    const int length = 3;
+    constexpr int length = 3;
     std::vector<std::set<char>> characters(length);
 
     for (const auto& login : logins)
