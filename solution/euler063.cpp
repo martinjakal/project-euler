@@ -16,13 +16,9 @@ int countNthPowerNumbers()
     for (int digit = 1; digit < 10; ++digit)
     {
         const double diff = 0.1 * digit;
-        double number = diff;
 
-        while (number >= 0.1)
-        {
+        for (double number = diff; number >= 0.1; number *= diff)
             ++nthPowerCnt;
-            number *= diff;
-        }
     }
 
     return nthPowerCnt;
