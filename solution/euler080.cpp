@@ -13,7 +13,7 @@
 auto squareRootWithPrecision(int number, int digits) -> BigInteger
 {
     // Extra digits ensure that the desired digits do not change with more iterations.
-    const int extraDigits = 2;
+    constexpr int extraDigits = 2;
     BigInteger a = 5 * number;
     BigInteger b = 5;
 
