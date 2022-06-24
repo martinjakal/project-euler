@@ -16,7 +16,11 @@ int countDigits(int number)
 
 int factorial(int number)
 {
-    return number == 0 ? 1 : number * factorial(number - 1);
+    assert(0 <= number && number <= 12 && "Invalid factorial"); // prevent overflow
+    int fac = 1;
+    for (int i = 2; i <= number; ++i)
+        fac *= i;
+    return fac;
 }
 
 auto getProperDivisors(int number) -> std::vector<int>
