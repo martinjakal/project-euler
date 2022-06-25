@@ -21,18 +21,10 @@ unsigned long long sumPerimetersOfAlmostEquilateralTriangles(unsigned long long 
 
         unsigned long long a = 2 * x;
         unsigned long long b;
+        int one = (a + 1) % 3 == 0 ? 1 : -1; // decide if 2x + 1 = 3a or 2x - 1 = 3a
 
-        if ((a + 1) % 3 == 0) // decide if 2x + 1 = 3a or 2x - 1 = 3a
-        {
-            a = (a + 1) / 3;
-            b = a + 1;
-        }
-        else
-        {
-            a = (a - 1) / 3;
-            b = a - 1;
-        }
-
+        a = (a + one) / 3;
+        b = a + one;
         perimeter = a + a + b;
 
         if (perimeter > limit)
