@@ -19,7 +19,6 @@ bool canObtainAllPairs(const std::vector<std::string>& pairs, const std::string&
             (dice1.find(p[1]) == std::string::npos || dice2.find(p[0]) == std::string::npos))
             return false;
     }
-
     return true;
 }
 
@@ -44,8 +43,7 @@ int countDiceArrangementsAllowingAllSquares()
     {
         for (std::size_t j = i + 1; j < dices.size(); ++j)
         {
-            if (canObtainAllPairs(pairs, dices[i], dices[j]))
-                ++arrangements;
+            arrangements += canObtainAllPairs(pairs, dices[i], dices[j]);
         }
     }
 
