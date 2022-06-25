@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include <helper/Constants.hpp>
 #include <helper/FileReader.hpp>
 
 // Project Euler - Problem 89
@@ -14,10 +15,6 @@
 
 using namespace reader;
 
-const std::vector<std::pair<std::string, std::string>> replacements = {
-    { "DCCCC", "CM" }, { "LXXXX", "XC" }, { "VIIII", "IX" },
-    { "CCCC", "CD" }, { "XXXX", "XL" }, { "IIII", "IV" } };
-
 int countLetters(const std::vector<std::string>& words)
 {
     return std::accumulate(words.begin(), words.end(), 0, 
@@ -26,7 +23,7 @@ int countLetters(const std::vector<std::string>& words)
 
 auto minimizeRomanNumber(std::string romanNumber) -> std::string
 {
-    for (const auto& repl : replacements)
+    for (const auto& repl : romanNumbersReplacements)
         romanNumber = std::regex_replace(romanNumber, std::regex(repl.first), repl.second);
 
     return romanNumber;
