@@ -6,9 +6,9 @@
 // Result: 137846528820
 
 // Both directions occur n times in square grid with size n, that is (2n n) combinations.
-unsigned long long countLatticePathsInSquareGrid(int gridSize)
+auto countLatticePathsInSquareGrid(int gridSize) -> unsigned long long
 {
-    unsigned long long paths = 1;
+    auto paths = 1ull;
 
     for (int i = 1; i <= gridSize; ++i)
     {

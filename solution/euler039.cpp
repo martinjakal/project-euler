@@ -30,7 +30,7 @@ int findPerimeterWithMaxIntRightTriangles(int limit)
 
     for (int perimeter = 3; perimeter <= limit; ++perimeter)
     {
-        int triangles = countIntRightTriangles(perimeter);
+        auto triangles = countIntRightTriangles(perimeter);
 
         if (triangles > maxTriangles)
         {

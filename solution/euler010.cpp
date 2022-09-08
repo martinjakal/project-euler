@@ -10,7 +10,7 @@
 
 using namespace math;
 
-unsigned long long sumPrimes(int limit)
+auto sumPrimes(int limit) -> unsigned long long
 {
     const auto primes = sieveOfEratosthenes(limit);
     return std::accumulate(primes.begin(), primes.end(), 0ull);

@@ -21,7 +21,7 @@ int sumAmicableNumbers(int limit)
     for (int a = 1; a < limit; ++a)
     {
         // Find second number and its divisors.
-        int b = divisorsCache.find(a)->second;
+        auto b = divisorsCache.find(a)->second;
         auto posB = divisorsCache.find(b);
 
         // Check if numbers are amicable and distinct.

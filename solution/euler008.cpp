@@ -13,15 +13,15 @@
 
 using namespace reader;
 
-unsigned long long findMaxProductInSeries(const std::vector<std::string>& numbers, int length)
+auto findMaxProductInSeries(const std::vector<std::string>& numbers, int length) -> unsigned long long
 {
-    const std::string concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string());
+    const auto concatNumber = std::accumulate(numbers.begin(), numbers.end(), std::string());
 
     std::vector<int> digits;
     for (auto digit : concatNumber)
         digits.push_back(digit - '0');
 
-    unsigned long long maxProduct = 0;
+    auto maxProduct = 0ull;
 
     for (auto it = digits.begin(); it != digits.end() - length; ++it)
     {

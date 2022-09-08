@@ -5,11 +5,11 @@
 // Largest prime factor
 // Result: 6857
 
-unsigned long long findMaxPrimeFactor(unsigned long long number)
+auto findMaxPrimeFactor(unsigned long long number) -> unsigned long long
 {
-    unsigned long long maxFactor = 0;
+    auto maxFactor = 0ull;
 
-    for (unsigned long long factor = 2; number > 1; ++factor)
+    for (auto factor = 2ull; number > 1; ++factor)
     {
         while (number % factor == 0)
         {
@@ -23,7 +23,7 @@ unsigned long long findMaxPrimeFactor(unsigned long long number)
 
 int main()
 {
-    unsigned long long number = 600'851'475'143;
+    auto number = 600'851'475'143ull;
 
     auto result = findMaxPrimeFactor(number);
     std::cout << result << std::endl;

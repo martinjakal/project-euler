@@ -37,7 +37,7 @@ int sumDoubleBasePalindromes(int limit)
 
         for (int number = 1; ; ++number)
         {
-            int palindrome = makePalindrome(number, 10, isOdd);
+            auto palindrome = makePalindrome(number, 10, isOdd);
 
             if (palindrome >= limit)
                 break;

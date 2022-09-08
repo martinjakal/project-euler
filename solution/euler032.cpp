@@ -26,9 +26,9 @@ int sumPandigitalProducts()
             if (product > 9999)
                 break;
 
-            int concatenated = concat(concat(i, j), product);
+            auto concatenatedExpression = concat(concat(i, j), product);
 
-            if (isPandigital(concatenated) && std::find(products.begin(), products.end(), product) == products.end())
+            if (isPandigital(concatenatedExpression) && std::find(products.begin(), products.end(), product) == products.end())
                 products.push_back(product);
         }
     }
