@@ -11,7 +11,7 @@
 
 using namespace math;
 
-unsigned long long concatSecondPrimePermutationTriple(int digits)
+auto concatSecondPrimePermutationTriple(int digits) -> unsigned long long
 {
     const int rank = static_cast<int>(std::pow(10, digits));
     bool foundFirst = false;
