@@ -30,7 +30,7 @@ public:
         for (int i = 0; i < board.size(); ++i)
             visitedSquares.emplace_back(i, board[i]);
 
-        std::sort(visitedSquares.begin(), visitedSquares.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b)
+        std::sort(visitedSquares.begin(), visitedSquares.end(), [&](const std::pair<int, int>& a, const std::pair<int, int>& b)
             { return a.second > b.second; });
 
         return str(visitedSquares[0].first) + str(visitedSquares[1].first) + str(visitedSquares[2].first);
@@ -106,7 +106,7 @@ private:
 
     void applyCommunityChest()
     {
-        int cc = communityChest_.front();
+        auto cc = communityChest_.front();
         std::rotate(communityChest_.begin(), communityChest_.begin() + 1, communityChest_.end());
 
         position_ = cc == 1 ? GO :
@@ -116,7 +116,7 @@ private:
 
     void applyChance()
     {
-        int ch = chance_.front();
+        auto ch = chance_.front();
         std::rotate(chance_.begin(), chance_.begin() + 1, chance_.end());
 
         position_ = ch == 1 ? GO :

@@ -12,15 +12,13 @@
 
 using namespace reader;
 
-using Grid = SudokuBacktracker::Grid;
-
-int sumTopLeftCornerOfSolvedSudokus(const std::vector<Grid>& sudokus)
+int sumTopLeftCornerOfSolvedSudokus(const std::vector<SudokuBacktracker::Grid>& sudokus)
 {
     int sumTopLeftCorner = 0;
 
     for (const auto& sudoku : sudokus)
     {
-        Grid solved = SudokuBacktracker(sudoku)();
+        const auto solved = SudokuBacktracker(sudoku)();
         sumTopLeftCorner += solved[0][0] * 100 + solved[0][1] * 10 + solved[0][2];
     }
 

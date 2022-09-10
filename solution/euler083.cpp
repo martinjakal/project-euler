@@ -33,10 +33,10 @@ struct Node
 int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
     const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 1, 0 }, { 0, -1 },  { 0, 1 } };
-    const std::size_t rows = matrix.size();
-    const std::size_t cols = matrix[0].size();
+    const auto rowCnt = matrix.size();
+    const auto colCnt = matrix[0].size();
 
-    std::vector<std::vector<int>> distances(rows, std::vector<int>(cols, std::numeric_limits<int>::max()));
+    std::vector<std::vector<int>> distances(rowCnt, std::vector<int>(colCnt, std::numeric_limits<int>::max()));
     distances[0][0] = matrix[0][0];
 
     std::set<Node> remainingNodes;
@@ -44,18 +44,18 @@ int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 
     while (!remainingNodes.empty())
     {
-        Node cur = *remainingNodes.begin();
+        auto curNode = *remainingNodes.begin();
         remainingNodes.erase(*remainingNodes.begin());
 
         for (const auto& dir : directions)
         {
-            int nextI = cur.i_ + dir.first;
-            int nextJ = cur.j_ + dir.second;
+            int nextI = curNode.i_ + dir.first;
+            int nextJ = curNode.j_ + dir.second;
 
-            if (nextI < 0 || nextI >= rows || nextJ < 0 || nextJ >= cols)
+            if (nextI < 0 || nextI >= rowCnt || nextJ < 0 || nextJ >= colCnt)
                 continue;
 
-            int newDistance = distances[cur.i_][cur.j_] + matrix[nextI][nextJ];
+            int newDistance = distances[curNode.i_][curNode.j_] + matrix[nextI][nextJ];
             int& curDistance = distances[nextI][nextJ];
 
             if (newDistance < curDistance)

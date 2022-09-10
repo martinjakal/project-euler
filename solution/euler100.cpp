@@ -7,15 +7,15 @@
 
 // The coefficients are obtained as a solution of diophantine equation 2x^2 - 2x - y^2 + y = 0
 // where x = blue and y = total.
-unsigned long long calcBlueDiscsArrangement(unsigned long long limit)
+auto calcBlueDiscsArrangement(unsigned long long limit) -> unsigned long long
 {
-    unsigned long long blue = 1;
-    unsigned long long total = 1;
+    auto blue = 1ull;
+    auto total = 1ull;
 
     while (total <= limit)
     {
-        unsigned long long blueNext = 3 * blue + 2 * total - 2;
-        unsigned long long totalNext = 4 * blue + 3 * total - 3;
+        auto blueNext = 3 * blue + 2 * total - 2;
+        auto totalNext = 4 * blue + 3 * total - 3;
         blue = blueNext;
         total = totalNext;
     }
@@ -25,7 +25,7 @@ unsigned long long calcBlueDiscsArrangement(unsigned long long limit)
 
 int main()
 {
-    unsigned long long limit = 1'000'000'000'000;
+    auto limit = 1'000'000'000'000ull;
 
     auto result = calcBlueDiscsArrangement(limit);
     std::cout << result << std::endl;

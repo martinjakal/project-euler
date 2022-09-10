@@ -14,23 +14,23 @@ using namespace reader;
 
 int sumMinPathInThreeDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
-    const std::size_t rows = matrix.size();
-    const std::size_t cols = matrix[0].size();
+    const auto rowCnt = matrix.size();
+    const auto colCnt = matrix[0].size();
 
     // Store paths to each cell separately, starting in the last column.
     std::vector<int> paths;
-    for (std::size_t i = 0; i < rows; ++i)
+    for (std::size_t i = 0; i < rowCnt; ++i)
         paths.push_back(matrix[i].back());
 
     // Traverse the matrix from right to left and decide the best direction to visit each cell (left, top or bottom).
-    for (std::size_t j = cols - 1; j-- > 0; )
+    for (std::size_t j = colCnt - 1; j-- > 0; )
     {
         paths[0] += matrix[0][j];
 
-        for (std::size_t i = 1; i < rows; ++i)
+        for (std::size_t i = 1; i < rowCnt; ++i)
             paths[i] = std::min(paths[i], paths[i - 1]) + matrix[i][j];
 
-        for (std::size_t i = rows - 1; i-- > 0; )
+        for (std::size_t i = rowCnt - 1; i-- > 0; )
             paths[i] = std::min(paths[i], paths[i + 1] + matrix[i][j]);
     }
 

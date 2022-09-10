@@ -8,23 +8,21 @@
 
 // The expression 4 * a^2 = b^2 + 4 * h^2 is true for triangle with integral sides (a, a, b).
 // Because b = a +/- 1, it can be written as Pell's equation x^2 - 3 * y^2 = 1 where x = (3a +/- 1) / 2 and y = h.
-unsigned long long sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit)
+auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsigned long long
 {
-    unsigned long long sumPerimeters = 0;
+    auto sumPerimeters = 0ull;
 
-    for (unsigned long long perimeter = 0, x = 1, y = 0; ;)
+    for (auto perimeter = 0ull, x = 1ull, y = 0ull; ;)
     {
-        unsigned long long xNext = 2 * x + 3 * y;
-        unsigned long long yNext = x + 2 * y;
+        auto xNext = 2 * x + 3 * y;
+        auto yNext = x + 2 * y;
         x = xNext;
         y = yNext;
 
-        unsigned long long a = 2 * x;
-        unsigned long long b;
+        auto a = 2 * x;
         int one = (a + 1) % 3 == 0 ? 1 : -1; // decide if 2x + 1 = 3a or 2x - 1 = 3a
-
         a = (a + one) / 3;
-        b = a + one;
+        auto b = a + one;
         perimeter = a + a + b;
 
         if (perimeter > limit)
@@ -42,7 +40,7 @@ unsigned long long sumPerimetersOfAlmostEquilateralTriangles(unsigned long long 
 
 int main()
 {
-    unsigned long long limit = 1'000'000'000;
+    auto limit = 1'000'000'000ull;
 
     auto result = sumPerimetersOfAlmostEquilateralTriangles(limit);
     std::cout << result << std::endl;
