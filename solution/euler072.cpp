@@ -12,7 +12,7 @@
 using namespace math;
 
 // Euler's totient function counts relatively prime integers to a number.
-unsigned long long countReducedProperFractions(int limit)
+auto countReducedProperFractions(int limit) -> unsigned long long
 {
     const auto primes = sieveOfEratosthenes(limit);
 

@@ -34,7 +34,7 @@ int countPerimetersWithSingleRightTriangle(int limit)
     }
 
     return static_cast<int>(std::count_if(solutions.begin(), solutions.end(),
-        [](const std::pair<int, int>& s) { return s.second == 1; }));
+        [&](const std::pair<int, int>& s) { return s.second == 1; }));
 }
 
 int main()

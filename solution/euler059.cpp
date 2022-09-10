@@ -49,10 +49,8 @@ auto decryptMessageWithKey(const std::vector<int>& message, const std::string& k
     return {};
 }
 
-int sumCharsInDecryptedMessage(const std::vector<std::vector<int>>& numbers)
+int sumCharsInDecryptedMessage(const std::vector<int>& message)
 {
-    const std::vector<int> message = numbers.back();
-
     for (char x = 'a'; x <= 'z'; ++x)
     {
         for (char y = 'a'; y <= 'z'; ++y)
@@ -80,7 +78,7 @@ int main()
     std::string filename = "input/euler059input.txt";
 
     auto input = readNumbers(filename, ',');
-    auto result = sumCharsInDecryptedMessage(input);
+    auto result = sumCharsInDecryptedMessage(input.front());
     std::cout << result << std::endl;
 
     return 0;

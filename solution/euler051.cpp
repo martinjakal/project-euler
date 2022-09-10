@@ -69,7 +69,7 @@ int calcMinMemberOfEightPrimeFamily()
 
         for (int digit = 0; digit < 10; ++digit)
         {
-            int replaced = replaceDigits(number, digitToRepl.value(), digit);
+            auto replaced = replaceDigits(number, digitToRepl.value(), digit);
 
             // Check for leading zeros when replacing with 0.
             if (digit == 0 && countDigits(replaced) != countDigits(number))
