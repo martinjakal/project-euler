@@ -1,4 +1,4 @@
-#include "SudokuBacktracker.hpp"
+#include <helper/SudokuBacktracker.hpp>
 
 auto SudokuBacktracker::operator()() -> Grid
 {
@@ -46,8 +46,7 @@ bool SudokuBacktracker::findEmptyPlace(int& row, int& col) const
 
 bool SudokuBacktracker::noConflicts(int row, int col, int number) const
 {
-    return !usedInRow(row, number) && !usedInCol(col, number)
-        && !usedInBox(row - row % 3, col - col % 3, number);
+    return !usedInRow(row, number) && !usedInCol(col, number) && !usedInBox(row - row % 3, col - col % 3, number);
 }
 
 bool SudokuBacktracker::usedInRow(int row, int number) const

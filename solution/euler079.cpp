@@ -32,14 +32,14 @@ auto crackPassword(const std::vector<std::string>& logins) -> std::string
 
     // First character has a unique value found only in the first column.
     std::set_difference(characters[0].begin(), characters[0].end(), characters[1].begin(), characters[1].end(),
-        std::inserter(candidates, candidates.end()));
+                        std::inserter(candidates, candidates.end()));
     curChar = *candidates.begin();
     password += curChar;
     candidates.clear();
 
     // Last character has a unique value found only in the last column.
-    std::set_difference(characters[length - 1].begin(), characters[length - 1].end(),
-        characters[length - 2].begin(), characters[length - 2].end(), std::inserter(candidates, candidates.end()));
+    std::set_difference(characters[length - 1].begin(), characters[length - 1].end(), characters[length - 2].begin(),
+                        characters[length - 2].end(), std::inserter(candidates, candidates.end()));
     lastChar = *candidates.begin();
     candidates.clear();
 

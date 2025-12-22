@@ -35,7 +35,7 @@ auto decryptMessageWithKey(const std::vector<int>& message, const std::string& k
     {
         char c = message[i] ^ key[i % 3];
 
-        if (c < 32 || c == 127) // must be a valid ASCII character
+        if (c < 32 || c == 127)  // must be a valid ASCII character
             break;
 
         decodedMessage.push_back(c);
@@ -57,13 +57,13 @@ int sumCharsInDecryptedMessage(const std::vector<int>& message)
         {
             for (char z = 'a'; z <= 'z'; ++z)
             {
-                const std::string key = { x, y, z };
+                const std::string key = {x, y, z};
                 const auto decodedMessage = decryptMessageWithKey(message, key);
 
                 if (decodedMessage.has_value())
                 {
                     const auto& originalMessage = decodedMessage.value();
-                    //std::cout << originalMessage << std::endl;
+                    // std::cout << originalMessage << std::endl;
                     return std::accumulate(originalMessage.begin(), originalMessage.end(), 0);
                 }
             }

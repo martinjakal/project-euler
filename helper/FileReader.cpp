@@ -1,4 +1,4 @@
-#include "FileReader.hpp"
+#include <helper/FileReader.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -42,7 +42,7 @@ auto readStrings(const std::string& filename, char separator) -> std::vector<std
 
     for (auto& line : out)
     {
-        for (auto& item : line) // remove quotation marks
+        for (auto& item : line)  // remove quotation marks
             item.erase(std::remove(item.begin(), item.end(), '"'), item.end());
     }
 
@@ -77,7 +77,7 @@ auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vec
         std::string row;
         std::vector<std::vector<int>> grid(9, std::vector<int>(9));
 
-        std::getline(file, row); // discard header
+        std::getline(file, row);  // discard header
 
         for (int i = 0; i < 9; ++i)
         {
@@ -93,4 +93,4 @@ auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vec
     return out;
 }
 
-} // namespace reader
+}  // namespace reader

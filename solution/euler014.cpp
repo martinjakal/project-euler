@@ -23,7 +23,7 @@ int findLongestCollatzSequence(int limit)
             else
                 number = 3 * number + 1;
 
-            if (number < i) // sequence length for smaller terms is precalculated
+            if (number < i)  // sequence length for smaller terms is precalculated
             {
                 seqLengthCache[i] += seqLengthCache[static_cast<int>(number)];
                 break;

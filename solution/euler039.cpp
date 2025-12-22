@@ -3,7 +3,7 @@
 // Project Euler - Problem 39
 // https://projecteuler.net/problem=39
 // Integer right triangles
-// Result: 840  
+// Result: 840
 
 int countIntRightTriangles(int perimeter)
 {
@@ -47,7 +47,7 @@ int main()
     int limit = 1000;
 
     auto result = findPerimeterWithMaxIntRightTriangles(limit);
-    std::cout << result << std::endl; 
+    std::cout << result << std::endl;
 
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "MathPackage.hpp"
+#include <helper/MathPackage.hpp>
 
 #include <algorithm>
 #include <array>
@@ -7,7 +7,7 @@
 #include <numeric>
 #include <sstream>
 
-namespace math 
+namespace math
 {
 int countDigits(int number)
 {
@@ -16,7 +16,7 @@ int countDigits(int number)
 
 int factorial(int number)
 {
-    assert(0 <= number && number <= 12 && "Invalid factorial"); // prevent overflow
+    assert(0 <= number && number <= 12 && "Invalid factorial");  // prevent overflow
     int fac = 1;
     for (int i = 2; i <= number; ++i)
         fac *= i;
@@ -28,7 +28,7 @@ auto getProperDivisors(int number) -> std::vector<int>
     if (number == 1)
         return {};
 
-    std::vector<int> properDivisors = { 1 };
+    std::vector<int> properDivisors = {1};
 
     for (int i = 2; i * i <= number; ++i)
     {
@@ -38,7 +38,7 @@ auto getProperDivisors(int number) -> std::vector<int>
 
             if (number != i * i)
                 properDivisors.push_back(i);
-        }    
+        }
     }
 
     return properDivisors;
@@ -203,7 +203,7 @@ bool isRightTruncatablePrime(int number)
     {
         if (!isPrime(number))
             return false;
-        
+
         number /= 10;
     }
 
@@ -287,4 +287,4 @@ int concat(int number1, int number2)
     return rank * number1 + number2;
 }
 
-} // namespace math
+}  // namespace math

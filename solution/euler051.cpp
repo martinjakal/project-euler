@@ -54,7 +54,7 @@ auto findDigitForReplacement(int number, int count) -> std::optional<int>
 
 int calcMinMemberOfEightPrimeFamily()
 {
-    for (int i = 2; ; ++i)
+    for (int i = 2;; ++i)
     {
         if (!isPrime(i))
             continue;

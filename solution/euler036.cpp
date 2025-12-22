@@ -35,7 +35,7 @@ int sumDoubleBasePalindromes(int limit)
     {
         bool isOdd = i % 2 == 0;
 
-        for (int number = 1; ; ++number)
+        for (int number = 1;; ++number)
         {
             auto palindrome = makePalindrome(number, 10, isOdd);
 

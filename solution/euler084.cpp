@@ -30,8 +30,8 @@ public:
         for (int i = 0; i < board.size(); ++i)
             visitedSquares.emplace_back(i, board[i]);
 
-        std::sort(visitedSquares.begin(), visitedSquares.end(), [&](const std::pair<int, int>& a, const std::pair<int, int>& b)
-            { return a.second > b.second; });
+        std::sort(visitedSquares.begin(), visitedSquares.end(),
+                  [&](const std::pair<int, int>& a, const std::pair<int, int>& b) { return a.second > b.second; });
 
         return str(visitedSquares[0].first) + str(visitedSquares[1].first) + str(visitedSquares[2].first);
     }
@@ -52,10 +52,7 @@ private:
     int position_ = GO;
     int doubles_ = 0;
 
-    auto str(int value) const -> std::string
-    {
-        return (value < 10 ? "0" : "") + std::to_string(value);
-    }
+    auto str(int value) const -> std::string { return (value < 10 ? "0" : "") + std::to_string(value); }
 
     void initGame()
     {
@@ -109,9 +106,7 @@ private:
         auto cc = communityChest_.front();
         std::rotate(communityChest_.begin(), communityChest_.begin() + 1, communityChest_.end());
 
-        position_ = cc == 1 ? GO :
-                    cc == 2 ? JAIL :
-                    position_;
+        position_ = cc == 1 ? GO : cc == 2 ? JAIL : position_;
     }
 
     void applyChance()
@@ -119,30 +114,26 @@ private:
         auto ch = chance_.front();
         std::rotate(chance_.begin(), chance_.begin() + 1, chance_.end());
 
-        position_ = ch == 1 ? GO :
-                    ch == 2 ? JAIL :
-                    ch == 3 ? 11 :
-                    ch == 4 ? 24 :
-                    ch == 5 ? 39 :
-                    ch == 6 ? 5 :
-                    ch == 7 ? nextRailway() :
-                    ch == 8 ? nextRailway() :
-                    ch == 9 ? nextUtility() :
-                    ch == 10 ? (position_ - 3) % squares_ : // 3 steps back
-                    position_;
+        position_ = ch == 1    ? GO
+                    : ch == 2  ? JAIL
+                    : ch == 3  ? 11
+                    : ch == 4  ? 24
+                    : ch == 5  ? 39
+                    : ch == 6  ? 5
+                    : ch == 7  ? nextRailway()
+                    : ch == 8  ? nextRailway()
+                    : ch == 9  ? nextUtility()
+                    : ch == 10 ? (position_ - 3) % squares_
+                               :  // 3 steps back
+                        position_;
     }
 
     int nextRailway() const
     {
-        return 5 <= position_ && position_ < 15 ? 15 :
-               15 <= position_ && position_ < 25 ? 25 :
-               25 <= position_ && position_ < 35 ? 35 : 5;
+        return 5 <= position_ && position_ < 15 ? 15 : 15 <= position_ && position_ < 25 ? 25 : 25 <= position_ && position_ < 35 ? 35 : 5;
     }
 
-    int nextUtility() const
-    {
-        return 12 <= position_ && position_ < 28 ? 28 : 12;
-    }
+    int nextUtility() const { return 12 <= position_ && position_ < 28 ? 28 : 12; }
 };
 
 int main()

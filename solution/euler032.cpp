@@ -38,7 +38,7 @@ int sumPandigitalProducts()
 
 int main()
 {
-    auto result = sumPandigitalProducts(); 
+    auto result = sumPandigitalProducts();
     std::cout << result << std::endl;
 
     return 0;

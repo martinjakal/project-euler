@@ -17,8 +17,8 @@ using namespace reader;
 
 int countLetters(const std::vector<std::string>& words)
 {
-    return std::accumulate(words.begin(), words.end(), 0, 
-        [](int letterCnt, const std::string& word) { return letterCnt + static_cast<int>(word.size()); });
+    return std::accumulate(words.begin(), words.end(), 0,
+                           [](int letterCnt, const std::string& word) { return letterCnt + static_cast<int>(word.size()); });
 }
 
 auto minimizeRomanNumber(std::string romanNumber) -> std::string

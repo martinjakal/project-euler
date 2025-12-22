@@ -38,7 +38,7 @@ int countOddPeriodsOfSquareRoots(int limit)
         auto period = calcSquareRootPeriod(i);
 
         if (period.has_value() && period.value() % 2 != 0)
-            ++oddPeriodCnt; 
+            ++oddPeriodCnt;
     }
 
     return oddPeriodCnt;

@@ -13,7 +13,7 @@ using namespace math;
 // Skip triangular check because each hexagonal number is also triangular.
 auto findNextPentaHexaNumber(int previous) -> unsigned long long
 {
-    for (int i = 1; ; ++i)
+    for (int i = 1;; ++i)
     {
         auto hexagonal = 2ull * i * i - i;
 

@@ -9,4 +9,4 @@ auto readStrings(const std::string& filename, char separator) -> std::vector<std
 auto readNumbers(const std::string& filename, char separator) -> std::vector<std::vector<int>>;
 auto readSudoku(const std::string& filename) -> std::vector<std::vector<std::vector<int>>>;
 
-} // namespace reader
+}  // namespace reader

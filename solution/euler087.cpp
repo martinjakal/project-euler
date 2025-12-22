@@ -17,13 +17,13 @@ auto raiseToPower(const std::vector<int>& data, int power) -> std::vector<int>
 {
     std::vector<int> result;
     std::transform(data.begin(), data.end(), std::back_inserter(result),
-        [power](int num) { return static_cast<int>(std::pow(num, power)); });
+                   [power](int num) { return static_cast<int>(std::pow(num, power)); });
     return result;
 }
 
 int countPrimePowerTriples(int limit)
 {
-    const int sieveLimit = static_cast<int>(std::sqrt(limit)); // each number is written as sum of powers greater than 1
+    const int sieveLimit = static_cast<int>(std::sqrt(limit));  // each number is written as sum of powers greater than 1
     const auto primes = sieveOfEratosthenes(sieveLimit);
     const auto primes2 = raiseToPower(primes, 2);
     const auto primes3 = raiseToPower(primes, 3);

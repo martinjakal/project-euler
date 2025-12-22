@@ -22,8 +22,8 @@ bool hasSubstringsDivisibleByPrimes(const std::vector<int>& digits, const std::v
 
 auto sumDivisiblePandigitalNumbers() -> unsigned long long
 {
-    const std::vector<int> primes = { 2, 3, 5, 7, 11, 13, 17 };
-    std::vector<int> digits = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    const std::vector<int> primes = {2, 3, 5, 7, 11, 13, 17};
+    std::vector<int> digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     auto sumDivisiblePandigital = 0ull;
 
     do
@@ -31,7 +31,7 @@ auto sumDivisiblePandigitalNumbers() -> unsigned long long
         if (hasSubstringsDivisibleByPrimes(digits, primes))
         {
             sumDivisiblePandigital += std::accumulate(digits.begin(), digits.end(), 0ull,
-                [](unsigned long long number, int digit) { return number * 10 + digit; });
+                                                      [](unsigned long long number, int digit) { return number * 10 + digit; });
         }
     } while (std::next_permutation(digits.begin(), digits.end()));
 

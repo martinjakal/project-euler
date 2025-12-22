@@ -14,7 +14,7 @@ int calcMinPentagonalDifference()
 {
     std::vector<int> pentagonal;
 
-    for (int i = 1; ; ++i)
+    for (int i = 1;; ++i)
     {
         const int number = i * (3 * i - 1) / 2;
 

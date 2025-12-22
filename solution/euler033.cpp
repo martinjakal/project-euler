@@ -13,11 +13,13 @@ auto cancelFraction(int numerator, int denominator) -> std::optional<double>
     const int d1 = denominator / 10;
     const int d0 = denominator % 10;
 
-    return n1 == d1 ? 1.0 * n0 / d0 :
-           n1 == d0 ? 1.0 * n0 / d1 :
-           n0 == d1 && d0 != 0 ? 1.0 * n1 / d0 : // check zero division
-           n0 == d0 && d0 != 0 ? 1.0 * n1 / d1 : // check trivial case
-           std::optional<double>{};
+    return n1 == d1              ? 1.0 * n0 / d0
+           : n1 == d0            ? 1.0 * n0 / d1
+           : n0 == d1 && d0 != 0 ? 1.0 * n1 / d0
+                                 :  // check zero division
+               n0 == d0 && d0 != 0 ? 1.0 * n1 / d1
+                                   :  // check trivial case
+               std::optional<double>{};
 }
 
 int calcDenominatorOfCancelledFractions()

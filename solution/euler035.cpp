@@ -24,7 +24,7 @@ int main()
     int limit = 1'000'000;
 
     auto result = countCircularPrimes(limit);
-    std::cout << result << std::endl; 
+    std::cout << result << std::endl;
 
     return 0;
 }

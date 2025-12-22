@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <map>
 #include <optional>
@@ -21,13 +22,13 @@ using WordPair = std::pair<std::string, std::string>;
 // Create anagram pairs grouped by the number of distinct characters.
 auto findAnagramsByLength(const std::vector<std::string>& words) -> std::map<int, std::vector<WordPair>>
 {
-    std::map<int, std::vector<WordPair>> anagramsByLength; // key - number of distinct characters, value - anagram pair
+    std::map<int, std::vector<WordPair>> anagramsByLength;  // key - number of distinct characters, value - anagram pair
 
     for (std::size_t a = 0; a < words.size(); ++a)
     {
         const int length = static_cast<int>(words[a].size());
 
-        std::unordered_map<char, int> charCountA; // store characters found in the first word
+        std::unordered_map<char, int> charCountA;  // store characters found in the first word
         for (std::size_t i = 0; i < words[a].size(); ++i)
             ++charCountA[words[a][i]];
 
@@ -36,7 +37,7 @@ auto findAnagramsByLength(const std::vector<std::string>& words) -> std::map<int
             if (words[a].size() != words[b].size())
                 continue;
 
-            std::unordered_map<char, int> charCountB = charCountA; // remove characters found in the second word
+            std::unordered_map<char, int> charCountB = charCountA;  // remove characters found in the second word
             for (std::size_t i = 0; i < words[b].size(); ++i)
                 --charCountB[words[b][i]];
 

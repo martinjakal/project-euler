@@ -23,7 +23,7 @@ auto sumLargeNumbers(const std::vector<std::string>& numbers, int firstDigits) -
 }
 
 int main()
-{ 
+{
     std::string filename = "input/euler013input.txt";
     int firstDigits = 10;
 

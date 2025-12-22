@@ -11,7 +11,7 @@ using namespace math;
 
 int findConsecNumberWithDistinctFactors(int factorsCnt)
 {
-    for (int number = 1, consecutiveCnt = 0; ; ++number)
+    for (int number = 1, consecutiveCnt = 0;; ++number)
     {
         if (countDistinctFactors(number) == factorsCnt)
             ++consecutiveCnt;

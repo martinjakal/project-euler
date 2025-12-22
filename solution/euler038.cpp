@@ -14,7 +14,7 @@ int calcMaxPandigitalProduct()
     int maxProduct = 0;
 
     // Only numbers with max 4 digits can create 9 digit concatenated product.
-    for (int i = 1; i < 10000; ++i) 
+    for (int i = 1; i < 10000; ++i)
     {
         int product = 0;
 

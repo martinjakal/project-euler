@@ -23,14 +23,14 @@ int sumMinPathInThreeDirectionMatrix(const std::vector<std::vector<int>>& matrix
         paths.push_back(matrix[i].back());
 
     // Traverse the matrix from right to left and decide the best direction to visit each cell (left, top or bottom).
-    for (std::size_t j = colCnt - 1; j-- > 0; )
+    for (std::size_t j = colCnt - 1; j-- > 0;)
     {
         paths[0] += matrix[0][j];
 
         for (std::size_t i = 1; i < rowCnt; ++i)
             paths[i] = std::min(paths[i], paths[i - 1]) + matrix[i][j];
 
-        for (std::size_t i = rowCnt - 1; i-- > 0; )
+        for (std::size_t i = rowCnt - 1; i-- > 0;)
             paths[i] = std::min(paths[i], paths[i + 1] + matrix[i][j]);
     }
 

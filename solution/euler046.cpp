@@ -21,7 +21,7 @@ bool canSplitAsPrimeAndTwoSquares(int number)
 
 int findMinNumberBreakingGoldbachOther()
 {
-    for (int number = 3; ; number += 2) // must be odd and composite
+    for (int number = 3;; number += 2)  // must be odd and composite
     {
         if (!isPrime(number) && !canSplitAsPrimeAndTwoSquares(number))
             return number;

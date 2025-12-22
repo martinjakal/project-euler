@@ -25,7 +25,8 @@ bool canObtainAllPairs(const std::vector<std::string>& pairs, const std::string&
 int countDiceArrangementsAllowingAllSquares()
 {
     const std::string digits = "0123456789";
-    const std::vector<std::string> pairs = { "01", "04", "06", "16", "18", "25", "36", "46" }; // some digits are switched, 9 is replaced with 6
+    const std::vector<std::string> pairs = {"01", "04", "06", "16",
+                                            "18", "25", "36", "46"};  // some digits are switched, 9 is replaced with 6
 
     auto dices = generateCombinations(digits, 6, false);
 

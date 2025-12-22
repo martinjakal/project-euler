@@ -32,7 +32,7 @@ struct Node
 // Implementation of Dijkstra's algorithm.
 int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
-    const std::vector<std::pair<int, int>> directions = { { -1, 0 }, { 1, 0 }, { 0, -1 },  { 0, 1 } };
+    const std::vector<std::pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     const auto rowCnt = matrix.size();
     const auto colCnt = matrix[0].size();
 
@@ -60,7 +60,7 @@ int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 
             if (newDistance < curDistance)
             {
-                if (curDistance != std::numeric_limits<int>::max()) // node is already visited
+                if (curDistance != std::numeric_limits<int>::max())  // node is already visited
                     remainingNodes.erase(remainingNodes.find(Node(nextI, nextJ, curDistance)));
 
                 curDistance = newDistance;

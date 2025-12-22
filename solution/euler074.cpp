@@ -50,7 +50,7 @@ int countDigitFactorialChainsWithLength(int limit, int length)
             ++chainLengths[i];
             number = factDigitSums[number];
 
-            if (number < i) // chain length for smaller terms is precalculated
+            if (number < i)  // chain length for smaller terms is precalculated
             {
                 chainLengths[i] += chainLengths[number];
                 break;

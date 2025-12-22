@@ -12,37 +12,37 @@ auto generateFigurateNumbersInRange(int minRange, int maxRange) -> std::vector<s
 {
     std::vector<std::vector<int>> figurateNumbers(6);
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (i + 1) / 2) // triangle
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (i + 1) / 2)  // triangle
     {
         if (n >= minRange)
             figurateNumbers[0].push_back(n);
     }
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * i) // square
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * i)  // square
     {
         if (n >= minRange)
             figurateNumbers[1].push_back(n);
     }
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (3 * i - 1) / 2) // pentagonal
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (3 * i - 1) / 2)  // pentagonal
     {
         if (n >= minRange)
             figurateNumbers[2].push_back(n);
     }
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (2 * i - 1)) // hexagonal
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (2 * i - 1))  // hexagonal
     {
         if (n >= minRange)
             figurateNumbers[3].push_back(n);
     }
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (5 * i - 3) / 2) // heptagonal
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (5 * i - 3) / 2)  // heptagonal
     {
         if (n >= minRange)
             figurateNumbers[4].push_back(n);
     }
 
-    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (3 * i - 2)) // octagonal
+    for (int i = 1, n = 0; n < maxRange; ++i, n = i * (3 * i - 2))  // octagonal
     {
         if (n >= minRange)
             figurateNumbers[5].push_back(n);

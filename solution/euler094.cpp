@@ -12,7 +12,7 @@ auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsi
 {
     auto sumPerimeters = 0ull;
 
-    for (auto perimeter = 0ull, x = 1ull, y = 0ull; ;)
+    for (auto perimeter = 0ull, x = 1ull, y = 0ull;;)
     {
         auto xNext = 2 * x + 3 * y;
         auto yNext = x + 2 * y;
@@ -20,7 +20,7 @@ auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsi
         y = yNext;
 
         auto a = 2 * x;
-        int one = (a + 1) % 3 == 0 ? 1 : -1; // decide if 2x + 1 = 3a or 2x - 1 = 3a
+        int one = (a + 1) % 3 == 0 ? 1 : -1;  // decide if 2x + 1 = 3a or 2x - 1 = 3a
         a = (a + one) / 3;
         auto b = a + one;
         perimeter = a + a + b;
@@ -29,7 +29,7 @@ auto sumPerimetersOfAlmostEquilateralTriangles(unsigned long long limit) -> unsi
             break;
 
         double half = static_cast<double>(perimeter) / 2;
-        double area = (half - a) * std::sqrt(half * (half - b)); // Heron's formula
+        double area = (half - a) * std::sqrt(half * (half - b));  // Heron's formula
 
         if (area != 0 && area == static_cast<unsigned long long>(area))
             sumPerimeters += perimeter;

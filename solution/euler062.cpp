@@ -10,11 +10,11 @@
 
 auto findMinCubeWithDigitPermutations(int permCnt) -> unsigned long long
 {
-    // String of sorted digits is used as a key for fast permutation check, 
+    // String of sorted digits is used as a key for fast permutation check,
     // value stores the original number and occurrence of its permutations.
     std::unordered_map<std::string, std::pair<unsigned long long, int>> permutations;
 
-    for (int number = 1; ; ++number)
+    for (int number = 1;; ++number)
     {
         auto cube = 1ull * number * number * number;
         auto cubeStr = std::to_string(cube);
@@ -31,7 +31,7 @@ auto findMinCubeWithDigitPermutations(int permCnt) -> unsigned long long
                 return pos->second.first;
         }
         else
-            permutations[cubeStr] = { cube, 1 };
+            permutations[cubeStr] = {cube, 1};
     }
 }
 

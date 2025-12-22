@@ -23,7 +23,7 @@ int countLettersInNumbers(int limit)
         if (hundreds > 0)
             letterCnt += numberLetters.find(hundreds)->second + numberLetters.find(100)->second;
 
-        if ((thousands > 0 || hundreds > 0) && belowHundred > 0) // add "and" word
+        if ((thousands > 0 || hundreds > 0) && belowHundred > 0)  // add "and" word
             letterCnt += 3;
 
         if (belowHundred > 0)

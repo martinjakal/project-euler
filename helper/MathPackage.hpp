@@ -9,7 +9,7 @@ namespace impl
 template <typename T>
 void generateCombinations(const T& data, std::size_t length, std::size_t startIdx, T& result, std::vector<T>& carrier, bool repeat);
 
-} // namespace impl
+}  // namespace impl
 
 // General
 int countDigits(int number);
@@ -45,7 +45,7 @@ bool isPandigital(int number, int maxDigit = 9);
 // Helper
 int concat(int number1, int number2);
 
-} // namespace math
+}  // namespace math
 
 namespace math
 {
@@ -68,7 +68,7 @@ void generateCombinations(const T& data, std::size_t length, std::size_t startId
     }
 }
 
-} // namespace impl
+}  // namespace impl
 
 template <typename T>
 auto generateCombinations(const T& data, int length, bool repeat) -> std::vector<T>
@@ -79,4 +79,4 @@ auto generateCombinations(const T& data, int length, bool repeat) -> std::vector
     return combinations;
 }
 
-} // namespace math
+}  // namespace math

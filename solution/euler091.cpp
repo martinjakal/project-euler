@@ -8,7 +8,7 @@
 
 int countRightTrianglesInSquareGrid(int limit)
 {
-    int triangles = 3 * limit * limit; // right angle vertex is placed on axis
+    int triangles = 3 * limit * limit;  // right angle vertex is placed on axis
 
     // Solution of linear Diophantine equation with symmetry.
     for (int x = 1; x <= limit; ++x)

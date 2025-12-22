@@ -11,8 +11,8 @@
 auto findArrangementInMagic5GonRing() -> std::string
 {
     constexpr int length = 5;
-    std::vector<int> outer = { 6, 7, 8, 9, 10 };
-    std::vector<int> inner = { 1, 2, 3, 4, 5 };
+    std::vector<int> outer = {6, 7, 8, 9, 10};
+    std::vector<int> inner = {1, 2, 3, 4, 5};
     std::string maxSolution = "0";
 
     // Higher numbers must be placed in the outer loop for the solution to be maximized.
@@ -44,7 +44,7 @@ auto findArrangementInMagic5GonRing() -> std::string
             maxSolution = std::max(maxSolution, solution);
 
         } while (std::next_permutation(inner.begin(), inner.end()));
-    } while (std::next_permutation(outer.begin() + 1, outer.end())); // keep the lowest outer number locked in place
+    } while (std::next_permutation(outer.begin() + 1, outer.end()));  // keep the lowest outer number locked in place
 
     return maxSolution;
 }

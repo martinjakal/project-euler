@@ -25,7 +25,7 @@ int findCuboidDimWithSolutions(int targetSolutions)
             {
                 solutions += ab / 2;
 
-                if (ab > dimM) // remove solutions where a > M or b > M
+                if (ab > dimM)  // remove solutions where a > M or b > M
                     solutions -= ab - dimM - 1;
             }
         }

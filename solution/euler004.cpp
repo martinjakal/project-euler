@@ -23,7 +23,7 @@ int calcMaxPalindromeProduct(int limit)
                 maxProduct = product;
         }
     }
- 
+
     return maxProduct;
 }
 

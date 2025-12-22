@@ -14,7 +14,7 @@ int findFirstNumberWithEnoughPrimePartitions(int limit)
 {
     std::vector<int> primes;
 
-    for (int number = 1; ; ++number)
+    for (int number = 1;; ++number)
     {
         std::vector<int> ways(number + 1, 0);
         ways[0] = 1;

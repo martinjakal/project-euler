@@ -16,7 +16,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
 {
     int maxProduct = 0;
 
-    for (std::size_t i = 0; i < grid.size(); ++i) // horizontal
+    for (std::size_t i = 0; i < grid.size(); ++i)  // horizontal
     {
         for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {
@@ -29,7 +29,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
         }
     }
 
-    for (std::size_t i = 0; i <= grid.size() - length; ++i) // vertical
+    for (std::size_t i = 0; i <= grid.size() - length; ++i)  // vertical
     {
         for (std::size_t j = 0; j < grid[i].size(); ++j)
         {
@@ -42,7 +42,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
         }
     }
 
-    for (std::size_t i = 0; i <= grid.size() - length; ++i) // left diagonal
+    for (std::size_t i = 0; i <= grid.size() - length; ++i)  // left diagonal
     {
         for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {
@@ -55,7 +55,7 @@ int findMaxProductInGrid(const std::vector<std::vector<int>>& grid, int length)
         }
     }
 
-    for (std::size_t i = length - 1; i < grid.size(); ++i) // right diagonal
+    for (std::size_t i = length - 1; i < grid.size(); ++i)  // right diagonal
     {
         for (std::size_t j = 0; j <= grid[i].size() - length; ++j)
         {

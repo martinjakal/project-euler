@@ -14,36 +14,33 @@ using namespace math;
 
 double op(double a, double b, char sign)
 {
-    return sign == '+' ? a + b :
-           sign == '-' ? a - b :
-           sign == '*' ? a * b :
-           sign == '/' && b != 0 ? a / b : 0;
+    return sign == '+' ? a + b : sign == '-' ? a - b : sign == '*' ? a * b : sign == '/' && b != 0 ? a / b : 0;
 }
 
 int findArithmeticExpressionWithLongestSequence()
 {
-    const std::vector<int> digits = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    const std::vector<char> signs = { '+', '-', '*', '/' };
+    const std::vector<int> digits = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    const std::vector<char> signs = {'+', '-', '*', '/'};
     const auto digitCombinations = generateCombinations(digits, 4, false);
     const auto signCombinations = generateCombinations(signs, 3, true);
     int maxLength = 0;
     int bestSet = 0;
 
-    for (auto d : digitCombinations) // digit selection
+    for (auto d : digitCombinations)  // digit selection
     {
         std::vector<int> resultStore;
 
-        do // digit permutation
+        do  // digit permutation
         {
-            for (const auto& s : signCombinations) // sign selection
+            for (const auto& s : signCombinations)  // sign selection
             {
-                std::array<double, 5> results; // bracket combinations
+                std::array<double, 5> results;  // bracket combinations
 
-                results[0] = op(op(op(d[0], d[1], s[0]), d[2], s[1]), d[3], s[2]); // ((1)2)3
-                results[1] = op(d[0], op(d[1], op(d[2], d[3], s[2]), s[1]), s[0]); // 3(2(1))
-                results[2] = op(op(d[0], d[1], s[0]), op(d[2], d[3], s[2]), s[1]); // (1)3(2)
-                results[3] = op(op(d[0], op(d[1], d[2], s[1]), s[0]), d[3], s[2]); // (2(1))3
-                results[4] = op(d[0], op(op(d[1], d[2], s[1]), d[3], s[2]), s[0]); // 3((1)2)
+                results[0] = op(op(op(d[0], d[1], s[0]), d[2], s[1]), d[3], s[2]);  // ((1)2)3
+                results[1] = op(d[0], op(d[1], op(d[2], d[3], s[2]), s[1]), s[0]);  // 3(2(1))
+                results[2] = op(op(d[0], d[1], s[0]), op(d[2], d[3], s[2]), s[1]);  // (1)3(2)
+                results[3] = op(op(d[0], op(d[1], d[2], s[1]), s[0]), d[3], s[2]);  // (2(1))3
+                results[4] = op(d[0], op(op(d[1], d[2], s[1]), d[3], s[2]), s[0]);  // 3((1)2)
 
                 for (auto res : results)
                 {
@@ -55,11 +52,11 @@ int findArithmeticExpressionWithLongestSequence()
         } while (std::next_permutation(d.begin(), d.end()));
 
         std::sort(resultStore.begin(), resultStore.end());
-        if (resultStore.empty() || resultStore[0] != 1) // sequence must start with 1
+        if (resultStore.empty() || resultStore[0] != 1)  // sequence must start with 1
             continue;
 
         int length = 1;
-        for (std::size_t i = 1; i < resultStore.size(); ++i) // find longest sequence from 1 to n
+        for (std::size_t i = 1; i < resultStore.size(); ++i)  // find longest sequence from 1 to n
         {
             if (resultStore[i] == resultStore[i - 1] + 1)
                 ++length;

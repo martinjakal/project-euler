@@ -17,9 +17,7 @@ struct Card
 {
     Card(char rank, char suit) : suit_(suit)
     {
-        rank_ = rank == 'T' ? 10 : rank == 'J' ? 11 :
-                rank == 'Q' ? 12 : rank == 'K' ? 13 :
-                rank == 'A' ? 14 : rank - '0';
+        rank_ = rank == 'T' ? 10 : rank == 'J' ? 11 : rank == 'Q' ? 12 : rank == 'K' ? 13 : rank == 'A' ? 14 : rank - '0';
     }
 
     bool operator<(const Card& other) const
@@ -39,10 +37,7 @@ class Hand
 public:
     static constexpr std::size_t MAX_CARDS = 5;
 
-    bool isHandFull() const
-    {
-        return cards_.size() == MAX_CARDS;
-    }
+    bool isHandFull() const { return cards_.size() == MAX_CARDS; }
 
     void drawCard(const Card& card)
     {
@@ -112,16 +107,15 @@ public:
         return "0" + str(cards_[4]) + str(cards_[3]) + str(cards_[2]) + str(cards_[1]) + str(cards_[0]);
     }
 
-private: 
+private:
     std::vector<Card> cards_;
 
-    auto str(const Card& card) const -> std::string
-    {
-        return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_);
-    }
+    auto str(const Card& card) const -> std::string { return (card.rank_ < 10 ? "0" : "") + std::to_string(card.rank_); }
 
     bool isPair(int i) const { return cards_[i].rank_ == cards_[i + 1].rank_; }
+
     bool isThree(int i) const { return isPair(i) && isPair(i + 1); }
+
     bool isFour(int i) const { return isPair(i) && isThree(i + 1); }
 
     bool consecutive() const
@@ -142,7 +136,7 @@ private:
                 return false;
         }
         return true;
-    } 
+    }
 };
 
 int countPokerWins(const std::vector<std::vector<std::string>>& games)

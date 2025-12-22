@@ -21,7 +21,7 @@ int countPerimetersWithSingleRightTriangle(int limit)
     {
         for (int n = 1; n < m; ++n)
         {
-            // Coefficients must be coprime and not both odd. 
+            // Coefficients must be coprime and not both odd.
             if (std::gcd(m, n) != 1 || (m % 2 != 0 && n % 2 != 0))
                 continue;
 
@@ -33,8 +33,7 @@ int countPerimetersWithSingleRightTriangle(int limit)
         }
     }
 
-    return static_cast<int>(std::count_if(solutions.begin(), solutions.end(),
-        [&](const std::pair<int, int>& s) { return s.second == 1; }));
+    return static_cast<int>(std::count_if(solutions.begin(), solutions.end(), [&](const std::pair<int, int>& s) { return s.second == 1; }));
 }
 
 int main()

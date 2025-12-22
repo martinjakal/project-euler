@@ -8,16 +8,16 @@
 
 int findNumberWithDivisiblePartitions(int mod)
 {
-    std::vector<int> partitions = { 1 };
+    std::vector<int> partitions = {1};
     std::vector<int> pentagonal;
 
-    for (int number = 1, p = 1; ; ++number)
+    for (int number = 1, p = 1;; ++number)
     {
         // Generate the next generalized pentagonal number.
         if (pentagonal.empty() || number > pentagonal.back())
         {
             pentagonal.push_back(p * (3 * p - 1) / 2);
-            p = p >= 0 ? -p : -p + 1; // 1, -1, 2, -2, 3, -3 ...
+            p = p >= 0 ? -p : -p + 1;  // 1, -1, 2, -2, 3, -3 ...
         }
 
         int ways = 0;

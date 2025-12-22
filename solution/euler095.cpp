@@ -21,14 +21,14 @@ int findMinNumberInLongestAmicableChain(int limit)
 
     for (int i = 1; i <= limit; ++i)
     {
-        std::vector<int> chain = { i };
+        std::vector<int> chain = {i};
         int length = 1;
         bool validChain = true;
 
         for (int number = sumProperDivisors[i]; number != i; number = sumProperDivisors[number])
         {
             // The solution must be the smallest number in the chain. Also if the number is already in the chain,
-            // there is a loop which never goes back to the starting number. 
+            // there is a loop which never goes back to the starting number.
             if (number > limit || number < i || std::find(chain.begin(), chain.end(), number) != chain.end())
             {
                 validChain = false;
@@ -37,7 +37,7 @@ int findMinNumberInLongestAmicableChain(int limit)
 
             chain.push_back(number);
             ++length;
-        } 
+        }
 
         if (validChain && length > maxLength)
         {
@@ -53,7 +53,7 @@ int main()
 {
     int limit = 1'000'000;
 
-    auto result = findMinNumberInLongestAmicableChain(limit); 
+    auto result = findMinNumberInLongestAmicableChain(limit);
     std::cout << result << std::endl;
 
     return 0;

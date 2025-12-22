@@ -31,8 +31,8 @@ public:
     int getMinFamilySum() const { return minFamilySum_; }
 
 private:
-    static constexpr int STEP = 5'000; // reasonable guess for range of primes which could make family size of 4 or 5
-    static constexpr int LIMIT = 20'000; // enough to avoid overflow during integer concatenation
+    static constexpr int STEP = 5'000;  // reasonable guess for range of primes which could make family size of 4 or 5
+    static constexpr int LIMIT = 20'000;  // enough to avoid overflow during integer concatenation
     int primeLimit_ = 0;
     std::vector<int> primes_;
     std::unordered_map<int, std::unordered_set<int>> pairsCache_;
@@ -48,7 +48,7 @@ private:
 
         for (std::size_t i = 0; i < primes_.size(); ++i)
         {
-            auto primeIt = pairsCache_.insert(pairsCache_.end(), { primes_[i], {} });
+            auto primeIt = pairsCache_.insert(pairsCache_.end(), {primes_[i], {}});
 
             for (std::size_t j = i + 1; j < primes_.size(); ++j)
             {

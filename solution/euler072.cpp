@@ -24,7 +24,7 @@ auto countReducedProperFractions(int limit) -> unsigned long long
     {
         for (int i = p; i <= limit; i += p)
         {
-            totients[i] /= p; // no data lost because i % p = 0
+            totients[i] /= p;  // no data lost because i % p = 0
             totients[i] *= p - 1;
         }
     }

@@ -38,7 +38,7 @@ int calcProductOfBestQuadFormulaCoeffs(int maxA, int maxB)
     return coeffProduct;
 }
 
-int main() 
+int main()
 {
     int maxA = 1000;
     int maxB = 1000;
