@@ -5,9 +5,9 @@ SRC = $(wildcard helper/*.cpp)
 BUILD_DIR = build
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	mkdir -p $@
 
-all: $(addprefix euler,$(shell seq -w 1 100))
+all: $(shell printf "euler%03d " {1..100})
 
 euler%: solution/euler%.cpp $(SRC) | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) $^ -o $(BUILD_DIR)/$@
