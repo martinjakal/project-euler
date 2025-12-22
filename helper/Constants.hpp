@@ -3,6 +3,8 @@
 #include <array>
 #include <string>
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
 inline const std::unordered_map<int, int> numberLetters = {
     {1, 3},  {2, 3},  {3, 5},  {4, 4},  {5, 4},  {6, 3},  {7, 5},  {8, 5},  {9, 4},  {10, 3}, {11, 6}, {12, 6}, {13, 8},  {14, 8},  {15, 7},
@@ -15,5 +17,5 @@ inline const std::unordered_map<char, int> alphabet = {{'A', 1},  {'B', 2},  {'C
 
 inline constexpr std::array<int, 8> coins = {1, 2, 5, 10, 20, 50, 100, 200};
 
-inline const std::unordered_map<std::string, std::string> romanNumbersReplacements = {{"DCCCC", "CM"}, {"CCCC", "CD"},  {"LXXXX", "XC"},
-                                                                                      {"XXXX", "XL"},  {"VIIII", "IX"}, {"IIII", "IV"}};
+inline const std::vector<std::pair<std::string, std::string>> romanNumbersReplacements = {{"DCCCC", "CM"}, {"CCCC", "CD"},  {"LXXXX", "XC"},
+                                                                                          {"XXXX", "XL"},  {"VIIII", "IX"}, {"IIII", "IV"}};
