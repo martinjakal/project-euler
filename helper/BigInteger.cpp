@@ -88,7 +88,7 @@ auto BigInteger::print() const -> std::string
 bool BigInteger::compare(long long number) const
 {
     std::size_t digits = number != 0 ? static_cast<std::size_t>(std::floor(std::log10(std::abs(number)))) + 1 : 1;
-    if (sign_ != number >= 0 || digitCnt() != digits)
+    if (sign_ != (number >= 0) || digitCnt() != digits)
         return false;
 
     for (std::size_t i = 0; i < digitCnt(); ++i, number /= BASE)
@@ -257,7 +257,7 @@ auto BigInteger::operator-=(BigInteger other) -> BigInteger&
     {
         bool needSignChange = false;
 
-        if (*this < other && sign_ == true || *this > other && sign_ == false)
+        if ((*this < other && sign_ == true) || (*this > other && sign_ == false))
         {
             swap(*this, other);
             needSignChange = true;
@@ -368,7 +368,7 @@ auto BigInteger::operator%=(BigInteger other) -> BigInteger&
     if (other.isZero())
         throw std::runtime_error("Cannot divide or mod by zero");
 
-    if (*this < other && sign_ == true || *this > other && sign_ == false)
+    if ((*this < other && sign_ == true) || (*this > other && sign_ == false))
         return *this;
 
     if (*this == other)
