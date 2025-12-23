@@ -13,15 +13,17 @@
 // Keed adding numbers to the current sum and product recursively and update the minimum product sum.
 void calcProductSumNumbers(std::vector<int>& data, int start = 2, int count = 0, int sum = 0, int prod = 1)
 {
+    int dataSize = data.size();
+
     int value = count + prod - sum;  // (prod - sum) is the amount of ones
     data[value] = std::min(data[value], prod);
 
-    for (int i = start; i < data.size(); ++i)
+    for (int i = start; i < dataSize; ++i)
     {
         int nextSum = sum + i;
         int nextProd = prod * i;
 
-        if (count + nextProd - nextSum >= data.size() - 1)  // next depth adds one extra number
+        if (count + nextProd - nextSum >= dataSize - 1)  // next depth adds one extra number
             break;
 
         calcProductSumNumbers(data, i, count + 1, nextSum, nextProd);

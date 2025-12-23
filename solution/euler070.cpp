@@ -14,7 +14,7 @@ using namespace math;
 // because if n is a prime, then phi(n) = n - 1 and n - 1 is never a permutation of n.
 // Also phi(m * n) = phi(m) * phi(n) * d / phi(d), where d = gcd(m, n).
 // If m and n are primes, then phi(m * n) = phi(m) * phi(n).
-int findNumberWithMinTotientPermutation(int limit)
+int findNumberWithMinTotientPermutation(unsigned long long limit)
 {
     const auto primes = sieveOfEratosthenes(limit / 2);
     double minRatio = std::numeric_limits<double>::max();
@@ -45,7 +45,7 @@ int findNumberWithMinTotientPermutation(int limit)
 
 int main()
 {
-    int limit = 10'000'000;
+    unsigned long long limit = 10'000'000;
 
     auto result = findNumberWithMinTotientPermutation(limit);
     std::cout << result << std::endl;

@@ -27,7 +27,7 @@ public:
         }
 
         std::vector<std::pair<int, int>> visitedSquares;
-        for (int i = 0; i < board.size(); ++i)
+        for (int i = 0; i < squares_; ++i)
             visitedSquares.emplace_back(i, board[i]);
 
         std::sort(visitedSquares.begin(), visitedSquares.end(),

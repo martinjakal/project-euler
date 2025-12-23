@@ -67,10 +67,12 @@ private:
 
             addToFamily(primes_[i]);
 
-            if (family_.size() == familySize_ && familySum_ < minFamilySum_)
+            int familySize = static_cast<int>(family_.size());
+
+            if (familySize == familySize_ && familySum_ < minFamilySum_)
                 minFamilySum_ = familySum_;
 
-            if (family_.size() < familySize_)
+            if (familySize < familySize_)
                 findNextPrimeForFamily(i + 1);
 
             removeFromFamily();

@@ -33,8 +33,8 @@ struct Node
 int sumMinPathInFourDirectionMatrix(const std::vector<std::vector<int>>& matrix)
 {
     const std::vector<std::pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-    const auto rowCnt = matrix.size();
-    const auto colCnt = matrix[0].size();
+    const int rowCnt = matrix.size();
+    const int colCnt = matrix[0].size();
 
     std::vector<std::vector<int>> distances(rowCnt, std::vector<int>(colCnt, std::numeric_limits<int>::max()));
     distances[0][0] = matrix[0][0];

@@ -17,7 +17,7 @@ auto squareRootWithPrecision(int number, int digits) -> BigInteger
     BigInteger a = 5 * number;
     BigInteger b = 5;
 
-    while (b.digitCnt() < digits + extraDigits)
+    while (static_cast<int>(b.digitCnt()) < digits + extraDigits)
     {
         if (a >= b)
         {
