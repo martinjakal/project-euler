@@ -10,7 +10,8 @@
 
 bool hasSubstringsDivisibleByPrimes(const std::vector<int>& digits, const std::vector<int>& primes)
 {
-    for (int i = 0; i < primes.size(); ++i)
+    int primesCount = static_cast<int>(primes.size());
+    for (int i = 0; i < primesCount; ++i)
     {
         int substr = digits[i + 1] * 100 + digits[i + 2] * 10 + digits[i + 3];
 

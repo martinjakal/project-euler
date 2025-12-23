@@ -11,7 +11,7 @@ using namespace math;
 
 // Generate hexagonal number and verify the pentagonal property.
 // Skip triangular check because each hexagonal number is also triangular.
-auto findNextPentaHexaNumber(int previous) -> unsigned long long
+auto findNextPentaHexaNumber(unsigned long long previous) -> unsigned long long
 {
     for (int i = 1;; ++i)
     {
@@ -24,7 +24,7 @@ auto findNextPentaHexaNumber(int previous) -> unsigned long long
 
 int main()
 {
-    int previous = 40'755;
+    unsigned long long previous = 40'755;
 
     auto result = findNextPentaHexaNumber(previous);
     std::cout << result << std::endl;

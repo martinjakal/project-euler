@@ -13,7 +13,7 @@ int findTriangleNumWithDivisors(int divisors)
 {
     int triangle = 0;
 
-    for (int i = 1; getDivisors(triangle).size() <= divisors; ++i)
+    for (int i = 1; static_cast<int>(getDivisors(triangle).size()) <= divisors; ++i)
         triangle = i * (i + 1) / 2;
 
     return triangle;
