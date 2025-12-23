@@ -1,0 +1,16 @@
+BasedOnStyle: Chromium
+Language: Cpp
+SortIncludes: true
+IndentWidth: 4
+AccessModifierOffset: -4
+MaxEmptyLinesToKeep: 1
+ColumnLimit: 140
+IndentAccessModifiers: false
+PointerAlignment: Left
+BreakBeforeBraces: Allman
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+SeparateDefinitionBlocks: Always
+AlignTrailingComments: false
